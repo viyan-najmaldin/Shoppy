@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className='bg-[#003049] px-5 py-15 w-full flex lg:gap-20 flex-nowrap gap-5 flex-col text-white lg:flex-row'>
+    <div className='bg-[#003049] px-5 py-10 w-full flex lg:gap-20 flex-nowrap gap-5 flex-col text-white lg:flex-row'>
 
         <div className='lg:w-2/4'>
             <PageLogo />
