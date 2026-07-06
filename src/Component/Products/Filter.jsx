@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { FaStar, FaRegStar, FaFilter } from "react-icons/fa";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { IoFilter } from "react-icons/io5";
 
 
 
@@ -10,10 +11,10 @@ const Filter = () => {
     const [showFilter, setShowFilter] = useState(false)
   return (
     <div>
-      <div className='flex justify-between pb-2 sm:pb-4 sm:sticky top-44 text-sm'>
+      <div className='flex justify-between items-center pb-2 sm:pb-4 sm:sticky top-44 text-sm'>
         <a href="http://">Home - Product</a>
          <button onClick={()=>{setShowFilter(!showFilter)}}>
-         <HiAdjustmentsHorizontal className="sm:hidden text-cyan-800 rounded-lg text-4xl" />
+         <IoFilter className="sm:hidden text-cyan-800 rounded-lg text-2xl" />
       </button>
       </div>
      
