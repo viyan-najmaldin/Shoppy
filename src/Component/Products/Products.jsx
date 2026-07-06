@@ -16,7 +16,7 @@ const Products = () => {
                  
                     <div>
                       <label className='hidden lg:inline mr-2'>Sort:</label>
-                         <select id="sortSelect" className="flex-1 sm:flex-initial p-2 border w-full lg:w-auto border-slate-300 rounded-lg text-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-cyan-700/30">
+                         <select id="sortSelect" className="flex-1 flex-initial p-2 border w-full lg:w-auto border-slate-300 rounded-lg text-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-cyan-700/30">
                             <option value="featured">Featured</option>
                             <option value="price-low">Price: Low to High</option>
                             <option value="price-high">Price: High to Low</option>
