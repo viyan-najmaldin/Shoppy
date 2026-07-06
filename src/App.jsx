@@ -1,8 +1,10 @@
 import './App.css'
+import Footer from './Component/Footer';
 import Home from './Component/Home/Home';
 import MenuLinks from './Component/Navbar/MenuLinks'
 import Nav from './Component/Navbar/Nav'
 import { useState } from 'react';
+import Products from './Component/Products/Products';
 
 function App() {
  
@@ -14,13 +16,14 @@ function App() {
       setIsMenuOpen={setIsMenuOpen} />
 
    {isMenuOpen && 
-  <div className="sm:hidden sticky top-36">
+  <div className="sm:hidden">
      <MenuLinks/> 
   </div> }
-        <Home />
-    <h1 className='bg-blue-50 h-[100vh]'></h1>
+        {/* <Home /> */}
+        <Products />
 
 
+    <Footer />
     </>
   )
 }

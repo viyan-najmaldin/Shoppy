@@ -2,6 +2,7 @@ import React from 'react'
 import HomeStart from './HomeStart'
 import Category from './Category'
 import TrindingProducts from './TrindingProducts'
+import Aboutwebsite from './Aboutwebsite'
 
 const Home = () => {
   return (
@@ -9,6 +10,8 @@ const Home = () => {
       <HomeStart/>
       <Category />
       <TrindingProducts />
+      <Aboutwebsite />
+      <div className='bg-blue-50 h-20'></div>
     </div>
   )
 }
