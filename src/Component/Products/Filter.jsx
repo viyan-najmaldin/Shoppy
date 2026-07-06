@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 const Filter = () => {
     const [priceValue, setPriceValue] = useState(500)
   return (
-     <div className='p-5 py-10 bg-white min-w-60 rounded-2xl mb-5'>
+     <div className='p-5 py-10 border border-slate-200 sm:sticky top-48 bg-white min-w-60 max-h-fit rounded-2xl mb-5'>
 
             <div className='flex justify-between mb-5'>
                   <h1 className='font-bold text-lg'>Filters</h1>
@@ -23,9 +24,60 @@ const Filter = () => {
             </div>
 
             <div className='py-5 border-b border-slate-200'>
-                <h1 className='font-semibold'>Categories</h1>
+                  <h1 className='font-semibold'>Categories</h1>   
+                  <div className="space-y-2 pt-3">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="electronics"/>
+                            <span className="text-sm">Electronics</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="fashion"/>
+                            <span className="text-sm">Fashion</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" className="w-4 h-4  rounded" value="home"/>
+                            <span className="text-sm">Home & Living</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="sports"/>
+                            <span className="text-sm">Sports</span>
+                        </label>
+                   </div>  
+            </div>
 
-              
+
+            <div className='pt-5 border-slate-200'>
+                  <h1 className='font-semibold'>Rating</h1>   
+                  <div className="space-y-2 pt-3">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="rating" value="4" className="rating-filter w-4 h-4 text-primary"
+                                  onChange={(e) => setRatingFilter(e.target.value)}/>
+
+                                <div className="flex text-amber-400 text-sm">
+                                  <FaStar />
+                                  <FaStar />
+                                  <FaStar />
+                                  <FaStar />
+                                  <FaRegStar />
+                                </div>
+                                <span className="text-sm text-slate-600">&amp; up</span>
+                        </label>
+
+                        <label className="flex items-center gap-2 cursor-pointer">
+                              <input type="radio" name="rating" value="3" className="rating-filter w-4 h-4 text-primary"
+                                onChange={(e) => setRatingFilter(e.target.value)}/>
+
+                              <div className="flex text-amber-400 text-sm">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaRegStar />
+                                <FaRegStar />
+                              </div>
+                              <span className="text-sm text-slate-600">&amp; up</span>
+                    </label>
+                  </div>
+               
             </div>
 
         

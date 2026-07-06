@@ -15,19 +15,19 @@ const Footer = () => {
             <PageLogo />
             <p>Your one-stop destination for premium products. Quality, value, and exceptional service guaranteed.</p>
             <div className="flex gap-3 my-5">
-                        <button className="w-10 h-10 bg-cyan-700  hover:bg-primary rounded-lg flex items-center justify-center transition">
+                        <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
                             <FaFacebookF />
                         </button>
 
-                        <button className="w-10 h-10 bg-cyan-700  hover:bg-primary rounded-lg flex items-center justify-center transition">
+                        <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
                             <FaTwitter />
                         </button>
 
-                        <button className="w-10 h-10 bg-cyan-700  hover:bg-primary rounded-lg flex items-center justify-center transition">
+                        <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
                             <FaInstagram />
                         </button>
 
-                        <button className="w-10 h-10 bg-cyan-700  hover:bg-primary rounded-lg flex items-center justify-center transition">
+                        <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
                             <FaYoutube />
                         </button>
                 </div>
@@ -38,30 +38,30 @@ const Footer = () => {
             <div>
             <h1 className='font-bold text-lg mb-2'>Shop</h1>
             <ul>
-                <li>All Products</li>
-                 <li>Electronics</li>
-                <li>Fashion</li>
-                 <li>Home & Living</li>
+                 <li className='text-slate-400 hover:text-white'>All Products</li>
+                 <li className='text-slate-400 hover:text-white'>Electronics</li>
+                 <li className='text-slate-400 hover:text-white'>Fashion</li>
+                 <li className='text-slate-400 hover:text-white'>Home & Living</li>
             </ul>
         </div>
 
           <div>
             <h1 className='font-bold text-lg mb-2'>Company</h1>
             <ul>
-                <li>About Us</li>
-                 <li>Contact</li>
-                <li>Careers</li>
-                 <li>Blog</li>
+                 <li className='text-slate-400 hover:text-white'>About Us</li>
+                 <li className='text-slate-400 hover:text-white'>Contact</li>
+                 <li className='text-slate-400 hover:text-white'>Careers</li>
+                 <li className='text-slate-400 hover:text-white'>Blog</li>
             </ul>
         </div>
 
         <div>
             <h1 className='font-bold text-lg mb-2'>Support</h1>
             <ul>
-                <li>Help Center</li>
-                 <li>Returns</li>
-                 <li>Shopping Info</li>
-                <li>Track Order</li>
+                 <li className='text-slate-400 hover:text-white'>Help Center</li>
+                 <li className='text-slate-400 hover:text-white'>Returns</li>
+                 <li className='text-slate-400 hover:text-white'>Shopping Info</li>
+                <li className='text-slate-400 hover:text-white'>Track Order</li>
             </ul>
         </div>    
         
