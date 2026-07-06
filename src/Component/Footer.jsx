@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
     
-    <div className='sm:gap-20 gap-10 grid sm:grid-cols-2 lg:grid-cols-3 '>
+    <div className='sm:gap-20 gap-5 grid sm:grid-cols-2 lg:grid-cols-3 '>
             <div>
             <h1 className='font-bold text-lg mb-2'>Shop</h1>
             <ul>
