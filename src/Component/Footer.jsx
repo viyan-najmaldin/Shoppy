@@ -72,7 +72,7 @@ const Footer = () => {
  
 
 
-        <div className='text-center text-slate-500 p-2 text-sm border-t border-slate-700'>
+        <div className='text-center text-slate-500 p-2 mt-5 text-sm border-t border-slate-700'>
             <p>© 2026 Shoppy. All rights reserved.</p>
         </div>
       
