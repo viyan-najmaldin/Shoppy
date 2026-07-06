@@ -4,10 +4,10 @@ import Filter from './Filter'
 
 const Products = () => {
   return (
-    <div className='sm:flex gap-5 bg-blue-50 sm:p-10 p-5  '>
+    <div className='sm:flex gap-5 bg-blue-50 p-5'>
        <Filter/>
         <div>
-                <div className='flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
+                <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
                     <div className='m-2'>
                         Showing 
                         <span className='text-black font-semibold'> 6 </span> 

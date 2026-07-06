@@ -1,11 +1,23 @@
 import React from 'react'
 import { useState } from 'react'
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { FaStar, FaRegStar, FaFilter } from "react-icons/fa";
+import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+
+
 
 const Filter = () => {
     const [priceValue, setPriceValue] = useState(500)
+    const [showFilter, setShowFilter] = useState(false)
   return (
-     <div className='p-5 py-10 border border-slate-200 sm:sticky top-48 bg-white min-w-60 max-h-fit rounded-2xl mb-5'>
+    <div>
+      <div className='flex justify-between pb-2 sm:pb-4 sm:sticky top-44 text-sm'>
+        <a href="http://">Home - Product</a>
+         <button onClick={()=>{setShowFilter(!showFilter)}}>
+         <HiAdjustmentsHorizontal className="sm:hidden text-cyan-800 rounded-lg text-4xl" />
+      </button>
+      </div>
+     
+        <div className={`${showFilter? 'block': 'hidden'} sm:block p-5 py-10 border border-slate-200 sm:sticky top-52 bg-white min-w-60 max-h-fit rounded-2xl mb-5`}>
 
             <div className='flex justify-between mb-5'>
                   <h1 className='font-bold text-lg'>Filters</h1>
@@ -81,7 +93,9 @@ const Filter = () => {
             </div>
 
         
-     </div>
+     </div> 
+    </div>
+    
   )
 }
 
