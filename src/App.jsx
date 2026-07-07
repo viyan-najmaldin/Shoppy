@@ -5,6 +5,7 @@ import MenuLinks from './Component/Navbar/MenuLinks'
 import Nav from './Component/Navbar/Nav'
 import { useState } from 'react';
 import Products from './Component/Products/Products';
+import SingleProduct from './Component/Products/SingleProduct';
 
 function App() {
  
@@ -19,8 +20,9 @@ function App() {
   <div className="sm:hidden">
      <MenuLinks/> 
   </div> }
-        {/* <Home /> */}
+        <Home />
         <Products />
+        <SingleProduct />
 
 
     <Footer />

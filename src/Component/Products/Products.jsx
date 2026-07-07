@@ -4,7 +4,7 @@ import Filter from './Filter'
 
 const Products = () => {
   return (
-    <div className='sm:flex gap-5 bg-blue-50 p-5'>
+    <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
        <Filter/>
         <div>
                 <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
@@ -30,7 +30,7 @@ const Products = () => {
                  
 
 
-                    <div className='mt-5 grid grid-cols-2 lg:grid-cols-4 gap-5'>
+                    <div className='mt-5 grid grid-cols-2 lg:grid-cols-3 gap-5'>
                         <Carts/>
                         <Carts/>
                         <Carts/>

@@ -1,10 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { FaStar, FaRegStar, FaFilter } from "react-icons/fa";
-import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { IoFilter } from "react-icons/io5";
-
-
 
 const Filter = () => {
     const [priceValue, setPriceValue] = useState(500)
@@ -18,7 +15,7 @@ const Filter = () => {
       </button>
       </div>
      
-        <div className={`${showFilter? 'block': 'hidden'} sm:block p-5 py-10 border border-slate-200 sm:sticky top-52 bg-white min-w-60 max-h-fit rounded-2xl mb-5`}>
+        <div className={`${showFilter? 'block': 'hidden'} sm:block p-5 py-10 border border-slate-200 sm:sticky top-52 bg-white min-w-60 max-h-fit rounded-2xl mb-5 sm:mb-0`}>
 
             <div className='flex justify-between mb-5'>
                   <h1 className='font-bold text-lg'>Filters</h1>
@@ -61,7 +58,7 @@ const Filter = () => {
 
             <div className='pt-5 border-slate-200'>
                   <h1 className='font-semibold'>Rating</h1>   
-                  <div className="space-y-2 pt-3">
+                  <div className="space-y-2 py-3 ">
                         <label className="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="rating" value="4" className="rating-filter w-4 h-4 text-primary"
                                   onChange={(e) => setRatingFilter(e.target.value)}/>
