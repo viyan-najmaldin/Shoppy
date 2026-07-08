@@ -7,17 +7,17 @@ import {
 
 const UserAction = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
-    <div className='text-white flex justify-end gap-5 '>
+    <div className='text-white flex justify-end gap-5 mr-5'>
       <button>
-           <FaRegUser className="text-lg" />
+           <FaRegUser className="text-xl" />
       </button>
 
       <button>
-           <FaRegHeart className="text-lg" />
+           <FaRegHeart className="text-xl" />
       </button>
 
       <button>
-          <FaCartShopping className="text-lg" />
+          <FaCartShopping className="text-xl" />
       </button>
       
          <button className='block sm:hidden' onClick={()=>{setIsMenuOpen(!isMenuOpen)}}>

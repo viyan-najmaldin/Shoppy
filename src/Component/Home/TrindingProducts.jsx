@@ -4,8 +4,7 @@ import Carts from './Carts'
 
 const TrindingProducts = () => {
   return (
-    <div className='py-20 mx-10'>
-         
+    <div className='py-20 mx-5'>
         <h1 className='text-2xl font-bold'>Trending Products</h1>
        
         <div className='flex justify-between'> 

@@ -6,6 +6,7 @@ import Nav from './Component/Navbar/Nav'
 import { useState } from 'react';
 import Products from './Component/Products/Products';
 import SingleProduct from './Component/Products/SingleProduct';
+import FavProducts from './Component/Products/FavProducts'
 
 function App() {
  
@@ -23,6 +24,7 @@ function App() {
         <Home />
         <Products />
         <SingleProduct />
+        <FavProducts />
 
 
     <Footer />
