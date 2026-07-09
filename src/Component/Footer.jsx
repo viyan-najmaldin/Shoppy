@@ -6,8 +6,22 @@ import {
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
+ const goToFacebook = () => {
+    window.location.href = "https://www.facebook.com";
+  };
+  const goToX = () => {
+    window.location.href = "https://www.x.com";
+  };
+ const goToInstagram = () => {
+    window.location.href = "https://www.instagram.com";
+  };
+   const goToYoutube = () => {
+    window.location.href = "https://www.youtube.com";
+  };
+
+
   return (
     <div className='bg-[#003049] sm:pt-10 p-5'>
 
@@ -16,21 +30,21 @@ const Footer = () => {
                         <PageLogo />
                         <p>Your one-stop destination for premium products. Quality, value, and exceptional service guaranteed.</p>
                         <div className="flex gap-3 my-5">
-                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
-                                        <FaFacebookF />
-                                    </button>
+                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition"
+                                     onClick={()=>goToFacebook()}
+                                    > <FaFacebookF /> </button>
 
-                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
-                                        <FaTwitter />
-                                    </button>
+                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition"
+                                     onClick={()=>goToX()} >
+                                          <FaTwitter />  </button>
 
-                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
-                                        <FaInstagram />
-                                    </button>
+                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition"
+                                     onClick={()=>goToInstagram()} >
+                                        <FaInstagram /> </button>
 
-                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition">
-                                        <FaYoutube />
-                                    </button>
+                                    <button className="w-10 h-10 bg-cyan-700  hover:bg-cyan-500 rounded-lg flex items-center justify-center transition"
+                                     onClick={()=>goToYoutube()}>
+                                        <FaYoutube /> </button>
                             </div>
                     </div>
 
@@ -39,30 +53,30 @@ const Footer = () => {
                         <div>
                         <h1 className='font-bold text-lg mb-2'>Shop</h1>
                         <ul>
-                            <li className='text-slate-400 hover:text-white'>All Products</li>
-                            <li className='text-slate-400 hover:text-white'>Electronics</li>
-                            <li className='text-slate-400 hover:text-white'>Fashion</li>
-                            <li className='text-slate-400 hover:text-white'>Home & Living</li>
+                            <Link to='/products'><li className='text-slate-400 hover:text-white'>All Products</li></Link>
+                            <Link to='/products'><li className='text-slate-400 hover:text-white'>Electronics</li></Link>
+                            <Link to='/products'><li className='text-slate-400 hover:text-white'>Fashion</li></Link>
+                            <Link to='/products'><li className='text-slate-400 hover:text-white'>Home & Living</li></Link>
                         </ul>
                     </div>
 
                     <div>
                         <h1 className='font-bold text-lg mb-2'>Company</h1>
                         <ul>
-                            <li className='text-slate-400 hover:text-white'>About Us</li>
-                            <li className='text-slate-400 hover:text-white'>Contact</li>
-                            <li className='text-slate-400 hover:text-white'>Careers</li>
-                            <li className='text-slate-400 hover:text-white'>Blog</li>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>About Us</li></Link>
+                            <Link to='/contact'><li className='text-slate-400 hover:text-white'>Contact</li></Link>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Careers</li></Link>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Blog</li></Link>
                         </ul>
                     </div>
 
                     <div>
                         <h1 className='font-bold text-lg mb-2'>Support</h1>
                         <ul>
-                            <li className='text-slate-400 hover:text-white'>Help Center</li>
-                            <li className='text-slate-400 hover:text-white'>Returns</li>
-                            <li className='text-slate-400 hover:text-white'>Shopping Info</li>
-                            <li className='text-slate-400 hover:text-white'>Track Order</li>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Help Center</li></Link>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Returns</li></Link>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Shopping Info</li></Link>
+                            <Link to='/'><li className='text-slate-400 hover:text-white'>Track Order</li></Link>
                         </ul>
                     </div>    
                     

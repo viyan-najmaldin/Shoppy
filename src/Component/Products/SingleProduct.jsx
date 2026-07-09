@@ -5,7 +5,6 @@ import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
 
 
-
 const SingleProduct = () => {
   return (
     <div className='bg-blue-50 pb-10 p-5'>

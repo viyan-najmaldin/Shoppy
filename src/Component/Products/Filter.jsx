@@ -7,7 +7,7 @@ const Filter = () => {
     const [priceValue, setPriceValue] = useState(500)
     const [showFilter, setShowFilter] = useState(false)
   return (
-    <div>
+    <aside>
       <div className='flex justify-between items-center pb-2 sm:pb-4 sm:sticky top-44 text-sm'>
         <a href="http://">Home - Product</a>
          <button onClick={()=>{setShowFilter(!showFilter)}}>
@@ -55,7 +55,6 @@ const Filter = () => {
                    </div>  
             </div>
 
-
             <div className='pt-5 border-slate-200'>
                   <h1 className='font-semibold'>Rating</h1>   
                   <div className="space-y-2 py-3 ">
@@ -92,7 +91,7 @@ const Filter = () => {
 
         
      </div> 
-    </div>
+    </aside>
     
   )
 }

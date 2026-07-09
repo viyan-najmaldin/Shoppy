@@ -1,6 +1,6 @@
 import React from 'react'
 import Carts from './Carts'
-
+import { Link } from 'react-router-dom'
 
 const TrindingProducts = () => {
   return (
@@ -9,18 +9,20 @@ const TrindingProducts = () => {
        
         <div className='flex justify-between'> 
         <p>Most loved by our customers</p>
-        <span className='font-bold text-cyan-900'>View All →</span>
+        <Link to="/products" className='font-bold text-cyan-900'>View All →</Link>
         </div>
      
-     <div className='mt-5 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6'>
+     <div className='mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6'>
+    
+  
      <Carts />
      <Carts />
      <Carts />
      <Carts />
      <Carts />
      <Carts />
-     <Carts />
-     <Carts />
+ 
+  
      </div>
     
 

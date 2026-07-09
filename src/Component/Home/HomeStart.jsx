@@ -1,10 +1,14 @@
 import React from 'react'
 import { FaFireFlameCurved, FaArrowRight } from "react-icons/fa6";
 import Shopping from "../../assets/Shopping.png";
+import { useNavigate } from "react-router-dom";
 
 const HomeStart = () => {
+
+  const navigate = useNavigate();
+
   return (
-    <div className='flex pt-10 px-5 gap-5 flex-col sm:flex-row'>
+    <div className='flex pt-10 pl-5 gap-5 flex-col sm:flex-row'>
         <div className='flex items-center sm:items-start flex-col h-full'>
       <span className="w-fit inline-block px-4 py-1.5 bg-blue-100 text-blue-500 rounded-full text-sm font-semibold mb-4">
             <FaFireFlameCurved className="text-orange-400 inline mr-1" />
@@ -19,8 +23,10 @@ const HomeStart = () => {
       </div>
 
       <div className='flex font-bold gap-5 mt-8'>
-         <button className='bg-red-500 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-br from-red-700 to-red-500 hover:px-20 transition'>Shop Now <FaArrowRight className="inline mr-1" /> </button>
-         <button className='bg-white rounded-full shadow-lg p-3 px-10  hover:px-20'>Learn More</button>
+         <button className='bg-red-500 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-red-600 to-orange-400 transition'
+         onClick={()=>navigate("/products")}>
+          Shop Now <FaArrowRight className="inline mr-1" /> </button>
+         <button className='bg-white rounded-full shadow-lg p-3 px-10  hover:bg-gray-500 transition hover:text-white'>Learn More</button>
       </div>
 
       <div className='flex my-8 gap-5'>
@@ -39,9 +45,9 @@ const HomeStart = () => {
 
     <div className='sm:relative z-0 sm:w-2/4'>
         <img src="https://www.mallofqatar.com.qa/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fmoq-bucket-moq-skwid%2Fshopping_homepage_sqaure_img_1_a07728752d%2Fshopping_homepage_sqaure_img_1_a07728752d.jpg&w=3840&q=75" 
-                 class="hidden sm:block rounded-3xl shadow-2xl w-full h-full object-cover" alt="Shopping"></img>
+                 class="hidden sm:block sm:rounded-full sm:w-70 lg:rounded-r-[2vw] lg:w-full h-full object-cover" alt="Shopping"></img>
      
-     <img src={Shopping} className='sm:absolute w-100 hover:rotate-5 transition -bottom-36 -left-46' alt="Shopping" />
+     <img src={Shopping} className='sm:absolute  w-100 hover:rotate-5 transition -bottom-36 -left-46' alt="Shopping" />
       
     </div>
     </div>

@@ -1,11 +1,14 @@
 import React from 'react'
 import { FaStar, FaStarHalfAlt, FaRegStar, FaRegHeart  } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Carts = () => {
+
+  const navigate = useNavigate();
   return (
    
-      
+        <Link to="/products/4">
        <div className="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300">
           <div className="relative aspect-square bg-slate-100 overflow-hidden cursor-pointer">
                 <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80" alt="img" loading="lazy" 
@@ -37,13 +40,15 @@ const Carts = () => {
           <button className="p-2.5 hover:bg-red-100 rounded-xl transition text-slate-400">
             <FaRegHeart />
           </button>
-          <button className="p-2.5 bg-cyan-700 hover:bg-cyan-500 text-white rounded-xl transition">
+          <button className="p-2.5 bg-cyan-700 hover:bg-cyan-500 text-white rounded-xl transition"
+          onClick={()=>navigate("/cart")}>
            <FaCartShopping className="" />
           </button>
         
       </div>
     </div>
     </div>
+    </Link>
   )
 }
 

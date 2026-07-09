@@ -4,21 +4,22 @@ import {
   FaRegHeart,
   FaCartShopping,FaBars
 } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const UserAction = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
     <div className='text-white flex justify-end gap-5 mr-5'>
-      <button>
+      <Link to='/account'>
            <FaRegUser className="text-xl" />
-      </button>
+      </Link>
 
-      <button>
+      <Link to='/favorites'>
            <FaRegHeart className="text-xl" />
-      </button>
+      </Link>
 
-      <button>
+      <Link to='/cart'>
           <FaCartShopping className="text-xl" />
-      </button>
+      </Link>
       
          <button className='block sm:hidden' onClick={()=>{setIsMenuOpen(!isMenuOpen)}}>
              <FaBars className="text-lg" />

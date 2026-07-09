@@ -8,8 +8,8 @@ import {
 
 const Aboutwebsite = () => {
   return (
-    <div className="bg-white border-y sm:my-10 border-slate-300">
-  <div className="max-w-7xl mx-auto px-4 py-20 lg:py-20">
+    <div className="bg-white border-y sm:my-5 border-slate-300">
+  <div className="max-w-7xl mx-auto px-4 py-15">
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
      
       <div className="text-center">

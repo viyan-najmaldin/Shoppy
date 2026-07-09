@@ -1,8 +1,12 @@
 import React from 'react'
 import {  FaRegHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
+
 
 const SelectProduct = () => {
+    const navigate = useNavigate();
+
   return (
       <div className='my-6 py-4 border-slate-300 border-t w-full'>
                            <h1 className='sm:text-xl font-semibold'>Select Color</h1>  
@@ -25,10 +29,11 @@ const SelectProduct = () => {
                           </div>
 
                     <div className='flex gap-4 py-10 border-b border-slate-300 '>
-                        <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'> 
-                            <FaCartShopping className="text-lg" />Add to Cartt
+                        <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'
+                        onClick={()=>navigate('/cart')}> 
+                            <FaCartShopping className="text-lg" />Add to Cart
                         </button>
-                        <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400'> <FaRegHeart /> </button>
+                        <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400 transition'> <FaRegHeart /> </button>
                     </div>
     </div>
   )
