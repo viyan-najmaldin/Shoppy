@@ -1,16 +1,29 @@
 import React from 'react'
 import Carts from '../Home/Carts'
 import Filter from './Filter'
+import { useParams } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Products = () => {
+const Products = ({Data}) => {
+
+   const { categories  } = useParams();
+
+  const myData = Data.filter(
+    (product) => product.category === categories
+  );
+
+  useEffect(()=>{
+    
+  },myData)
+  
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
-       <Filter/>
-        <div>
+       <Filter />
+      { myData.length?  <div>
                 <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
                     <div className='m-2'>
                         Showing 
-                        <span className='text-black font-semibold'> 6 </span> 
+                        <span className='text-black font-semibold'> {myData.length} </span> 
                         products
                       </div>
                  
@@ -27,18 +40,11 @@ const Products = () => {
                  </div>
 
 
-                 
-
-
                     <div className='mt-5 grid grid-cols-2 lg:grid-cols-3 gap-5'>
-                        <Carts/>
-                        <Carts/>
-                        <Carts/>
-                        <Carts/>
-                        <Carts/>
-                        <Carts/>   
+                        {myData.map(data=> <Carts data={data} />)}
                     </div>
-        </div>
+        </div> : <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>Product not found</h1>
+}
     </div>
   )
 }
