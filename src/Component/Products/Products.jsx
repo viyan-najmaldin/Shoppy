@@ -12,9 +12,7 @@ const Products = ({Data}) => {
     (product) => product.category === categories
   );
 
-  useEffect(()=>{
-    
-  },myData)
+ 
   
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
