@@ -36,7 +36,7 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
             {
               id: prevOrders.length + 1,
               myOrder: data,
-              quantity: 2,
+              quantity: 1,
             },
           ];
         });
@@ -46,7 +46,30 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
         (item) => item.myOrder.id === data.id
       );
 
+const IncreaseQty = () => {
+        setOrders((prevOrders) => {
+          const existingOrder = prevOrders.find(
+            (item) => item.myOrder.id === data.id
+          );
 
+          if (existingOrder) {
+            return prevOrders.map((item) =>
+              item.myOrder.id === data.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            );
+          }
+
+          return [
+            ...prevOrders,
+            {
+              id: prevOrders.length + 1,
+              myOrder: data,
+              quantity: 2,
+            },
+          ];
+        });
+      };
 
       const decreaseQty = () => {
   setOrders((prevOrders) =>
@@ -82,7 +105,7 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
                                  {myOrderr ? myOrderr.quantity : 1}                  
                                  </span>
                                <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1'
-                                onClick={onOrders}>
+                                onClick={IncreaseQty}>
                                   +</button>
                           </div>  
                           {data.quantity<15 && <p className='text-slate-500 text-sm'>Only {data.quantity} left in stock</p> }
