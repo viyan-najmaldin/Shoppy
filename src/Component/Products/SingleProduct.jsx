@@ -6,7 +6,7 @@ import SelectProduct from './SelectProduct';
 import { useParams } from "react-router-dom";
 import { useState } from 'react';
 
-const SingleProduct = ({Data}) => {
+const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const { id  } = useParams();
     const data = Data.find(
     (item) => item.id === Number(id)
@@ -26,30 +26,33 @@ const SingleProduct = ({Data}) => {
          
                <MoreExplore />
 
-               {console.log(id)}
+               {/* {console.log(id)} */}
            </section>
             
-        <section id='PruductDetails' className=''>
+        <section id='PruductDetails'>
             <div>
                  <h1 className='sm:text-3xl text-xl font-bold'>{data.name}</h1>  
                 <div className='flex my-2 gap-2'>
                     <div className="flex text-2xl text-amber-400">
-                                        <FaStar />
-                                        <FaStar />
-                                        <FaStar />
-                                        <FaStar />
-                                        <FaRegStar />
+                                         {[...Array(5)].map((_, index) =>
+                                                          index < data.rating ? (
+                                                            <FaStar key={index} />
+                                                          ) : (
+                                                            <FaRegStar key={index} />
+                                                          )
+                                                        )}
                                         </div>
-                                <span className='text-slate-500'>4.1 (108 reviews)</span>
+                                <span className='text-slate-500'>{data.rating} (108 reviews)</span>
                 </div>
                     <div className='flex gap-3 my-4 items-center'>
                         <h1 className='sm:text-3xl text-xl font-bold'>${data.price}</h1>  
-                        <h1 className='sm:text-xl text-slate-400 line-through font-bold'>$129.5</h1>
-                        <span className="px-2 h-fit bg-red-500/20 text-red-500 rounded-lg">20% OFF</span>
+                       {data.oldPrice && <h1 className='sm:text-xl text-slate-400 line-through font-bold'>${data.oldPrice}</h1> }
+                      {data.off ? <span className="px-2 h-fit bg-red-500/20 text-red-500 rounded-lg">{data.off}% OFF</span> : '' }
+                     {/* {console.log(data.off)} */}
                     </div>
             </div>
 
-            <SelectProduct />    
+            <SelectProduct data={data} setData={setData} orders={orders} setOrders={setOrders}/>    
                
             <ul className='mt-5'>
               <li><FaTruck className="text-cyan-800 inline mr-2" />

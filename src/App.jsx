@@ -18,7 +18,7 @@ import Category from './Component/Home/Category';
 function App() {
  
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const Data =[
+    const initialData =[
      {
     id: 1,
     name: "Wireless Headset",
@@ -29,7 +29,7 @@ function App() {
     category: "Electronics",
     quantity: 1,
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D",
-    favorite: false,
+    favorite: true,
     rating : 4,
     description: "Wireless Headset, i love it hehe"
   },
@@ -60,14 +60,33 @@ function App() {
     rating : 4,
     favorite :false,
     description: "i have nothing to say just try tio buy it"
+  },
+    {
+    id: 4,
+    name: "Creamy Bag",
+    price: 30,
+    off: 0,
+    oldPrice: '',
+    color: "Brown",
+    category: "Fashion",
+    quantity: 50,
+    image: "https://d1a66n3120ol3x.cloudfront.net/landing/tools/bag-product-photography/hero-054d1802-69df-4a26-81ad-1cded7f04a67.png",
+    favorite: true,
+    rating : 5,
+    description: "fgfzdhg ghfg fhgjg fdgg hehe"
+  },
 
-  }
     ]
+   const [Data, setData]=useState(initialData)
+   const [orders, setOrders]= useState([])
+
+
   return (
     <>
             <Nav  isMenuOpen={isMenuOpen}
                 setIsMenuOpen={setIsMenuOpen}
-                categories={Data.category} />
+                categories={Data.category}
+                orders={orders} />
 
             {isMenuOpen && 
             <div className="sm:hidden">
@@ -77,11 +96,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home Data={Data} />} />
                 <Route path="/products/:categories" element={<Products Data={Data} />} />
-                <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} />} />
-                <Route path="/favorites" element={<FavProducts />} />
+                <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
+                <Route path="/favorites" element={<FavProducts Data={Data} />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/account" element={<AccountProfile />} />      
-                <Route path="/cart" element={<ShoppingCart />} />
+                <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} />
                 <Route path="*" element={<PageNotFound404 />} />
             </Routes>
 

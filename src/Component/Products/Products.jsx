@@ -10,11 +10,7 @@ const Products = ({Data}) => {
 
  
 const myData = (categories == "All")?  Data  : Data.filter((product) => product.category === categories) ;
-   
-  
-
  
-  
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
        <Filter />
@@ -45,7 +41,6 @@ const myData = (categories == "All")?  Data  : Data.filter((product) => product.
         </div> : <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>Product not found</h1>
 }
 
-{console.log(myData)}
     </div>
   )
 }

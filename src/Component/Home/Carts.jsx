@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Carts = ({data}) => {
 
   const navigate = useNavigate();
+
   return (
    
         <Link to={`/products/${data.category}/${data.id}`}>
@@ -32,12 +33,7 @@ const Carts = ({data}) => {
                       <FaRegStar key={index} />
                     )
                   )}
-               
-              {/* <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStarHalfAlt />
-              <FaRegStar /> */}
+      
         </div>
 
           <span className="text-xs text-slate-500">(168)</span>
@@ -47,11 +43,12 @@ const Carts = ({data}) => {
             <div className="font-bold text-lg text-dark">${data.price}</div>
             {data.oldPrice? <div className="text-xs text-slate-400 line-through">${data.oldPrice}</div>: <div className='p-2'></div>}
           </div>
-          <button className="p-2.5 hover:bg-red-100 rounded-xl transition text-slate-400">
+          <button className="p-2.5 rounded-xl text-slate-400">
            {data.favorite ?<FaHeart className='text-red-500' />: <FaRegHeart />  }
           </button>
           <button className="p-2.5 bg-cyan-700 hover:bg-cyan-500 text-white rounded-xl transition"
-          onClick={()=>navigate("/cart")}>
+          onClick={()=>navigate("/cart")}
+          >
            <FaCartShopping />
           </button>
         
