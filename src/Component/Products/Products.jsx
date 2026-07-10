@@ -8,9 +8,10 @@ const Products = ({Data}) => {
 
    const { categories  } = useParams();
 
-  const myData = Data.filter(
-    (product) => product.category === categories
-  );
+ 
+const myData = (categories == "All")?  Data  : Data.filter((product) => product.category === categories) ;
+   
+  
 
  
   
@@ -43,6 +44,8 @@ const Products = ({Data}) => {
                     </div>
         </div> : <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>Product not found</h1>
 }
+
+{console.log(myData)}
     </div>
   )
 }
