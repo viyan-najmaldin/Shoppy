@@ -1,11 +1,17 @@
-import React from 'react'
+import {useRef, useState} from 'react'
 import {  FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { FaInfoCircle } from "react-icons/fa";
+
 
 
 const SelectProduct = ({data, setData , orders, setOrders}) => {
 
+      const [selectedSize, setSelectedSize] = useState("M");
+      const [selectedColor, setSelectedColor] = useState("");
+      const divRef = useRef(null);
       const navigate = useNavigate();
       const onFavToggle=(id)=>{
         setData((prev) =>
@@ -26,7 +32,7 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
           if (existingOrder) {
             return prevOrders.map((item) =>
               item.myOrder.id === data.id
-                ? { ...item, quantity: item.quantity + 1 }
+                ? { ...item, size: selectedSize, quantity: item.quantity  }
                 : item
             );
           }
@@ -37,9 +43,12 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
               id: prevOrders.length + 1,
               myOrder: data,
               quantity: 1,
+                ...(data.sizes && { size: selectedSize })
             },
           ];
         });
+           myOrderr? '' :toast.success("Product added to cart!")
+
       };
 
       const myOrderr = orders.find(
@@ -55,7 +64,7 @@ const IncreaseQty = () => {
           if (existingOrder) {
             return prevOrders.map((item) =>
               item.myOrder.id === data.id
-                ? { ...item, quantity: item.quantity + 1 }
+                ? { ...item, size: selectedSize, quantity: item.quantity + 1 }
                 : item
             );
           }
@@ -66,40 +75,109 @@ const IncreaseQty = () => {
               id: prevOrders.length + 1,
               myOrder: data,
               quantity: 2,
+                ...(data.sizes && { size: selectedSize })
             },
           ];
         });
+     toast.success(`You added ${myOrderr? myOrderr.quantity : 2} items to cart!`);
       };
 
       const decreaseQty = () => {
-  setOrders((prevOrders) =>
-    prevOrders
-      .map((item) =>
-        item.myOrder.id === data.id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-      .filter((item) => item.quantity > 0)
-  );
-};
+        setOrders((prevOrders) =>
+          prevOrders
+            .map((item) =>
+              item.myOrder.id === data.id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            )
+            .filter((item) => item.quantity > 0)
+        );
+    };
 
 
   return (
       <div className='my-6 py-4 border-slate-300 border-t w-full'>
-                           <h1 className='sm:text-xl font-semibold'>Select Color</h1>  
-                             <div className='flex gap-2 my-'>
-                                <button className='p-3 border border-slate-300 bg-red-500 w-fit rounded-3xl'></button>
-                                <button className='p-3 border border-slate-300 bg-white w-fit rounded-3xl'></button>
-                                <button className='p-3 border border-slate-300 bg-black w-fit rounded-3xl'></button>
-                                <button className='p-3 border border-slate-300 bg-blue-500 w-fit rounded-3xl'></button>
-                                <button className='p-3 border border-slate-300 bg-yellow-500 w-fit rounded-3xl'></button>
-                             </div>
+
+        
+                           { data.sizes && <div>
+                            <h3 className="font-semibold mb-2">Select Size</h3>
+
+                          <div className="flex gap-2">
+                              {data.sizes.map((size) => (
+                                <button
+                                  key={size}
+                                  onClick={() => {
+                                    setSelectedSize(size)
+                                    orders && setOrders((prevOrders) => {
+                                    
+                                          return prevOrders.map((item) =>
+                                            item.myOrder.id === data.id
+                                              ? { ...item, size: size }
+                                              : item
+                                          );
+                                        
+                                    })
+                                  }}
+                                  className={`w-15 h-8 border border-slate-200 rounded-full transition
+                                    ${
+                                      selectedSize === size
+                                        ? "bg-cyan-800 text-white"
+                                        : "bg-white text-black  hover:border-cyan-600"
+                                    }`}
+                                >
+                                  {size}
+                                </button>
+                              ))}
+                            </div> 
+
+                            <p className="mt-4 mb-5">
+                              Selected size: <strong>{selectedSize || "None"}</strong>
+                            </p>
+                          </div> }
+                          
+                          { data.colors && <div>
+                            <h3 className="font-semibold mb-2">Select Color</h3>
+
+                          <div className="flex gap-2">
+                              {data.colors.map((color) => (
+                                <button
+                                  key={color}
+                                  onClick={() => {
+                                    setSelectedColor(color)
+                                    orders && setOrders((prevOrders) => {
+                                          return prevOrders.map((item) =>
+                                            item.myOrder.id === data.id
+                                              ? { ...item, color: color }
+                                              : item
+                                          );
+                                        
+                                    })
+                                  }}
+                                  className={`w-5 h-5 bg-[${color}] border border-slate-200 rounded-full transition
+                                    ${
+                                      selectedColor === color
+                                        ? "border"
+                                        : " hover:border-cyan-600"
+                                    }`}
+                                >
+                                  
+                                </button>
+                              ))}
+                            </div> 
+
+                            <p className="mt-4 mb-5">
+                              Selected Color: <strong>{selectedColor || "None"}</strong>
+                            </p>
+                          </div> }
+
+                      
       
-                           <h1 className='sm:text-xl mt-4 py-2 font-semibold'>Quantity</h1>
+                           <h1 className='font-semibold mb-2'>Quantity</h1>
                           <div className='flex gap-2 items-center'>
                                <div className='flex justify-between items-center gap-5 border border-slate-400 rounded-lg sm:w-40 '>
-                               <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1'
+                               <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1 disabled:opacity-50 disabled:cursor-not-allowed'
                                onClick={decreaseQty}
+                                 disabled={myOrderr ? myOrderr.quantity <= 1 : true}
                                >-</button>
                                <span>                           
                                  {myOrderr ? myOrderr.quantity : 1}                  
@@ -111,23 +189,39 @@ const IncreaseQty = () => {
                           {data.quantity<15 && <p className='text-slate-500 text-sm'>Only {data.quantity} left in stock</p> }
                           </div>
 
-                    <div className='flex gap-4 py-10 border-b border-slate-300 '>
+                    <div className=' py-10 border-b border-slate-300 '>
+                       <div className='flex gap-4'>
+
+                      
                         <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'
                         onClick={()=>{
-                          onOrders()
-                          // console.log(orders)
-                          navigate('/cart')
+                          onOrders()  
+                         myOrderr&&  divRef.current.focus()                        
                         }}
                          title='Add to Shopping Cart'> 
                             <FaCartShopping className="text-lg"/>
                             Add to Cart
                         </button>
+                 { console.log(orders) }
                         <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400 transition'
                          onClick={()=>onFavToggle(data.id)}
                          title='Add to favorite'
                         >
                         {data.favorite? <FaHeart className='text-red-500' />: <FaRegHeart /> } </button>
                     </div>
+                      
+                    {myOrderr && (
+                      <p
+                        ref={divRef}
+                        tabIndex={-1}
+                        className="text-xs gap-1 text-slate-600 flex mt-1 focus:text-red-700"
+                      >
+                        <FaInfoCircle className="text-sm" />
+                        You already added this item to the cart.
+                      </p>
+                    )}
+
+                    </div>  
     </div>
   )
 }

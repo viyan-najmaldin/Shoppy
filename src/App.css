@@ -1,0 +1,13 @@
+.Toastify__toast--success {
+  background: #3b82f6;
+}
+
+.Toastify__progress-bar--success {
+  background: rgb(32, 185, 227) !important; /* Blue */
+}
+
+.Toastify__toast-icon svg {
+  fill: rgb(32, 185, 227);
+}
+
+

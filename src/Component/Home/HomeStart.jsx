@@ -24,7 +24,7 @@ const HomeStart = () => {
 
       <div className='flex font-bold gap-5 mt-8'>
          <button className='bg-red-500 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-red-600 to-orange-400 transition'
-         onClick={()=>navigate("/products")}>
+         onClick={()=>navigate("/products/All")}>
           Shop Now <FaArrowRight className="inline mr-1" /> </button>
          <button className='bg-white rounded-full shadow-lg p-3 px-10  hover:bg-gray-500 transition hover:text-white'>Learn More</button>
       </div>

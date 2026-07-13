@@ -13,6 +13,8 @@ import Contact from './Component/Contact';
 import ShoppingCart from './Component/ShoppingCart';
 import { Routes, Route } from "react-router-dom";
 import Category from './Component/Home/Category';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D",
     favorite: true,
     rating : 4,
+    sizes: ["S", "M", "L", "XL"],
     description: "Wireless Headset, i love it hehe"
   },
    {
@@ -45,6 +48,7 @@ function App() {
     image: "https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/primary/ProductShowcasesampleimages/JPEG/Product+Showcase-1.jpg",
     favorite :true,
     rating : 2,
+    sizes: ["S", "M", "L", "XL"],
     description: "white shose hehe i want to buy it but i have no money, so sad :("
   },
     {
@@ -58,6 +62,8 @@ function App() {
     quantity: 30,
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQewMrjE3iixwEvv56SkzE0qykj4VoFh7x_6VllPT8HlP5nsdwB2tLKpV7&s=10",
     rating : 4,
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["red", "blue","violet","brown"],
     favorite :false,
     description: "i have nothing to say just try tio buy it"
   },
@@ -73,6 +79,8 @@ function App() {
     image: "https://d1a66n3120ol3x.cloudfront.net/landing/tools/bag-product-photography/hero-054d1802-69df-4a26-81ad-1cded7f04a67.png",
     favorite: true,
     rating : 5,
+    // sizes: ["red", "blue", "L", "XL"],
+    colors: ["red", "black","Brown","White"],
     description: "fgfzdhg ghfg fhgjg fdgg hehe"
   },
 
@@ -92,7 +100,6 @@ function App() {
             <div className="sm:hidden">
               <MenuLinks/> 
             </div> }
-
             <Routes>
                 <Route path="/" element={<Home Data={Data} />} />
                 <Route path="/products/:categories" element={<Products Data={Data} />} />
@@ -103,7 +110,8 @@ function App() {
                 <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} />
                 <Route path="*" element={<PageNotFound404 />} />
             </Routes>
-
+            <ToastContainer />
+                  
               <Footer />
     </>
   )

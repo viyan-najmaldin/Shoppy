@@ -17,14 +17,13 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
     <div className='bg-blue-50 pb-10 p-5'>
       <a href="http://" className='pb-2 sm:pb-4 text-sm'>Home - Product - Procuct Detail</a> 
    
-   <div className='bg-white sm:my-5 my-2  rounded-2xl border border-slate-200 sm:p-10 p-4'>
-        <div className='grid sm:grid-cols-2  gap-10  '>
+        <div className='bg-white sm:my-5 my-2  rounded-2xl border border-slate-200 sm:p-10 p-4 grid sm:grid-cols-2  gap-10  '>
     
            <section id='productImage' className=''>
                 <img src={data.image} alt="img" loading="lazy" 
                 className="border border-slate-200 object-cover w-full h-110 mb-4 rounded-2xl"/>
          
-               <MoreExplore />
+               <MoreExplore Data={Data} />
 
                {/* {console.log(id)} */}
            </section>
@@ -64,11 +63,8 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
         </section>
         </div>
 
-          <div>
-            <h1 className='text-xl font-semibold mt-6 pb-2'>Description</h1>
-              <p>{data.description}</p>
-          </div>
-     </div>
+         
+         
     </div>
   )
 }

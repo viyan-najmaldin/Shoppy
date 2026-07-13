@@ -105,7 +105,7 @@ const decreaseQty = (id) => {
                 />
                   
                 <div className="flex-1 text-center sm:text-left">
-                  < Link to={`/products/${item.myOrder.id}`} >
+                  < Link  to={`/products/${item.category}/${item.id}`} >
                    <h3 className="text-lg font-semibold">{item.myOrder.name}</h3> 
                    </Link>
                   <p className="text-gray-500 mt-1">${item.myOrder.price}</p>
