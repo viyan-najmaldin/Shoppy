@@ -1,10 +1,11 @@
 import React from 'react'
 import { FaStar, FaRegStar, FaRegHeart } from "react-icons/fa";
-import { FaCartShopping,  FaTruck, FaRotateLeft,FaLock } from "react-icons/fa6";
+import { FaCartShopping,  FaTruck, FaRotateLeft,FaLock, FaAngleRight } from "react-icons/fa6";
 import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState } from 'react';
+
 
 const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const { id  } = useParams();
@@ -15,7 +16,14 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
   return (
     
     <div className='bg-blue-50 pb-10 p-5'>
-      <a href="http://" className='pb-2 sm:pb-4 text-sm'>Home - Product - Procuct Detail</a> 
+      <div className='text-sm font-semibold flex items-center gap-2'>
+        <Link to='/'> <span className='text-slate-500'>Home</span> </Link> 
+        <FaAngleRight  className='text-slate-500'/>
+         <Link to={`/products/${data.category}`} className='text-slate-500'><span> {data.category}</span></Link>
+          <FaAngleRight  className='text-slate-500'/>
+         <span> Product Detail</span>
+         
+         </div> 
    
         <div className='bg-white sm:my-5 my-2  rounded-2xl border border-slate-200 sm:p-10 p-4 grid sm:grid-cols-2  gap-10  '>
     

@@ -1,21 +1,28 @@
-import React from 'react'
 import { useState } from 'react'
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { FaStar, FaRegStar ,FaAngleRight } from "react-icons/fa";
 import { IoFilter } from "react-icons/io5";
+import { useParams, Link } from "react-router-dom";
 
-const Filter = () => {
+const Filter = ({Data}) => {
     const [priceValue, setPriceValue] = useState(500)
     const [showFilter, setShowFilter] = useState(false)
+    const { categories  } = useParams();
+     const myData = (categories == "All")?  Data  : Data.filter((product) => product.category === categories) ;
+   
   return (
     <aside>
-      <div className='flex justify-between items-center pb-2 sm:pb-4 sm:sticky top-44 text-sm'>
-        <a href="http://">Home - Product</a>
+      <div className='flex justify-between items-center pb-2 sm:pb-4 sm:sticky top-35 text-sm'>
+         <div className='font-semibold flex items-center gap-2'>
+          <Link to='/' className='text-slate-500'> <span>Home</span></Link> 
+          <FaAngleRight  className='text-slate-500'/>
+           
+           <span>{categories}</span></div>
          <button onClick={()=>{setShowFilter(!showFilter)}}>
          <IoFilter className="sm:hidden text-cyan-800 rounded-lg text-2xl" />
       </button>
       </div>
      
-        <div className={`${showFilter? 'block': 'hidden'} sm:block p-5 py-10 border border-slate-200 sm:sticky top-52 bg-white min-w-60 max-h-fit rounded-2xl mb-5 sm:mb-0`}>
+        <div className={`${showFilter? 'block': 'hidden'} sm:block p-5 py-10 border border-slate-200 sm:sticky top-45 bg-white min-w-60 max-h-fit rounded-2xl mb-5 sm:mb-0`}>
 
             <div className='flex justify-between mb-5'>
                   <h1 className='font-bold text-lg'>Filters</h1>

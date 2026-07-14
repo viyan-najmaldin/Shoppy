@@ -82,7 +82,7 @@ const IncreaseQty = () => {
             },
           ];
         });
-     toast.success(`You added ${myOrderr? myOrderr.quantity : 2} items to cart!`);
+     toast.success(`You added ${myOrderr? myOrderr.quantity+1: 2} items to cart!`);
       };
 
       const decreaseQty = () => {

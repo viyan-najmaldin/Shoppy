@@ -2,7 +2,6 @@ import React from 'react'
 import Carts from '../Home/Carts'
 import Filter from './Filter'
 import { useParams } from "react-router-dom";
-import { useEffect } from 'react';
 
 const Products = ({Data}) => {
 
@@ -13,7 +12,7 @@ const myData = (categories == "All")?  Data  : Data.filter((product) => product.
  
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
-       <Filter />
+       <Filter Data={Data} />
       { myData.length?  <div>
                 <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
                     <div className='m-2'>
