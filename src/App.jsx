@@ -47,7 +47,7 @@ function App() {
     quantity: 10,
     image: "https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/primary/ProductShowcasesampleimages/JPEG/Product+Showcase-1.jpg",
     favorite :true,
-    rating : 2,
+    rating : 3,
     sizes: ["S", "M", "L", "XL"],
     description: "white shose hehe i want to buy it but i have no money, so sad :("
   },
@@ -78,13 +78,45 @@ function App() {
     quantity: 50,
     image: "https://d1a66n3120ol3x.cloudfront.net/landing/tools/bag-product-photography/hero-054d1802-69df-4a26-81ad-1cded7f04a67.png",
     favorite: true,
+    rating : 3,
+    // sizes: ["red", "blue", "L", "XL"],
+    colors: ["red", "black","Brown","White"],
+    description: "fgfzdhg ghfg fhgjg fdgg hehe"
+  },
+{
+    id: 5,
+    name: "Black T-shirt",
+    price: 25,
+    off: 10,
+    oldPrice: '35',
+    color: "Black",
+    category: "Fashion",
+    quantity: 59,
+    image: "https://cdn.tom-tailor.com/products/1045021_29999_7.jpg?fwidth=1920&quality=75&format=auto",
+    favorite: false,
     rating : 5,
     // sizes: ["red", "blue", "L", "XL"],
     colors: ["red", "black","Brown","White"],
     description: "fgfzdhg ghfg fhgjg fdgg hehe"
   },
-
+  {
+    id: 6,
+    name: "Brown T-shirt",
+    price: 25,
+    off: 10,
+    oldPrice: '35',
+    color: "Brown",
+    category: "Fashion",
+    quantity: 59,
+    image: "https://cdn.tom-tailor.com/products/1045021_15033_7.jpg?fwidth=1920&quality=75&format=auto",
+    favorite: false,
+    rating : 5,
+    // sizes: ["red", "blue", "L", "XL"],
+    colors: ["red", "black","Brown","White"],
+    description: "fgfzdhg ghfg fhgjg fdgg hehe"
+  },
     ]
+
    const [Data, setData]=useState(initialData)
    const [orders, setOrders]= useState([])
 

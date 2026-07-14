@@ -3,12 +3,21 @@ import { FaStar, FaRegStar ,FaAngleRight } from "react-icons/fa";
 import { IoFilter } from "react-icons/io5";
 import { useParams, Link } from "react-router-dom";
 
-const Filter = ({Data}) => {
-    const [priceValue, setPriceValue] = useState(500)
+const Filter = ({Data, priceValue , setPriceValue, categoryValue, setCategoryValue, ratingValue, setRatingValue}) => {
+   
     const [showFilter, setShowFilter] = useState(false)
     const { categories  } = useParams();
-     const myData = (categories == "All")?  Data  : Data.filter((product) => product.category === categories) ;
    
+    const filterCategory= (e) => {
+                                if (e.target.checked) {
+                                  setCategoryValue((prev) => [...prev, e.target.value]);
+                                } else {
+                                  setCategoryValue((prev) =>
+                                    prev.filter((item) => item !== e.target.value)
+                                  );
+                                }
+                              }
+
   return (
     <aside>
       <div className='flex justify-between items-center pb-2 sm:pb-4 sm:sticky top-35 text-sm'>
@@ -44,19 +53,27 @@ const Filter = ({Data}) => {
                   <h1 className='font-semibold'>Categories</h1>   
                   <div className="space-y-2 pt-3">
                         <label className="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="electronics"/>
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded" 
+                           onChange={(e) => filterCategory(e)} 
+                              value="Electronics"/>
                             <span className="text-sm">Electronics</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="fashion"/>
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded"
+                              onChange={(e) => filterCategory(e)} 
+                            value="Fashion"/>
                             <span className="text-sm">Fashion</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4  rounded" value="home"/>
+                            <input type="checkbox" className="w-4 h-4  rounded"
+                               onChange={(e) => filterCategory(e)} 
+                            value="Home & Living"/>
                             <span className="text-sm">Home & Living</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4 text-primary rounded" value="sports"/>
+                            <input type="checkbox" className="w-4 h-4 text-primary rounded"
+                               onChange={(e)=>filterCategory(e)} 
+                            value="Sports"/>
                             <span className="text-sm">Sports</span>
                         </label>
                    </div>  
@@ -67,7 +84,7 @@ const Filter = ({Data}) => {
                   <div className="space-y-2 py-3 ">
                         <label className="flex items-center gap-2 cursor-pointer">
                                 <input type="radio" name="rating" value="4" className="rating-filter w-4 h-4 text-primary"
-                                  onChange={(e) => setRatingFilter(e.target.value)}/>
+                                  onChange={(e) => setRatingValue(Number(e.target.value))}/>
 
                                 <div className="flex text-amber-400 text-sm">
                                   <FaStar />
@@ -81,7 +98,7 @@ const Filter = ({Data}) => {
 
                         <label className="flex items-center gap-2 cursor-pointer">
                               <input type="radio" name="rating" value="3" className="rating-filter w-4 h-4 text-primary"
-                                onChange={(e) => setRatingFilter(e.target.value)}/>
+                                onChange={(e) => setRatingValue(Number(e.target.value))}/>
 
                               <div className="flex text-amber-400 text-sm">
                                 <FaStar />

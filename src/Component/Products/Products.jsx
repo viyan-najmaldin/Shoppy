@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Carts from '../Home/Carts'
 import Filter from './Filter'
 import { useParams } from "react-router-dom";
@@ -6,13 +6,31 @@ import { useParams } from "react-router-dom";
 const Products = ({Data}) => {
 
    const { categories  } = useParams();
+   const [priceValue, setPriceValue] = useState(500)
+   const [categoryValue, setCategoryValue] = useState([])
+   const [ratingValue, setRatingValue] = useState(0)
+
+
 
  
-const myData = (categories == "All")?  Data  : Data.filter((product) => product.category === categories) ;
- 
+const myData = Data.filter((product) =>{
+
+   const myCategory=  (categories === "All" || product.category === categories) &&
+                      (categoryValue.length === 0 || categoryValue.includes(product.category))
+
+   const myPrice = product.price <= priceValue
+   const myRating =  ratingValue === 0 || product.rating >= ratingValue;
+
+   return myCategory && myPrice && myRating
+    }  );
+      
+      
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
-       <Filter Data={Data} />
+       <Filter priceValue={priceValue} setPriceValue={setPriceValue} 
+       categoryValue={categoryValue} setCategoryValue={setCategoryValue}
+       ratingValue={ratingValue}  setRatingValue={setRatingValue}
+       Data={Data} />
       { myData.length?  <div>
                 <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
                     <div className='m-2'>
@@ -32,8 +50,7 @@ const myData = (categories == "All")?  Data  : Data.filter((product) => product.
                          </select>
                     </div>
                  </div>
-
-
+ 
                     <div className='mt-5 grid grid-cols-2 lg:grid-cols-3 gap-5'>
                         {myData.map(data=> <Carts data={data} />)}
                     </div>
