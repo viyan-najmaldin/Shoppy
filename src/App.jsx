@@ -63,7 +63,7 @@ function App() {
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQewMrjE3iixwEvv56SkzE0qykj4VoFh7x_6VllPT8HlP5nsdwB2tLKpV7&s=10",
     rating : 4,
     sizes: ["S", "M", "L", "XL"],
-    colors: ["red", "blue","violet","brown"],
+    colors: ["red", "blue","white","brown"],
     favorite :false,
     description: "i have nothing to say just try tio buy it"
   },

@@ -10,7 +10,7 @@ import { FaInfoCircle } from "react-icons/fa";
 const SelectProduct = ({data, setData , orders, setOrders}) => {
 
       const [selectedSize, setSelectedSize] = useState("M");
-      const [selectedColor, setSelectedColor] = useState("");
+      const [selectedColor, setSelectedColor] = useState("")
       const divRef = useRef(null);
       const navigate = useNavigate();
       const onFavToggle=(id)=>{
@@ -32,7 +32,7 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
           if (existingOrder) {
             return prevOrders.map((item) =>
               item.myOrder.id === data.id
-                ? { ...item, size: selectedSize, quantity: item.quantity  }
+                ? { ...item, size: selectedSize, color:selectedColor, quantity: item.quantity  }
                 : item
             );
           }
@@ -43,7 +43,9 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
               id: prevOrders.length + 1,
               myOrder: data,
               quantity: 1,
-                ...(data.sizes && { size: selectedSize })
+                ...(data.sizes && { size: selectedSize }),
+                ...(data.colors && { color: selectedColor })
+
             },
           ];
         });
@@ -64,7 +66,7 @@ const IncreaseQty = () => {
           if (existingOrder) {
             return prevOrders.map((item) =>
               item.myOrder.id === data.id
-                ? { ...item, size: selectedSize, quantity: item.quantity + 1 }
+                ? { ...item, size: selectedSize , color:selectedColor, quantity: item.quantity + 1 }
                 : item
             );
           }
@@ -75,7 +77,8 @@ const IncreaseQty = () => {
               id: prevOrders.length + 1,
               myOrder: data,
               quantity: 2,
-                ...(data.sizes && { size: selectedSize })
+                ...(data.sizes && { size: selectedSize }),
+                ...(data.colors && { color: selectedColor })
             },
           ];
         });
@@ -100,9 +103,9 @@ const IncreaseQty = () => {
 
         
                            { data.sizes && <div>
-                            <h3 className="font-semibold mb-2">Select Size</h3>
+                            <h3 className="font-semibold mb-2">Select Size <strong>{selectedSize || "None"}</strong></h3>
 
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 mb-4">
                               {data.sizes.map((size) => (
                                 <button
                                   key={size}
@@ -130,15 +133,13 @@ const IncreaseQty = () => {
                               ))}
                             </div> 
 
-                            <p className="mt-4 mb-5">
-                              Selected size: <strong>{selectedSize || "None"}</strong>
-                            </p>
+                           
                           </div> }
                           
                           { data.colors && <div>
-                            <h3 className="font-semibold mb-2">Select Color</h3>
+                            <h3 className="font-semibold my-4">Select Color  <strong>{selectedColor || ""}</strong> </h3> 
 
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 mb-4">
                               {data.colors.map((color) => (
                                 <button
                                   key={color}
@@ -153,21 +154,20 @@ const IncreaseQty = () => {
                                         
                                     })
                                   }}
-                                  className={`w-5 h-5 bg-[${color}] border border-slate-200 rounded-full transition
+                                    style={{ backgroundColor: color }}
+                                  className={`size-5 border rounded-full transition
                                     ${
-                                      selectedColor === color
-                                        ? "border"
-                                        : " hover:border-cyan-600"
+                                      selectedColor === color? "border-5 border-slate-300 "
+                                        : " hover:border-cyan-600 border-slate-300"
                                     }`}
                                 >
                                   
                                 </button>
                               ))}
+                              
                             </div> 
 
-                            <p className="mt-4 mb-5">
-                              Selected Color: <strong>{selectedColor || "None"}</strong>
-                            </p>
+                           
                           </div> }
 
                       
