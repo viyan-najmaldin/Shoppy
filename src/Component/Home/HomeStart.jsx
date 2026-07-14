@@ -8,7 +8,7 @@ const HomeStart = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex pt-10 pl-5 gap-5 flex-col sm:flex-row'>
+    <div className='flex pt-10 px-5 sm:pr-0  gap-5 flex-col sm:flex-row'>
         <div className='flex items-center sm:items-start flex-col h-full'>
       <span className="w-fit inline-block px-4 py-1.5 bg-blue-100 text-blue-500 rounded-full text-sm font-semibold mb-4">
             <FaFireFlameCurved className="text-orange-400 inline mr-1" />

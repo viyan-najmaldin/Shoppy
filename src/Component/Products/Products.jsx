@@ -9,6 +9,7 @@ const Products = ({Data}) => {
    const [priceValue, setPriceValue] = useState(500)
    const [categoryValue, setCategoryValue] = useState([])
    const [ratingValue, setRatingValue] = useState(0)
+   const [sortValue, setSortValue] = useState("featured");
 
 
 
@@ -17,13 +18,23 @@ const myData = Data.filter((product) =>{
 
    const myCategory=  (categories === "All" || product.category === categories) &&
                       (categoryValue.length === 0 || categoryValue.includes(product.category))
-
    const myPrice = product.price <= priceValue
    const myRating =  ratingValue === 0 || product.rating >= ratingValue;
 
    return myCategory && myPrice && myRating
     }  );
-      
+   
+
+    const sortedData = [...myData];
+
+      if (sortValue === "price-low") {
+      sortedData.sort((a, b) => a.price - b.price);
+      } else if (sortValue === "price-high") {
+      sortedData.sort((a, b) => b.price - a.price);
+      } else if (sortValue === "rating") {
+      sortedData.sort((a, b) => b.rating - a.rating);
+      }
+
       
   return (
     <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
@@ -31,7 +42,7 @@ const myData = Data.filter((product) =>{
        categoryValue={categoryValue} setCategoryValue={setCategoryValue}
        ratingValue={ratingValue}  setRatingValue={setRatingValue}
        Data={Data} />
-      { myData.length?  <div>
+      { sortedData.length?  <div>
                 <div className='sm:mt-9 flex justify-between flex-col sm:flex-row sm:items-center p-4 bg-white text-slate-600 border border-slate-200 rounded-2xl'>
                     <div className='m-2'>
                         Showing 
@@ -41,7 +52,10 @@ const myData = Data.filter((product) =>{
                  
                     <div>
                       <label className='hidden lg:inline mr-2'>Sort:</label>
-                         <select id="sortSelect" className="flex-1 flex-initial p-2 border w-full lg:w-auto border-slate-300 rounded-lg text-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-cyan-700/30">
+                         <select id="sortSelect" 
+                         value={sortValue}
+                         onChange={(e) => setSortValue(e.target.value)}
+                         className="flex-1 flex-initial p-2 border w-full lg:w-auto border-slate-300 rounded-lg text-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-cyan-700/30">
                             <option value="featured">Featured</option>
                             <option value="price-low">Price: Low to High</option>
                             <option value="price-high">Price: High to Low</option>
@@ -52,7 +66,7 @@ const myData = Data.filter((product) =>{
                  </div>
  
                     <div className='mt-5 grid grid-cols-2 lg:grid-cols-3 gap-5'>
-                        {myData.map(data=> <Carts data={data} />)}
+                        {sortedData.map(data=> <Carts data={data} />)}
                     </div>
         </div> : <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>Product not found</h1>
 }
