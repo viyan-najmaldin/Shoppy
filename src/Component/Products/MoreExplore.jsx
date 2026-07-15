@@ -13,7 +13,7 @@ const MoreExplore = ({Data}) => {
               
                <div className='grid grid-cols-4 gap-2 mt-1  sm:h-30 h-20 justify-center'>
                 {randomProducts.map((product) => (  
-               <Link to={`/products/${product.category}/${product.id}`}>
+               <Link key={product.id} to={`/products/${product.category}/${product.id}`}>
                <img src={product.image} alt={product.name} loading="lazy" 
                       className=" object-cover w-full  sm:h-30 h-20 border border-slate-200 rounded-lg hover:scale-105 transition-transform duration-500"/>
               </Link>))}  </div>

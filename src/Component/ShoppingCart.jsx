@@ -2,40 +2,10 @@ import { useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-// const initialCart = [
-//   {
-//     id: 1,
-//     name: "Wireless Headphones",
-//     price: 89,
-//     quantity: 1,
-//     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80",
-//   },
-//   {
-//     id: 2,
-//     name: "Orange Shoes",
-//     price: 149,
-//     quantity: 2,
-//     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNO36XKY6a7gCZq0CK5bQrqrMjc-VhMWm9QQVwp4TNoQ&s=10",
-//   },
-//   {
-//     id: 3,
-//     name: "Orange Shoes",
-//     price: 149,
-//     quantity: 2,
-//     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNO36XKY6a7gCZq0CK5bQrqrMjc-VhMWm9QQVwp4TNoQ&s=10",
-//   },
-//   {
-//     id: 4,
-//     name: "Orange Shoes",
-//     price: 149,
-//     quantity: 2,
-//     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNO36XKY6a7gCZq0CK5bQrqrMjc-VhMWm9QQVwp4TNoQ&s=10",
-//   },
-// ];
 
 export default function ShoppingCart({ orders, setOrders}) {
-  // const [orders, setOrders] = useState(orders);
 
+  const [showDeleteId , setShowDeleteId ] =useState(null)
   const increaseQty = (id) => {
     setOrders((items) =>
       items.map((item) =>
@@ -46,7 +16,7 @@ export default function ShoppingCart({ orders, setOrders}) {
     );
   };
 
-  console.log(orders)
+  // console.log(orders)
 
 const decreaseQty = (id) => {
   setOrders((items) => {
@@ -67,6 +37,8 @@ const decreaseQty = (id) => {
   const removeItem = (id) => {
     setOrders((items) => items.filter((item) => item.id !== id));
     // setOrders(orders)
+    // console.log(id)
+    setShowDeleteId(null)
   };
 
   const subtotal = orders.reduce(
@@ -105,7 +77,7 @@ const decreaseQty = (id) => {
                 />
                   
                 <div className="flex-1 text-center sm:text-left">
-                  < Link  to={`/products/${item.category}/${item.id}`} >
+                  < Link  to={`/products/${item.myOrder.category}/${item.myOrder.id}`} >
                    <h3 className="text-lg font-semibold">{item.myOrder.name}</h3> 
                    </Link>
                   <p className="text-gray-500 mt-1">${item.myOrder.price}</p>
@@ -121,7 +93,7 @@ const decreaseQty = (id) => {
                   </button>
 
                   <span className="px-2">{item.quantity}</span>
-
+                   
                   <button
                     onClick={() => increaseQty(item.id)}
                     className="p-3 hover:bg-gray-100"
@@ -129,15 +101,39 @@ const decreaseQty = (id) => {
                     <FaPlus size={12} />
                   </button>
                 </div>
-
+                 
                 <button
-                  onClick={() => removeItem(item.id)}
+                   onClick={() => setShowDeleteId(item.id)}
                   className="text-red-500 hover:text-red-700"
                 >
                   <FaTrash />
                 </button>
+             
         </div>
-              </div>
+         {showDeleteId === item.id &&  
+         <div className="bg-mist-300 shadow-lg fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm text-center rounded-xl  border-2 border-slate-400">
+                               <div className="flex bg-[#003049] justify-end p-0 rounded-t-lg ">
+                                <button
+                                  onClick={() => setShowDeleteId(null)}
+                                  className="text-xl font-bold text-white rounded-tr-lg p-1 px-3 hover:bg-red-700"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                           
+                             <div className="p-5">
+                             <p>do you want to delete this product?</p>
+                              <div className="flex justify-center text-black mt-2 gap-2">
+                              <button className="bg-white border hover:bg-red-700 hover:text-white px-4 border-slate-400 p-1 rounded-xl"
+                              onClick={() => removeItem(item.id)}>Yes</button>
+                              <button className="bg-white border px-4 hover:bg-[#003049] hover:text-white border-slate-400 p-1 rounded-xl"
+                              onClick={() => setShowDeleteId(null)}>No</button>
+                             </div>
+                               </div>
+                        </div>
+                }
+              
+                    </div>
               
             ))}
           </div>
