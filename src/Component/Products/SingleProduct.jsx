@@ -9,8 +9,9 @@ import { useState } from 'react';
 
 const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const { id  } = useParams();
+
     const data = Data.find(
-    (item) => item.id === Number(id)
+    (item) => item.id === Number(id) 
   );
 
   return (
@@ -59,7 +60,12 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
                     </div>
             </div>
 
-            <SelectProduct data={data} setData={setData} orders={orders} setOrders={setOrders}/>    
+            <SelectProduct 
+                          Data={Data}
+                          data={data} 
+                          setData={setData}
+                          orders={orders} 
+                          setOrders={setOrders}/>    
                
             <ul className='mt-5'>
               <li><FaTruck className="text-cyan-800 inline mr-2" />

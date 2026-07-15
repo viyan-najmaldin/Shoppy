@@ -7,10 +7,12 @@ import { FaInfoCircle } from "react-icons/fa";
 
 
 
-const SelectProduct = ({data, setData , orders, setOrders}) => {
+const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
 
       const [selectedSize, setSelectedSize] = useState("M");
       const [selectedColor, setSelectedColor] = useState("")
+      const [newProduct, setNewProduct] = useState("")
+
       const divRef = useRef(null);
       const navigate = useNavigate();
       const onFavToggle=(id)=>{
@@ -22,16 +24,29 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
         ))
       }
 
+ const changeColor = (selectedColor) => {
+  const product = Data.find(
+    (item) =>
+      item.code === data.code &&
+      item.color === selectedColor
+  );
+
+  if (product) {
+    setNewProduct(product);
+    navigate(`/products/${product.category}/${product.id}`);
+  }
+};
+
 
       const onOrders = () => {
         setOrders((prevOrders) => {
           const existingOrder = prevOrders.find(
-            (item) => item.myOrder.id === data.id
+            (item) => item.myOrder.id === data.id 
           );
 
           if (existingOrder) {
             return prevOrders.map((item) =>
-              item.myOrder.id === data.id
+              item.myOrder.id === data.id 
                 ? { ...item, size: selectedSize, color:selectedColor, quantity: item.quantity  }
                 : item
             );
@@ -54,18 +69,18 @@ const SelectProduct = ({data, setData , orders, setOrders}) => {
       };
 
       const myOrderr = orders.find(
-        (item) => item.myOrder.id === data.id
+        (item) => item.myOrder.id === data.id 
       );
 
 const IncreaseQty = () => {
         setOrders((prevOrders) => {
           const existingOrder = prevOrders.find(
-            (item) => item.myOrder.id === data.id
+            (item) => item.myOrder.id === data.id 
           );
 
           if (existingOrder) {
             return prevOrders.map((item) =>
-              item.myOrder.id === data.id
+              item.myOrder.id === data.id 
                 ? { ...item, size: selectedSize , color:selectedColor, quantity: item.quantity + 1 }
                 : item
             );
@@ -151,8 +166,9 @@ const IncreaseQty = () => {
                                               ? { ...item, color: color }
                                               : item
                                           );
-                                        
+                                      
                                     })
+                                    changeColor(color)
                                   }}
                                     style={{ backgroundColor: color }}
                                   className={`size-5 border rounded-full transition
