@@ -4,7 +4,7 @@ import Filter from './Filter'
 import { useParams } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
-const Products = ({Data}) => {
+const Products = ({Data, search}) => {
 
    const { categories  } = useParams();
    const [priceValue, setPriceValue] = useState(500)
@@ -33,8 +33,13 @@ const myData = Data.filter((product) =>{
                       (categoryValue.length === 0 || categoryValue.includes(product.category))
    const myPrice = product.price <= priceValue
    const myRating =  ratingValue === 0 || product.rating >= ratingValue;
+   const mySearch =
+                  product.name.toLowerCase().includes(search.toLowerCase()) ||
+                  product.category.toLowerCase().includes(search.toLowerCase()) ||
+                  product.color.toLowerCase().includes(search.toLowerCase());
 
-   return myCategory && myPrice && myRating
+
+   return myCategory && myPrice && myRating && mySearch
     }  );
    
     const scrollToTop = () => {

@@ -6,12 +6,16 @@ import MenuLinks from './MenuLinks'
 
 
 
-const Nav = ({ isMenuOpen, setIsMenuOpen , categories ,orders }) => {
+const Nav = ({ isMenuOpen, setIsMenuOpen , categories ,orders, search, setSearch }) => {
   return (
     <div className='flex flex-wrap p-3 z-10 shadow-lg sticky sm:top-0 bg-[#003049] items-center justify-between '>
       <PageLogo/>
-      <Search />
-      <UserAction isMenuOpen={isMenuOpen}
+      <Search 
+        search={search}
+        setSearch={setSearch}
+        />
+      <UserAction 
+      isMenuOpen={isMenuOpen}
       setIsMenuOpen={setIsMenuOpen} 
       orders={orders}
       />

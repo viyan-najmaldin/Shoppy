@@ -22,6 +22,7 @@ function App() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [Data, setData]=useState(productData)
    const [orders, setOrders]= useState([])
+   const [search, setSearch] = useState("");
 
 
   return (
@@ -29,7 +30,10 @@ function App() {
             <Nav  isMenuOpen={isMenuOpen}
                 setIsMenuOpen={setIsMenuOpen}
                 categories={Data.category}
-                orders={orders} />
+                orders={orders}
+                search={search}
+                setSearch={setSearch}
+                />
 
             {isMenuOpen && 
             <div className="sm:hidden">
@@ -38,7 +42,7 @@ function App() {
             <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
             <Routes>
                 <Route path="/" element={<Home Data={Data} />} />
-                <Route path="/products/:categories" element={<Products Data={Data} />} />
+                <Route path="/products/:categories" element={<Products search={search} Data={Data} />} />
                 <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/favorites" element={<FavProducts Data={Data} />} />
                 <Route path="/contact" element={<Contact />} />
