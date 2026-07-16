@@ -23,10 +23,10 @@ const AccountProfile = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-300 p-6 lg:p-8">
+    <div className="bg-white rounded-2xl h-100 border border-slate-300 p-6 lg:p-8">
       <h2 className="text-2xl font-bold mb-8">Profile Information</h2>
-
-      <form onSubmit={handleSubmit}>
+     <p>Work on process...</p>
+      {/* <form onSubmit={handleSubmit}>
         <div className="flex items-center gap-6 mb-8">
           <div className="relative">
             <img
@@ -60,7 +60,6 @@ const AccountProfile = () => {
           </div>
         </div>
 
-        {/* Form */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label for='fname' className="block mb-2 font-medium">First Name</label>
@@ -103,7 +102,6 @@ const AccountProfile = () => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex justify-end gap-4 mt-8">
           <button
             type="button"
@@ -119,7 +117,7 @@ const AccountProfile = () => {
             Save Changes
           </button>
         </div>
-      </form>
+      </form> */}
     </div>
   
   )
