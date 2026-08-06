@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
+import orderss from "../assets/In no time-bro.png";
+
 
 
 export default function ShoppingCart({ orders, setOrders}) {
-
+  
+  const navigate = useNavigate();
   const [showDeleteId , setShowDeleteId ] =useState(null)
   const increaseQty = (id) => {
     setOrders((items) =>
@@ -51,17 +54,26 @@ const decreaseQty = (id) => {
 
   return (
     <section className=" bg-blue-50  px-4 py-10">
-      <h2 className="text-3xl font-bold mb-8">Shopping Cart</h2>
-
       {orders.length === 0 ? (
-        <div className="text-center py-16">
-          <h3 className="text-2xl font-semibold">Your cart is empty</h3>
+        <div className="flex justify-center flex-col sm:flex-row items-center gap-3">
+          <div><h3 className="text-2xl font-semibold">Your cart is empty</h3>
           <p className="text-gray-500 mt-2">
             Add some products to get started.
           </p>
+            </div>
+                   <div className='flex flex-col justify-center'>  
+                        <img src={orderss} alt="image wishlist" className='w-100'/>
+                       <button className='bg-red-500 mb-4 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-cyan-600 to-red-400 hover:font-semibold transition'
+                               onClick={()=>navigate("/products/All")}>
+                                Shop Now  </button>
+                        </div>
         </div>
-      ) : (
-        <div className="grid lg:grid-cols-3 gap-8">
+      ) :
+      
+      (
+        <>
+         <h2 className="text-3xl font-bold mb-8">Shopping Cart</h2>
+        <div className="grid lg:grid-cols-3 mx-4 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 border rounded-xl bg-white border-slate-300">
             {orders.map((item) => (
@@ -164,9 +176,14 @@ const decreaseQty = (id) => {
             >
               Proceed to Checkout
             </button>
-          </div>
+        <div className='items-end flex flex-col justify-center'>  
+                        <img src={orderss} alt="image wishlist" className='mt-2 w-100'/>
+                       
+                        </div>   </div>
+
+          
         </div>
-      )}
+      </>)}
     </section>
   );
 }

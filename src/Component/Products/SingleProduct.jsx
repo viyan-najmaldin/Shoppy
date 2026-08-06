@@ -5,6 +5,8 @@ import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
 import { useParams, Link } from "react-router-dom";
 import { useState } from 'react';
+import shopping from "../../assets/Shopping bag-amico.png";
+
 
 
 const SingleProduct = ({Data, setData, orders, setOrders}) => {
@@ -67,13 +69,19 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
                           orders={orders} 
                           setOrders={setOrders}/>    
                
-            <ul className='mt-5'>
+            <div className='flex'>
+               <ul className='mt-5'>
               <li><FaTruck className="text-cyan-800 inline mr-2" />
                Free shipping on orders over $50</li>
               <li><FaRotateLeft className="text-cyan-800 inline mr-2" />
                 30-day easy returns</li>
               <li> <FaLock className="text-cyan-800 inline mr-2" /> 2-year warranty included</li>
             </ul>
+            
+            <img src={shopping} alt="img shopping" className='w-50'/>
+
+            </div>
+           
         </section>
         </div>
 

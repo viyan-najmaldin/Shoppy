@@ -1,10 +1,9 @@
-import {useRef, useState} from 'react'
-import {  FaRegHeart, FaHeart } from "react-icons/fa";
+import {useState} from 'react'
+import {  FaRegHeart, FaHeart,FaInfoCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { FaInfoCircle } from "react-icons/fa";
-
+import { IoCheckmarkCircle } from "react-icons/io5";
 
 
 const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
@@ -13,7 +12,6 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
       const [selectedColor, setSelectedColor] = useState("")
       const [newProduct, setNewProduct] = useState("")
 
-      const divRef = useRef(null);
       const navigate = useNavigate();
       const onFavToggle=(id)=>{
         setData((prev) =>
@@ -118,127 +116,127 @@ const IncreaseQty = () => {
       <div className='my-6 py-4 border-slate-300 border-t w-full'>
 
         
-                           { data.sizes && <div>
-                            <h3 className="font-semibold mb-2">Select Size <strong>{selectedSize || "None"}</strong></h3>
+            { data.sizes && <div>
+            <h3 className="font-semibold mb-2">Select Size  
+              <strong> {selectedSize || "None"}</strong></h3>
 
-                          <div className="flex gap-2 mb-4">
-                              {data.sizes.map((size) => (
-                                <button
-                                  key={size}
-                                  onClick={() => {
-                                    setSelectedSize(size)
-                                    orders && setOrders((prevOrders) => {
-                                    
-                                          return prevOrders.map((item) =>
-                                            item.myOrder.id === data.id
-                                              ? { ...item, size: size }
-                                              : item
-                                          );
-                                        
-                                    })
-                                  }}
-                                  className={`w-15 h-8 border border-slate-200 rounded-full transition
-                                    ${
-                                      selectedSize === size
-                                        ? "bg-cyan-800 text-white"
-                                        : "bg-white text-black  hover:border-cyan-600"
-                                    }`}
-                                >
-                                  {size}
-                                </button>
-                              ))}
-                            </div> 
+          <div className="flex gap-2 mb-4">
+              {data.sizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => {
+                    setSelectedSize(size)
+                    orders && setOrders((prevOrders) => {
+                    
+                          return prevOrders.map((item) =>
+                            item.myOrder.id === data.id
+                              ? { ...item, size: size }
+                              : item
+                          );
+                        
+                    })
+                  }}
+                  className={`w-15 h-8 border border-slate-200 rounded-full transition
+                    ${
+                      selectedSize === size
+                        ? "bg-cyan-800 text-white"
+                        : "bg-white text-black  hover:border-cyan-600"
+                    }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div> 
 
-                           
-                          </div> }
-                          
-                          { data.colors && <div>
-                            <h3 className="font-semibold my-4">Select Color  <strong>{selectedColor || ""}</strong> </h3> 
+            
+          </div> }
+          
+          { data.colors && <div>
+            <h3 className="font-semibold my-4">Select Color  <strong>{selectedColor || ""}</strong> 
+            </h3> 
 
-                          <div className="flex gap-2 mb-4">
-                              {data.colors.map((color) => (
-                                <button
-                                  key={color}
-                                  onClick={() => {
-                                    setSelectedColor(color)
-                                    orders && setOrders((prevOrders) => {
-                                          return prevOrders.map((item) =>
-                                            item.myOrder.id === data.id
-                                              ? { ...item, color: color }
-                                              : item
-                                          );
-                                      
-                                    })
-                                    changeColor(color)
-                                  }}
-                                    style={{ backgroundColor: color }}
-                                  className={`size-5 border rounded-full transition
-                                    ${
-                                      selectedColor === color? "border-5 border-slate-300 "
-                                        : " hover:border-cyan-600 border-slate-300"
-                                    }`}
-                                >
-                                  
-                                </button>
-                              ))}
-                              
-                            </div> 
-
-                           
-                          </div> }
-
+          <div className="flex gap-2 mb-4">
+              {data.colors.map((color) => (
+                <button
+                  key={color}
+                  onClick={() => {
+                    setSelectedColor(color)
+                    orders && setOrders((prevOrders) => {
+                          return prevOrders.map((item) =>
+                            item.myOrder.id === data.id
+                              ? { ...item, color: color }
+                              : item
+                          );
                       
+                    })
+                    changeColor(color)
+                  }}
+                    style={{ backgroundColor: color }}
+                  className={`size-5 border rounded-full transition
+                    ${
+                      selectedColor === color? "border-5 border-slate-300 "
+                        : " hover:border-cyan-600 border-slate-300"
+                    }`}
+                >
+                  
+                </button>
+              ))}
+              
+            </div> 
+
+            
+          </div> }
+
       
-                           <h1 className='font-semibold mb-2'>Quantity</h1>
-                          <div className='flex gap-2 items-center'>
-                               <div className='flex justify-between items-center gap-5 border border-slate-400 rounded-lg sm:w-40 '>
-                               <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1 disabled:opacity-50 disabled:cursor-not-allowed'
-                               onClick={decreaseQty}
-                                 disabled={myOrderr ? myOrderr.quantity <= 1 : true}
-                               >-</button>
-                               <span>                           
-                                 {myOrderr ? myOrderr.quantity : 1}                  
-                                 </span>
-                               <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1'
-                                onClick={IncreaseQty}>
-                                  +</button>
-                          </div>  
-                          {data.quantity<15 && <p className='text-slate-500 text-sm'>Only {data.quantity} left in stock</p> }
-                          </div>
 
-                    <div className=' py-10 border-b border-slate-300 '>
-                       <div className='flex gap-4'>
+            <h1 className='font-semibold mb-2'>Quantity</h1>
+          <div className='flex gap-2 items-center'>
+                <div className='flex justify-between items-center gap-5 border border-slate-400 rounded-lg sm:w-40 '>
+                <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1 disabled:opacity-50 disabled:cursor-not-allowed'
+                onClick={decreaseQty}
+                  disabled={myOrderr ? myOrderr.quantity <= 1 : true}
+                >-</button>
+                <span>                           
+                  {myOrderr ? myOrderr.quantity : 1}                  
+                  </span>
+                <button className='text-xl font-mono hover:bg-slate-200 px-4 p-1'
+                onClick={IncreaseQty}>
+                  +</button>
+          </div>  
+          {/* {data.quantity<15 && <p className='text-slate-500 text-sm'>
+            Only {data.quantity} left in stock</p> } */}
+          </div>
 
-                      
-                        <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'
-                        onClick={()=>{
-                          onOrders()  
-                         myOrderr&&  divRef.current.focus()                        
-                        }}
-                         title='Add to Shopping Cart'> 
-                            <FaCartShopping className="text-lg"/>
-                            Add to Cart
-                        </button>
-                 { console.log(orders) }
-                        <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400 transition'
-                         onClick={()=>onFavToggle(data.id)}
-                         title='Add to favorite'
-                        >
-                        {data.favorite? <FaHeart className='text-red-500' />: <FaRegHeart /> } </button>
-                    </div>
-                      
-                    {myOrderr && (
-                      <p
-                        ref={divRef}
-                        tabIndex={-1}
-                        className="text-xs gap-1 text-slate-600 flex mt-1 focus:text-red-700"
-                      >
-                        <FaInfoCircle className="text-sm" />
-                        You already added this item to the cart.
-                      </p>
-                    )}
+    <div className=' py-10 border-b border-slate-300 '>
+        <div className='flex gap-4'>
 
-                    </div>  
+      
+        <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'
+        onClick={()=>{
+          onOrders()                       
+        }}
+          title='Add to Shopping Cart'> 
+            <FaCartShopping className="text-lg"/>
+            Add to Cart
+        </button>
+  { console.log(orders) }
+        <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400 transition'
+          onClick={()=>onFavToggle(data.id)}
+          title='Add to favorite'
+        >
+        {data.favorite? <FaHeart className='text-red-500' />: <FaRegHeart /> } </button>
+    </div>
+      
+    {myOrderr && (
+      <p
+        className="text-xs gap-1 text-green-500 flex mt-1 focus:text-red-700"
+      >
+        <IoCheckmarkCircle className=" text-base" />
+        Added to cart.
+      </p>
+    )}
+
+    </div>  
     </div>
   )
 }

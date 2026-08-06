@@ -41,10 +41,10 @@ function App() {
             </div> }
             <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
             <Routes>
-                <Route path="/" element={<Home Data={Data} />} />
-                <Route path="/products/:categories" element={<Products search={search} Data={Data} />} />
+                <Route path="/" element={<Home Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
+                <Route path="/products/:categories" element={<Products search={search} Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
-                <Route path="/favorites" element={<FavProducts Data={Data} />} />
+                <Route path="/favorites" element={<FavProducts Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/account" element={<AccountProfile />} />      
                 <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} />

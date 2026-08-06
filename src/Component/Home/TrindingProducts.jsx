@@ -2,7 +2,7 @@ import React from 'react'
 import Carts from './Carts'
 import { Link } from 'react-router-dom'
 
-const TrindingProducts = ({Data}) => {
+const TrindingProducts = ({Data , setData, orders, setOrders}) => {
   return (
     <div className='py-20 mx-5'>
         <h1 className='text-2xl font-bold'>Trending Products</h1>
@@ -14,7 +14,7 @@ const TrindingProducts = ({Data}) => {
      
      <div className='mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6'>
     
-    {Data.map(data=> <Carts data={data} />)}
+    {Data.map(data=> <Carts data={data} setData={setData} orders={orders} setOrders={setOrders}/>)}
   
      </div>
     

@@ -16,7 +16,7 @@ const Aboutwebsite = () => {
         <div className="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <FaTruck className="text-purple-500 text-2xl" />
         </div>
-        <h3 className="font-bold text-lg mb-2">Free Shopping</h3>
+        <h3 className="font-bold text-lg mb-2">Free Shipping</h3>
         <p className="text-slate-600 text-sm">On all orders over $50</p>
       </div>
 

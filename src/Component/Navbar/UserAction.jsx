@@ -19,7 +19,7 @@ const UserAction = ({ isMenuOpen, setIsMenuOpen, orders }) => {
 
       <Link to='/cart' className='relative'>
           <FaCartShopping className="text-xl " />
-         {orders.length? <p className='absolute -top-1 -right-1 bg-red-500 p-1 w-fit rounded-full text-white'></p> : '' }
+         {orders.length? <p className='absolute -top-2 -right-2 bg-red-500 px-1 w-fit text-xs rounded-full text-white'>{orders.length}</p> : '' }
       </Link>
       
          <button className='block sm:hidden' onClick={()=>{setIsMenuOpen(!isMenuOpen)}}>

@@ -8,7 +8,7 @@ import { FaArrowUp } from "react-icons/fa";
 
 
 
-const Home = ({Data}) => {
+const Home = ({Data , setData, orders, setOrders}) => {
     const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Home = ({Data}) => {
     <div className='bg-blue-50'>
       <HomeStart/>
       <Category />
-      <TrindingProducts Data={Data} />
+      <TrindingProducts Data={Data} setData={setData} orders={orders} setOrders={setOrders} />
       <Aboutwebsite />
       <div className='bg-blue-50 h-20'></div>
           {showButton &&

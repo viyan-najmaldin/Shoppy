@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Carts from '../Home/Carts'
 import Filter from './Filter'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
+import nodata from '../../assets/Search engines-rafiki.png'
 
-const Products = ({Data, search}) => {
+const Products = ({Data,setData, search , orders, setOrders}) => {
 
    const { categories  } = useParams();
    const [priceValue, setPriceValue] = useState(500)
@@ -12,6 +13,8 @@ const Products = ({Data, search}) => {
    const [ratingValue, setRatingValue] = useState(0)
    const [sortValue, setSortValue] = useState("featured");
    const [showButton, setShowButton] = useState(false);
+     const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,9 +93,33 @@ const myData = Data.filter((product) =>{
                  </div>
  
                     <div className='mt-5 grid grid-cols-2 lg:grid-cols-3 gap-5'>
-                        {sortedData.map(data=> <Carts key={data.id} data={data} />)}
+                        {sortedData.map(data=> <Carts key={data.id} data={data} setData={setData} orders={orders} setOrders={setOrders} />)}
                     </div>
-        </div> : <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>Product not found</h1>
+        </div> : 
+        // <div>
+        // <h1 className='mx-auto text-2xl text-slate-700 sm:min-h-fit min-h-100 sm:mt-20'>
+        //   Product not found</h1>
+        //   <div className='flex flex-col justify-center'>  
+        //                 <img src={nodata} alt="image wishlist" className='w-50'/>
+        //                <button className='bg-red-500 mb-4 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-cyan-600 to-red-400 hover:font-semibold transition'
+        //                        onClick={()=>navigate("/products/All")}>
+        //                         Shop Now  </button>
+        //                 </div>
+        //   </div>
+              <div className="flex sm:ml-20 flex-col sm:flex-row items-center gap-3">
+                    <div><h3 className="text-2xl font-semibold">Product not found</h3>
+                    <p className="text-gray-500 mt-2">
+                     We couldn't find any results.
+                    </p>
+                      </div>
+                             <div className='flex flex-col justify-center'>  
+                                  <img src={nodata} alt="image no-product" className='w-80'/>
+                                 <button className='bg-red-500 mb-4 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-cyan-600 to-red-400 hover:font-semibold transition'
+                                         onClick={()=>navigate("/products/All")}>
+                                          Shop Now  </button>
+                                  </div>
+                  </div>
+          
 }
 
            {showButton &&
