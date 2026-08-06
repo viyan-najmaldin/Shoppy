@@ -64,7 +64,7 @@ const myData = Data.filter((product) =>{
 
       
   return (
-    <div className='sm:flex gap-5 bg-blue-50 pb-10 p-5'>
+    <div className='font-josefin sm:flex gap-5 bg-blue-50 pb-10 p-5'>
        <Filter priceValue={priceValue} setPriceValue={setPriceValue} 
        categoryValue={categoryValue} setCategoryValue={setCategoryValue}
        ratingValue={ratingValue}  setRatingValue={setRatingValue}
@@ -107,7 +107,7 @@ const myData = Data.filter((product) =>{
         //                 </div>
         //   </div>
               <div className="flex sm:ml-20 flex-col sm:flex-row items-center gap-3">
-                    <div><h3 className="text-2xl font-semibold">Product not found</h3>
+                    <div><h3 className="text-2xl">Product not found</h3>
                     <p className="text-gray-500 mt-2">
                      We couldn't find any results.
                     </p>

@@ -56,7 +56,7 @@ const decreaseQty = (id) => {
     <section className=" bg-blue-50  px-4 py-10">
       {orders.length === 0 ? (
         <div className="flex justify-center flex-col sm:flex-row items-center gap-3">
-          <div><h3 className="text-2xl font-semibold">Your cart is empty</h3>
+          <div><h3 className="text-2xl">Your cart is empty</h3>
           <p className="text-gray-500 mt-2">
             Add some products to get started.
           </p>
@@ -72,7 +72,7 @@ const decreaseQty = (id) => {
       
       (
         <>
-         <h2 className="text-3xl font-bold mb-8">Shopping Cart</h2>
+         <h2 className="text-3xl mx-4 mb-8">Shopping Cart</h2>
         <div className="grid lg:grid-cols-3 mx-4 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 border rounded-xl bg-white border-slate-300">

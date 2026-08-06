@@ -12,7 +12,7 @@ const FavProducts = ({Data,setData, orders, setOrders}) => {
   return (
     <div className='min-h-100'>
       <div className='p-5'>
-        <h1 className='text-3xl font-semibold'>Favorites</h1>
+        <h1 className='text-3xl mb-2'>Favorites</h1>
       <p className='text-slate-500'>Store everything you love on one page.
        Think about it before purchasing it.</p>
       </div>

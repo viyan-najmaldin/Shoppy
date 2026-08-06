@@ -31,7 +31,7 @@ const Home = ({Data , setData, orders, setOrders}) => {
 };
 
   return (
-    <div className='bg-blue-50'>
+    <div className='bg-blue-50 font-josefin'>
       <HomeStart/>
       <Category />
       <TrindingProducts Data={Data} setData={setData} orders={orders} setOrders={setOrders} />

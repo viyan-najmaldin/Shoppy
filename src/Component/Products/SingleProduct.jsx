@@ -5,7 +5,7 @@ import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
 import { useParams, Link } from "react-router-dom";
 import { useState } from 'react';
-import shopping from "../../assets/Shopping bag-amico.png";
+// import shopping from "../../assets/Shopping bag-amico.png";
 
 
 
@@ -78,7 +78,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
               <li> <FaLock className="text-cyan-800 inline mr-2" /> 2-year warranty included</li>
             </ul>
             
-            <img src={shopping} alt="img shopping" className='w-50'/>
+            {/* <img src={shopping} alt="img shopping" className='w-50'/> */}
 
             </div>
            

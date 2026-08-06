@@ -7,6 +7,7 @@ import {
   FaGithub,
   FaLinkedin,
 } from "react-icons/fa";
+import Email from '../assets/Mention-rafiki.png'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ export default function Contact() {
             Fill out the form below and I'll get back to you as soon as possible.
           </p>
         </div>
-
+           <img src={Email} alt="image contact email" className="hidden lg:block w-80 absolute right-2 top-30" />
         <div className="flex w-full sm:flex-row flex-col gap-20">
 
           {/* Contact Information */}
