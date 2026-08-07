@@ -16,6 +16,7 @@ const AccountProfile = lazy(() => import("./Component/AccountProfile"));
 const ShoppingCart = lazy(() => import("./Component/ShoppingCart"));
 const PageNotFound404 = lazy(() => import("./Component/PageNotFound404"));
 import productData from "./data/productData";
+import Signup from './Component/Signup';
 
 function App() {
  
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/account" element={<AccountProfile />} />      
                 <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} />
                 <Route path="*" element={<PageNotFound404 />} />
+                <Route path="/signup" element={<Signup/>} />
             </Routes>
             </Suspense>
             <ToastContainer  limit={1}

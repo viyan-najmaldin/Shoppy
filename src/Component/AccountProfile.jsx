@@ -1,5 +1,7 @@
-   import { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const AccountProfile = () => {
 
@@ -23,9 +25,11 @@ const AccountProfile = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl h-100 border border-slate-300 p-6 lg:p-8">
+    <div className="bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8">
       <h2 className="text-2xl font-bold mb-8">Profile Information</h2>
-     <p>Work on process...</p>
+     {/* <p>Work on process...</p> */}
+     <Login />
+     <Signup />
       {/* <form onSubmit={handleSubmit}>
         <div className="flex items-center gap-6 mb-8">
           <div className="relative">
