@@ -29,7 +29,7 @@ const AccountProfile = () => {
       <h2 className="text-2xl font-bold mb-8">Profile Information</h2>
      {/* <p>Work on process...</p> */}
      <Login />
-     <Signup />
+     {/* <Signup /> */}
       {/* <form onSubmit={handleSubmit}>
         <div className="flex items-center gap-6 mb-8">
           <div className="relative">
