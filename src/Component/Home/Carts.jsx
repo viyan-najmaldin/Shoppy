@@ -4,12 +4,19 @@ import { FaCartShopping } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 
+import { useAuth } from "../../AuthContext";
 
 const Carts = ({data,setData, orders, setOrders}) => {
 
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
    const onOrders = () => {
+
+           if (!currentUser) {
+          navigate("/login");
+            return;
+          }
           setOrders((prevOrders) => {
             const existingOrder = prevOrders.find(
               (item) => item.myOrder.id === data.id 

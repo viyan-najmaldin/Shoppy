@@ -17,6 +17,9 @@ const ShoppingCart = lazy(() => import("./Component/ShoppingCart"));
 const PageNotFound404 = lazy(() => import("./Component/PageNotFound404"));
 import productData from "./data/productData";
 import Signup from './Component/Signup';
+import Login from './Component/Login';
+import ProtectedRoute from './Component/ProtectedRoute';
+
 
 function App() {
  
@@ -46,11 +49,25 @@ function App() {
                 <Route path="/products/:categories" element={<Products search={search} Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/favorites" element={<FavProducts Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/account" element={<AccountProfile />} />      
-                <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} />
+                <Route path="/contact" element={<Contact />} />     
+                {/* <Route path="/cart" element={<ShoppingCart  orders={orders} setOrders={setOrders} />} /> */}
                 <Route path="*" element={<PageNotFound404 />} />
-                <Route path="/signup" element={<Signup/>} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route
+                  path="/account" element={ <ProtectedRoute> 
+                                              <AccountProfile />
+                                            </ProtectedRoute> } />
+                <Route
+                    path="/cart" element={ <ProtectedRoute>
+                                              <ShoppingCart
+                                                orders={orders}
+                                                setOrders={setOrders}
+                                              />
+                      </ProtectedRoute>
+                    }
+                  />
+                {/* <Route path="/account" element={<AccountProfile />} /> */}
             </Routes>
             </Suspense>
             <ToastContainer  limit={1}

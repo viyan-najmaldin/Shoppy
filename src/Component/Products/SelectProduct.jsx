@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { IoCheckmarkCircle } from "react-icons/io5";
+import { useAuth } from "../../AuthContext";
 
 
 const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
@@ -11,7 +12,7 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
       const [selectedSize, setSelectedSize] = useState("M");
       const [selectedColor, setSelectedColor] = useState("")
       const [newProduct, setNewProduct] = useState("")
-
+      const { currentUser } = useAuth();
       const navigate = useNavigate();
       const onFavToggle=(id)=>{
         setData((prev) =>
@@ -37,6 +38,11 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
 
 
       const onOrders = () => {
+          if (!currentUser) {
+            navigate("/login");
+            return;
+          }
+
         setOrders((prevOrders) => {
           const existingOrder = prevOrders.find(
             (item) => item.myOrder.id === data.id 

@@ -2,11 +2,17 @@ import { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import Login from "./Login";
 import Signup from "./Signup";
+import { useAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
+
 
 const AccountProfile = () => {
 
+    const { currentUser, logout } = useAuth();
+    const navigate = useNavigate();
     const fileInputRef = useRef(null);
-     const [profileImage, setProfileImage] = useState(
+    const [profileImage, setProfileImage] = useState(
     "https://placehold.co/150x150"
   );
   const handleImageChange = (e) => {
@@ -24,13 +30,31 @@ const AccountProfile = () => {
     console.log("Profile saved!");
   };
 
+  const handleLogout = async () => {
+  try {
+    await logout();
+    navigate("/login");
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
   return (
-    <div className="bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8">
-      <h2 className="text-2xl font-bold mb-8">Profile Information</h2>
+    <div className="bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
+     <div className="flex justify-between">
+         <h2 className="text-2xl font-bold ">Profile Information</h2>
+      <button
+          onClick={handleLogout}
+          className="font-semibold text-red-500 px-6 py-3 sm:text-sm text-xs -mr-5 rounded-lg hover:text-red-700 transition"
+        >
+          <span className="pb-2 pt-1 px-2 bg-red-300/50 rounded-3xl"><FaSignOutAlt className="inline"/></span> Logout 
+         
+      </button>
+     </div>
+   
      {/* <p>Work on process...</p> */}
-     <Login />
+     {/* <Login /> */}
      {/* <Signup /> */}
-      {/* <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="flex items-center gap-6 mb-8">
           <div className="relative">
             <img
@@ -57,7 +81,7 @@ const AccountProfile = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold">John Doe</h3>
+            <h3 className="text-lg font-semibold">{currentUser?.displayName}</h3>
             <p className="text-slate-500 text-sm">
               Click the camera icon to change your profile photo.
             </p>
@@ -66,21 +90,11 @@ const AccountProfile = () => {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label for='fname' className="block mb-2 font-medium">First Name</label>
+            <label for='fname' className="block mb-2 font-medium">Full Name</label>
             <input
               id="fname"
               type="text"
-              defaultValue="John"
-              className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
-            />
-          </div>
-
-          <div>
-            <label for='lname' className="block mb-2 font-medium">Last Name</label>
-            <input
-              id="lname"
-              type="text"
-              defaultValue="Doe"
+              defaultValue={currentUser?.displayName}
               className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
             />
           </div>
@@ -90,7 +104,7 @@ const AccountProfile = () => {
             <input
               id="email"
               type="email"
-              defaultValue="john@example.com"
+              defaultValue={currentUser?.email}
               className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
             />
           </div>
@@ -102,6 +116,16 @@ const AccountProfile = () => {
               type="text"
               defaultValue="+964 750 123 4567"
               className="w-full border border-slate-300 rounded-lg outline-none focus:ring-1 focus:ring-cyan-500 px-4 py-3"
+            />
+          </div>
+
+           <div>
+            <label for='lname' className="block mb-2 font-medium">Address</label>
+            <input
+              id="lname"
+              type="text"
+              defaultValue={currentUser?.displayaddress}
+              className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
             />
           </div>
         </div>
@@ -121,7 +145,7 @@ const AccountProfile = () => {
             Save Changes
           </button>
         </div>
-      </form> */}
+      </form>
     </div>
   
   )
