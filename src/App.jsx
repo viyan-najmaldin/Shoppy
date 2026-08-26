@@ -19,6 +19,7 @@ import productData from "./data/productData";
 import Signup from './Component/Signup';
 import Login from './Component/Login';
 import ProtectedRoute from './Component/ProtectedRoute';
+import UserAddress from './Component/UserAddress';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                 <Route path="*" element={<PageNotFound404 />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/useraddress" element={<UserAddress />} />
                 <Route
                   path="/account" element={ <ProtectedRoute> 
                                               <AccountProfile />

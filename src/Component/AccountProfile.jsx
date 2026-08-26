@@ -1,15 +1,31 @@
-import { useRef, useState } from "react";
+import { useRef, useState,  useEffect  } from "react";
 import { FaCamera } from "react-icons/fa";
-import Login from "./Login";
-import Signup from "./Signup";
 import { useAuth } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 
 const AccountProfile = () => {
 
     const { currentUser, logout } = useAuth();
+    const [userData, setUserData] = useState(null);
+
+useEffect(() => {
+  const getUserData = async () => {
+    if (!currentUser) return;
+
+    const userRef = doc(db, "users", currentUser.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      setUserData(userSnap.data());
+    }
+  };
+
+  getUserData();
+}, [currentUser]);
     const navigate = useNavigate();
     const fileInputRef = useRef(null);
     const [profileImage, setProfileImage] = useState(
@@ -39,7 +55,7 @@ const AccountProfile = () => {
   }
 };
   return (
-    <div className="bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
+    <div className="m-5 bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
      <div className="flex justify-between">
          <h2 className="text-2xl font-bold ">Profile Information</h2>
       <button
@@ -50,10 +66,7 @@ const AccountProfile = () => {
          
       </button>
      </div>
-   
-     {/* <p>Work on process...</p> */}
-     {/* <Login /> */}
-     {/* <Signup /> */}
+  
       <form onSubmit={handleSubmit}>
         <div className="flex items-center gap-6 mb-8">
           <div className="relative">
@@ -88,63 +101,47 @@ const AccountProfile = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+  
           <div>
-            <label for='fname' className="block mb-2 font-medium">Full Name</label>
-            <input
-              id="fname"
-              type="text"
-              defaultValue={currentUser?.displayName}
-              className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
-            />
+                <h1 className="font-semibold inline mr-5">Full Name:</h1> 
+                <span className="text-slate-500">{userData?.fullName || currentUser?.displayName}</span>
+          </div>
+          <div>
+                <h1 className="font-semibold inline mr-5">Email:</h1> 
+                <span className="text-slate-500">{currentUser?.email}</span>
           </div>
 
           <div>
-            <label for="email" className="block mb-2 font-medium">Email</label>
-            <input
-              id="email"
-              type="email"
-              defaultValue={currentUser?.email}
-              className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
-            />
-          </div>
-
-          <div>
-            <label for='phone' className="block mb-2 outline-none focus:ring- focus:ring-cyan-500 font-medium">Phone</label>
-            <input
-              id="phone"
-              type="text"
-              defaultValue="+964 750 123 4567"
-              className="w-full border border-slate-300 rounded-lg outline-none focus:ring-1 focus:ring-cyan-500 px-4 py-3"
-            />
+                <h1 className="font-semibold inline mr-5">Phone:</h1> 
+                <span className="text-slate-500">{userData?.phone || "Not provided"}</span>
           </div>
 
            <div>
-            <label for='lname' className="block mb-2 font-medium">Address</label>
-            <input
-              id="lname"
-              type="text"
-              defaultValue={currentUser?.displayaddress}
-              className="w-full border border-slate-300 outline-none focus:ring-1 focus:ring-cyan-500 rounded-lg px-4 py-3"
-            />
+                <h1 className="font-semibold inline mr-5">Address:</h1> 
+                <span className="text-slate-500">{userData
+                  ? `${userData.street}, ${userData.city}, ${userData.region}, ${userData.country} ${userData.zipCode}`
+                  : "Not provided"}</span>
           </div>
-        </div>
 
-        <div className="flex justify-end gap-4 mt-8">
-          <button
-            type="button"
-            className="px-6 py-3 border border-slate-300 rounded-lg hover:bg-slate-100 transition"
-          >
-            Cancel
-          </button>
+    <div className="my-5 flex gap-2">
+      <Link to='/favorites' className="p-10 hover:bg-red-400 hover:text-white transition bg-red-300 rounded-xl">
+        <h1 className="font-semibold text-sm ">Your Favorites list</h1>
+      </Link>
 
-          <button
-            type="submit"
-            className="px-6 py-3 bg-[#003049] text-white rounded-lg hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition"
-          >
-            Save Changes
-          </button>
-        </div>
+      <Link to='/cart' className="p-10 hover:bg-blue-400 hover:text-white transition bg-blue-300 rounded-xl">
+        <h1 className="font-semibold text-sm ">Your orders list</h1>
+      </Link>
+
+      <Link className="p-10 hover:bg-purple-400 hover:text-white transition px-15 bg-purple-300 rounded-xl">
+        <h1 className="font-semibold text-sm">Your Wallet</h1>
+      </Link>
+
+      <Link to='/useraddress' className="p-10 hover:bg-orange-400 hover:text-white transition px-15 bg-orange-300 rounded-xl">
+        <h1 className="font-semibold text-sm">Your Address</h1>
+      </Link>
+    </div>
+
+      
       </form>
     </div>
   
