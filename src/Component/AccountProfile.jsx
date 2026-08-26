@@ -123,7 +123,7 @@ useEffect(() => {
                   : "Not provided"}</span>
           </div>
 
-    <div className="my-5 flex gap-2">
+    <div className="my-5 flex sm:flex-row flex-col gap-2">
       <Link to='/favorites' className="p-10 hover:bg-red-400 hover:text-white transition bg-red-300 rounded-xl">
         <h1 className="font-semibold text-sm ">Your Favorites list</h1>
       </Link>
