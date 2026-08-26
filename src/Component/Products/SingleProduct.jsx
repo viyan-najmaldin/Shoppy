@@ -1,25 +1,47 @@
 import React from 'react'
-import { FaStar, FaRegStar, FaRegHeart } from "react-icons/fa";
-import { FaCartShopping,  FaTruck, FaRotateLeft,FaLock, FaAngleRight } from "react-icons/fa6";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import {  FaTruck, FaRotateLeft,FaLock, FaAngleRight } from "react-icons/fa6";
 import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
 import { useParams, Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import shopping from "../../assets/Shopping bag-amico.png";
 
 
 
 const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const { id  } = useParams();
-
+    const [showButton, setShowButton] = useState(false);
     const data = Data.find(
     (item) => item.id === Number(id) 
   );
 
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        setShowButton(window.scrollY > 600);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+
+
   return (
     
     <div className='bg-blue-50 pb-10 p-5'>
-      <div className='text-sm font-semibold flex items-center gap-2'>
+       {showButton && <div className='bg-slate-300 -mx-5 p-1  px-5 sm:pt-32 top-0 mb-10 fixed w-full'>  <button
+            onClick={() => navigate(-1)}
+            className="text-cyan-700 hover:text-cyan-900 "
+          >
+            ← Back to previous
+          </button>
+        </div> }
+
+      <div className='text-sm  font-semibold flex items-center gap-2'>
         <Link to='/'> <span className='text-slate-500'>Home</span> </Link> 
         <FaAngleRight  className='text-slate-500'/>
          <Link to={`/products/${data.category}`} className='text-slate-500'><span> {data.category}</span></Link>
@@ -28,9 +50,11 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
          
          </div> 
    
+   
         <div className='bg-white sm:my-5 my-2  rounded-2xl border border-slate-200 sm:p-10 p-4 grid sm:grid-cols-2  gap-10  '>
     
-           <section id='productImage' className=''>
+            
+           <section id='productImage'>        
                 <img src={data.image} alt="img" loading="lazy" 
                 className="border border-slate-200 object-cover w-full h-110 mb-4 rounded-2xl"/>
          
@@ -83,6 +107,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
             </div>
            
         </section>
+
         </div>
 
          

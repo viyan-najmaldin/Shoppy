@@ -65,6 +65,14 @@ const myData = Data.filter((product) =>{
       
   return (
     <div className='font-josefin sm:flex gap-5 bg-blue-50 pb-10 p-5'>
+      {showButton && <div className='bg-slate-300 -mx-5 p-1 z-2 px-5 sm:pt-32 top-0 mb-10 fixed w-full'>  <button
+            onClick={() => navigate(-1)}
+            className="text-cyan-700 hover:text-cyan-900 "
+          >
+            ← Back to previous
+          </button>
+        </div> }
+
        <Filter priceValue={priceValue} setPriceValue={setPriceValue} 
        categoryValue={categoryValue} setCategoryValue={setCategoryValue}
        ratingValue={ratingValue}  setRatingValue={setRatingValue}
@@ -118,8 +126,7 @@ const myData = Data.filter((product) =>{
                                          onClick={()=>navigate("/products/All")}>
                                           Shop Now  </button>
                                   </div>
-                  </div>
-          
+                  </div>  
 }
 
            {showButton &&

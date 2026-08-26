@@ -102,6 +102,8 @@ export default function UserAddress() {
       );
 
       alert("Your address has been saved successfully!");
+      navigate("/account")
+
     } catch (error) {
       console.error("Error saving address:", error);
 
