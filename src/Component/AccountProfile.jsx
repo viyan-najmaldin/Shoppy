@@ -119,7 +119,7 @@ useEffect(() => {
            <div>
                 <h1 className="font-semibold inline mr-5">Address:</h1> 
                 <span className="text-slate-500">{userData
-                  ? `${userData.street}, ${userData.city}, ${userData.region}, ${userData.country} ${userData.zipCode}`
+                  ? `${userData.street}, ${userData.city}, Iraq`
                   : "Not provided"}</span>
           </div>
 

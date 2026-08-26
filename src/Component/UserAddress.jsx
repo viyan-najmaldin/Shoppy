@@ -5,201 +5,6 @@ import { db } from "../firebase";
 import { FaMapMarkerAlt, FaPhone, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const countries = [
-  "Afghanistan",
-  "Albania",
-  "Algeria",
-  "Andorra",
-  "Angola",
-  "Antigua and Barbuda",
-  "Argentina",
-  "Armenia",
-  "Australia",
-  "Austria",
-  "Azerbaijan",
-  "Bahamas",
-  "Bahrain",
-  "Bangladesh",
-  "Barbados",
-  "Belarus",
-  "Belgium",
-  "Belize",
-  "Benin",
-  "Bhutan",
-  "Bolivia",
-  "Bosnia and Herzegovina",
-  "Botswana",
-  "Brazil",
-  "Brunei",
-  "Bulgaria",
-  "Burkina Faso",
-  "Burundi",
-  "Cambodia",
-  "Cameroon",
-  "Canada",
-  "Cape Verde",
-  "Central African Republic",
-  "Chad",
-  "Chile",
-  "China",
-  "Colombia",
-  "Comoros",
-  "Congo",
-  "Costa Rica",
-  "Croatia",
-  "Cuba",
-  "Cyprus",
-  "Czech Republic",
-  "Denmark",
-  "Djibouti",
-  "Dominica",
-  "Dominican Republic",
-  "Ecuador",
-  "Egypt",
-  "El Salvador",
-  "Equatorial Guinea",
-  "Eritrea",
-  "Estonia",
-  "Eswatini",
-  "Ethiopia",
-  "Fiji",
-  "Finland",
-  "France",
-  "Gabon",
-  "Gambia",
-  "Georgia",
-  "Germany",
-  "Ghana",
-  "Greece",
-  "Grenada",
-  "Guatemala",
-  "Guinea",
-  "Guinea-Bissau",
-  "Guyana",
-  "Haiti",
-  "Honduras",
-  "Hungary",
-  "Iceland",
-  "India",
-  "Indonesia",
-  "Iran",
-  "Iraq",
-  "Ireland",
-  "Italy",
-  "Jamaica",
-  "Japan",
-  "Jordan",
-  "Kazakhstan",
-  "Kenya",
-  "Kiribati",
-  "Kuwait",
-  "Laos",
-  "Latvia",
-  "Lebanon",
-  "Lesotho",
-  "Liberia",
-  "Libya",
-  "Liechtenstein",
-  "Lithuania",
-  "Luxembourg",
-  "Madagascar",
-  "Malawi",
-  "Malaysia",
-  "Maldives",
-  "Mali",
-  "Malta",
-  "Marshall Islands",
-  "Mauritania",
-  "Mauritius",
-  "Mexico",
-  "Micronesia",
-  "Moldova",
-  "Monaco",
-  "Mongolia",
-  "Montenegro",
-  "Morocco",
-  "Mozambique",
-  "Myanmar",
-  "Namibia",
-  "Nauru",
-  "Nepal",
-  "Netherlands",
-  "New Zealand",
-  "Nicaragua",
-  "Niger",
-  "Nigeria",
-  "North Korea",
-  "North Macedonia",
-  "Norway",
-  "Oman",
-  "Pakistan",
-  "Palau",
-  "Palestine",
-  "Panama",
-  "Papua New Guinea",
-  "Paraguay",
-  "Peru",
-  "Philippines",
-  "Poland",
-  "Portugal",
-  "Qatar",
-  "Romania",
-  "Russia",
-  "Rwanda",
-  "Saint Kitts and Nevis",
-  "Saint Lucia",
-  "Saint Vincent and the Grenadines",
-  "Samoa",
-  "San Marino",
-  "Sao Tome and Principe",
-  "Saudi Arabia",
-  "Senegal",
-  "Serbia",
-  "Seychelles",
-  "Sierra Leone",
-  "Singapore",
-  "Slovakia",
-  "Slovenia",
-  "Solomon Islands",
-  "Somalia",
-  "South Africa",
-  "South Korea",
-  "South Sudan",
-  "Spain",
-  "Sri Lanka",
-  "Sudan",
-  "Suriname",
-  "Sweden",
-  "Switzerland",
-  "Syria",
-  "Taiwan",
-  "Tajikistan",
-  "Tanzania",
-  "Thailand",
-  "Timor-Leste",
-  "Togo",
-  "Tonga",
-  "Trinidad and Tobago",
-  "Tunisia",
-  "Turkey",
-  "Turkmenistan",
-  "Tuvalu",
-  "Uganda",
-  "Ukraine",
-  "United Arab Emirates",
-  "United Kingdom",
-  "United States",
-  "Uruguay",
-  "Uzbekistan",
-  "Vanuatu",
-  "Vatican City",
-  "Venezuela",
-  "Vietnam",
-  "Yemen",
-  "Zambia",
-  "Zimbabwe",
-];
-
 export default function UserAddress() {
   const navigate = useNavigate();
 
@@ -208,11 +13,8 @@ export default function UserAddress() {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-    country: "",
-    region: "",
     city: "",
     street: "",
-    zipCode: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -237,31 +39,18 @@ export default function UserAddress() {
           setFormData({
             fullName:
               userData.fullName ||
-              currentUser.displayName ||
-              "",
-
+              currentUser.displayName ||  "",
             phone: userData.phone || "",
-
-            country: userData.country || "",
-
-            region: userData.region || "",
-
             city: userData.city || "",
-
             street: userData.street || "",
 
-            zipCode: userData.zipCode || "",
           });
         } else {
-          // If the user does not have a document yet
           setFormData({
             fullName: currentUser.displayName || "",
             phone: "",
-            country: "",
-            region: "",
             city: "",
             street: "",
-            zipCode: "",
           });
         }
       } catch (error) {
@@ -304,11 +93,8 @@ export default function UserAddress() {
           fullName: formData.fullName,
           email: currentUser.email,
           phone: formData.phone,
-          country: formData.country,
-          region: formData.region,
           city: formData.city,
           street: formData.street,
-          zipCode: formData.zipCode,
         },
         {
           merge: true,
@@ -467,59 +253,7 @@ export default function UserAddress() {
             </div>
 
 
-            <div className="md:col-span-2">
-
-              <label
-                htmlFor="country"
-                className="block mb-2 font-medium"
-              >
-                Country
-              </label>
-
-              <select
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                required
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 bg-white outline-none focus:ring-1 focus:ring-cyan-500"
-              >
-
-                <option value="">
-                  Select your country
-                </option>
-                {countries.map((country) => (
-                  <option
-                    key={country}
-                    value={country}
-                  >
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="region"
-                className="block mb-2 font-medium"
-              >
-                Region / State / Province
-              </label>
-
-              <input
-                id="region"
-                name="region"
-                type="text"
-                value={formData.region}
-                onChange={handleChange}
-                placeholder="e.g. Kurdistan"
-                required
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
-              />
-            </div>
-
-
+        <div className="md:col-span-2">
             <div>
               <label
                 htmlFor="city"
@@ -535,12 +269,10 @@ export default function UserAddress() {
                 onChange={handleChange}
                 placeholder="e.g. Erbil"
                 required
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
+                className="w-full mb-5 border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
               />
             </div>
 
-
-            <div className="md:col-span-2">
               <label
                 htmlFor="street"
                 className="block mb-2 font-medium"
@@ -559,27 +291,8 @@ export default function UserAddress() {
               />
             </div>
 
-
-            <div>
-              <label
-                htmlFor="zipCode"
-                className="block mb-2 font-medium"
-              >
-                ZIP / Postal Code
-              </label>
-              <input
-                id="zipCode"
-                name="zipCode"
-                type="text"
-                value={formData.zipCode}
-                onChange={handleChange}
-                placeholder="ZIP / Postal code"
-                required
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
-              />
-            </div>
           </div>
-          
+
 
           <div className="flex justify-end gap-3 mt-8">
                   <button
