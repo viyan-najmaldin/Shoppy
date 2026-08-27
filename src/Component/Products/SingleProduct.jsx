@@ -3,7 +3,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import {  FaTruck, FaRotateLeft,FaLock, FaAngleRight } from "react-icons/fa6";
 import MoreExplore from './MoreExplore';
 import SelectProduct from './SelectProduct';
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 // import shopping from "../../assets/Shopping bag-amico.png";
 
@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 
 const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const { id  } = useParams();
+     const navigate = useNavigate();
     const [showButton, setShowButton] = useState(false);
     const data = Data.find(
     (item) => item.id === Number(id) 
@@ -19,7 +20,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
   
     useEffect(() => {
       const handleScroll = () => {
-        setShowButton(window.scrollY > 600);
+        setShowButton(window.scrollY > 300);
       };
   
       window.addEventListener("scroll", handleScroll);

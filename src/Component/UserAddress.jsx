@@ -102,7 +102,7 @@ export default function UserAddress() {
       );
 
       alert("Your address has been saved successfully!");
-      navigate("/account")
+      navigate(-1)
 
     } catch (error) {
       console.error("Error saving address:", error);
@@ -299,7 +299,7 @@ export default function UserAddress() {
           <div className="flex justify-end gap-3 mt-8">
                   <button
                     type="button"
-                    onClick={() => navigate("/account")}
+                    onClick={() => navigate(-1)}
                     className="px-6 py-3 border border-slate-300 rounded-lg hover:bg-slate-100 transition"
                   >
                     Cancel

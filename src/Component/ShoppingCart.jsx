@@ -1,48 +1,158 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import { Link , useNavigate} from "react-router-dom";
 import orderss from "../assets/In no time-bro.png";
-
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../AuthContext";
 
 
 export default function ShoppingCart({ orders, setOrders}) {
   
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [showDeleteId , setShowDeleteId ] =useState(null)
-  const increaseQty = (id) => {
+  useEffect(() => {
+  const loadOrders = async () => {
+    if (!currentUser) {
+      setOrders([]);
+      return;
+    }
+
+    try {
+      const itemsRef = collection(
+        db,
+        "orders",
+        currentUser.uid,
+        "items"
+      );
+
+      const snapshot = await getDocs(itemsRef);
+
+      const firebaseOrders = snapshot.docs.map((docSnap) => {
+        const item = docSnap.data();
+
+        return {
+          id: docSnap.id,
+          myOrder: {
+            id: item.productId,
+            name: item.productName,
+            price: item.price,
+            image: item.image,
+            category: item.category,
+          },
+          quantity: item.quantity,
+        };
+      });
+
+      setOrders(firebaseOrders);
+
+    } catch (error) {
+      console.error("Error loading cart:", error);
+    }
+  };
+
+  loadOrders();
+}, [currentUser, setOrders]);
+
+
+  const increaseQty = async (id) => {
+  const item = orders.find((item) => item.id === id);
+
+  if (!item || !currentUser) return;
+
+  const newQuantity = item.quantity + 1;
+
+  try {
+    await updateDoc(
+      doc(
+        db,
+        "orders",
+        currentUser.uid,
+        "items",
+        String(id)
+      ),
+      {
+        quantity: newQuantity,
+      }
+    );
+
     setOrders((items) =>
       items.map((item) =>
         item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: newQuantity }
           : item
       )
     );
-  };
 
-  // console.log(orders)
-
-const decreaseQty = (id) => {
-  setOrders((items) => {
-    const item = items.find((item) => item.id === id);
-
-    if (item.quantity === 1) {
-      return items.filter((item) => item.id !== id);
-    }
-
-    return items.map((item) =>
-      item.id === id
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    );
-  });
+  } catch (error) {
+    console.error("Error increasing quantity:", error);
+  }
 };
 
-  const removeItem = (id) => {
-    setOrders((items) => items.filter((item) => item.id !== id));
-    // setOrders(orders)
-    // console.log(id)
-    setShowDeleteId(null)
-  };
+const decreaseQty = async (id) => {
+  const item = orders.find((item) => item.id === id);
+
+  if (!item || !currentUser) return;
+
+  if (item.quantity === 1) {
+    await removeItem(id);
+    return;
+  }
+
+  const newQuantity = item.quantity - 1;
+
+  try {
+    await updateDoc(
+      doc(
+        db,
+        "orders",
+        currentUser.uid,
+        "items",
+        String(id)
+      ),
+      {
+        quantity: newQuantity,
+      }
+    );
+
+    setOrders((items) =>
+      items.map((item) =>
+        item.id === id
+          ? { ...item, quantity: newQuantity }
+          : item
+      )
+    );
+
+  } catch (error) {
+    console.error("Error decreasing quantity:", error);
+  }
+};
+
+  const removeItem = async (id) => {
+  if (!currentUser) return;
+
+  try {
+    await deleteDoc(
+      doc(
+        db,
+        "orders",
+        currentUser.uid,
+        "items",
+        String(id)
+      )
+    );
+
+    setOrders((items) =>
+      items.filter((item) => item.id !== id)
+    );
+
+    setShowDeleteId(null);
+
+  } catch (error) {
+    console.error("Error removing product:", error);
+  }
+};
 
   const subtotal = orders.reduce(
     (total, item) => total + item.myOrder.price * item.quantity,
@@ -53,7 +163,7 @@ const decreaseQty = (id) => {
   const total = subtotal + shipping;
 
   return (
-    <section className=" bg-blue-50  px-4 py-10">
+    <section className=" bg-blue-50  px-4 py-5">
       {orders.length === 0 ? (
         <div className="flex justify-center flex-col sm:flex-row items-center gap-3">
           <div><h3 className="text-2xl">Your cart is empty</h3>
@@ -72,14 +182,31 @@ const decreaseQty = (id) => {
       
       (
         <>
-         <h2 className="text-3xl mx-4 mb-8">Shopping Cart</h2>
-        <div className="grid lg:grid-cols-3 mx-4 gap-8">
+        <div className="mb-8 mx-5">
+
+          <button
+            onClick={() => navigate("/cart")}
+            className="text-cyan-700 hover:text-cyan-900 mb-3"
+          >
+            ← Back to Cart
+          </button>
+
+          <h1 className="text-3xl font-bold">
+            Shopping Cart
+          </h1>
+
+          <p className="text-slate-500 mt-2">
+            Review your order before completing your purchase.
+          </p>
+
+        </div>
+        <div className="grid  lg:grid-cols-3 mx-4 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 border rounded-xl bg-white border-slate-300">
+          <div className="lg:col-span-2 border rounded-xl h-fit bg-white border-slate-300">
             {orders.map((item) => (
              
               <div
-                key={item.myOrder.id}
+                key={item.id}
                 className="flex sm:flex-row flex-col items-center gap-2 sm:gap-6 border-t border-slate-300 mx-2 p-3 "
               >
                 <img
@@ -172,7 +299,7 @@ const decreaseQty = (id) => {
             </div>
 
             <button className="w-full mt-6 bg-[#003049] text-white py-2 rounded-lg hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition transition"
-              onClick={()=>console.log(orders.map(x=>x.myOrder.name))}
+             onClick={() => navigate("/checkout")}
             >
               Proceed to Checkout
             </button>

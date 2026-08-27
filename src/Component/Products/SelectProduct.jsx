@@ -5,15 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { useAuth } from "../../AuthContext";
+import { doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 
 const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
+  const myOrderr = orders.find(
+        (item) => item.myOrder.id === data.id 
+      );
+
 
       const [selectedSize, setSelectedSize] = useState("M");
       const [selectedColor, setSelectedColor] = useState("")
       const [newProduct, setNewProduct] = useState("")
       const { currentUser } = useAuth();
       const navigate = useNavigate();
+
+      
       const onFavToggle=(id)=>{
         setData((prev) =>
         prev.map((product) =>
@@ -37,85 +45,169 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
 };
 
 
-      const onOrders = () => {
-          if (!currentUser) {
-            navigate("/login");
-            return;
-          }
+      const onOrders = async () => {
+  if (!currentUser) {
+    navigate("/login");
+    return;
+  }
 
-        setOrders((prevOrders) => {
-          const existingOrder = prevOrders.find(
-            (item) => item.myOrder.id === data.id 
-          );
+  const orderRef = doc(
+    db,
+    "orders",
+    currentUser.uid,
+    "items",
+    String(data.id)
+  );
 
-          if (existingOrder) {
-            return prevOrders.map((item) =>
-              item.myOrder.id === data.id 
-                ? { ...item, size: selectedSize, color:selectedColor, quantity: item.quantity  }
-                : item
-            );
-          }
+  const existingOrder = orders.find(
+    (item) => item.myOrder.id === data.id
+  );
 
-          return [
-            ...prevOrders,
-            {
-              id: prevOrders.length + 1,
-              myOrder: data,
-              quantity: 1,
-                ...(data.sizes && { size: selectedSize }),
-                ...(data.colors && { color: selectedColor })
+  try {
+    if (existingOrder) {
+      const newQuantity = existingOrder.quantity + 1;
 
-            },
-          ];
-        });
-           myOrderr? '' :toast.success("Product added to cart!")
+      await updateDoc(orderRef, {
+        quantity: newQuantity,
+        size: data.sizes ? selectedSize : null,
+        color: data.colors ? selectedColor : null,
+      });
 
-      };
-
-      const myOrderr = orders.find(
-        (item) => item.myOrder.id === data.id 
+      setOrders((prevOrders) =>
+        prevOrders.map((item) =>
+          item.myOrder.id === data.id
+            ? {
+                ...item,
+                quantity: newQuantity,
+                size: data.sizes ? selectedSize : null,
+                color: data.colors ? selectedColor : null,
+              }
+            : item
+        )
       );
 
-const IncreaseQty = () => {
-        setOrders((prevOrders) => {
-          const existingOrder = prevOrders.find(
-            (item) => item.myOrder.id === data.id 
-          );
-
-          if (existingOrder) {
-            return prevOrders.map((item) =>
-              item.myOrder.id === data.id 
-                ? { ...item, size: selectedSize , color:selectedColor, quantity: item.quantity + 1 }
-                : item
-            );
-          }
-
-          return [
-            ...prevOrders,
-            {
-              id: prevOrders.length + 1,
-              myOrder: data,
-              quantity: 2,
-                ...(data.sizes && { size: selectedSize }),
-                ...(data.colors && { color: selectedColor })
-            },
-          ];
-        });
-     toast.dismiss();
-    //  toast.success(`You added ${myOrderr? myOrderr.quantity+1: 2} items to cart!`);
+    } else {
+      const newOrder = {
+        productId: data.id,
+        productName: data.name,
+        price: data.price,
+        image: data.image,
+        category: data.category,
+        quantity: 1,
+        size: data.sizes ? selectedSize : null,
+        color: data.colors ? selectedColor : null,
+        userId: currentUser.uid,
       };
 
-      const decreaseQty = () => {
-        setOrders((prevOrders) =>
-          prevOrders
-            .map((item) =>
-              item.myOrder.id === data.id
-                ? { ...item, quantity: item.quantity - 1 }
-                : item
-            )
-            .filter((item) => item.quantity > 0)
-        );
-    };
+      await setDoc(orderRef, newOrder);
+
+      setOrders((prevOrders) => [
+        ...prevOrders,
+        {
+          id: String(data.id),
+          myOrder: data,
+          quantity: 1,
+          size: data.sizes ? selectedSize : null,
+          color: data.colors ? selectedColor : null,
+        },
+      ]);
+
+      toast.success("Product added to cart!");
+    }
+  } catch (error) {
+    console.error("Error adding product:", error);
+    toast.error("Failed to add product.");
+  }
+};
+
+    
+const IncreaseQty = async () => {
+  if (!currentUser) {
+    navigate("/login");
+    return;
+  }
+
+  if (!myOrderr) {
+    // If product is not in cart yet, add it
+    await onOrders();
+    return;
+  }
+
+  const newQuantity = myOrderr.quantity + 1;
+
+  const orderRef = doc(
+    db,
+    "orders",
+    currentUser.uid,
+    "items",
+    String(data.id)
+  );
+
+  try {
+    await updateDoc(orderRef, {
+      quantity: newQuantity,
+    });
+
+    setOrders((prevOrders) =>
+      prevOrders.map((item) =>
+        item.myOrder.id === data.id
+          ? {
+              ...item,
+              quantity: newQuantity,
+            }
+          : item
+      )
+    );
+  } catch (error) {
+    console.error("Error increasing quantity:", error);
+  }
+};
+
+   const decreaseQty = async () => {
+  if (!currentUser || !myOrderr) return;
+
+  const newQuantity = myOrderr.quantity - 1;
+
+  const orderRef = doc(
+    db,
+    "orders",
+    currentUser.uid,
+    "items",
+    String(data.id)
+  );
+
+  try {
+    if (newQuantity <= 0) {
+      await deleteDoc(orderRef);
+
+      setOrders((prevOrders) =>
+        prevOrders.filter(
+          (item) => item.myOrder.id !== data.id
+        )
+      );
+
+      return;
+    }
+
+    await updateDoc(orderRef, {
+      quantity: newQuantity,
+    });
+
+    setOrders((prevOrders) =>
+      prevOrders.map((item) =>
+        item.myOrder.id === data.id
+          ? {
+              ...item,
+              quantity: newQuantity,
+            }
+          : item
+      )
+    );
+
+  } catch (error) {
+    console.error("Error decreasing quantity:", error);
+  }
+};
 
 
   return (
@@ -130,17 +222,35 @@ const IncreaseQty = () => {
               {data.sizes.map((size) => (
                 <button
                   key={size}
-                  onClick={() => {
-                    setSelectedSize(size)
-                    orders && setOrders((prevOrders) => {
-                    
-                          return prevOrders.map((item) =>
-                            item.myOrder.id === data.id
-                              ? { ...item, size: size }
-                              : item
-                          );
-                        
-                    })
+                 onClick={async () => {
+                    setSelectedSize(size);
+
+                    if (!currentUser || !myOrderr) return;
+
+                    try {
+                      await updateDoc(
+                        doc(
+                          db,
+                          "orders",
+                          currentUser.uid,
+                          "items",
+                          String(data.id)
+                        ),
+                        {
+                          size: size,
+                        }
+                      );
+
+                      setOrders((prevOrders) =>
+                        prevOrders.map((item) =>
+                          item.myOrder.id === data.id
+                            ? { ...item, size: size }
+                            : item
+                        )
+                      );
+                    } catch (error) {
+                      console.error("Error updating size:", error);
+                    }
                   }}
                   className={`w-15 h-8 border border-slate-200 rounded-full transition
                     ${
@@ -165,17 +275,37 @@ const IncreaseQty = () => {
               {data.colors.map((color) => (
                 <button
                   key={color}
-                  onClick={() => {
-                    setSelectedColor(color)
-                    orders && setOrders((prevOrders) => {
-                          return prevOrders.map((item) =>
+           onClick={async () => {
+                    setSelectedColor(color);
+
+                    if (currentUser && myOrderr) {
+                      try {
+                        await updateDoc(
+                          doc(
+                            db,
+                            "orders",
+                            currentUser.uid,
+                            "items",
+                            String(data.id)
+                          ),
+                          {
+                            color: color,
+                          }
+                        );
+
+                        setOrders((prevOrders) =>
+                          prevOrders.map((item) =>
                             item.myOrder.id === data.id
                               ? { ...item, color: color }
                               : item
-                          );
-                      
-                    })
-                    changeColor(color)
+                          )
+                        );
+                      } catch (error) {
+                        console.error("Error updating color:", error);
+                      }
+                    }
+
+                    changeColor(color);
                   }}
                     style={{ backgroundColor: color }}
                   className={`size-5 border rounded-full transition

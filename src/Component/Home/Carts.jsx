@@ -1,47 +1,93 @@
-import React from 'react'
-import { FaStar, FaStarHalfAlt, FaRegStar, FaRegHeart, FaHeart   } from "react-icons/fa";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from "../../AuthContext";
+import { FaStar, FaRegStar, FaRegHeart, FaHeart   } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-import { useAuth } from "../../AuthContext";
 
 const Carts = ({data,setData, orders, setOrders}) => {
 
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-   const onOrders = () => {
+ const onOrders = async () => {
 
-           if (!currentUser) {
-          navigate("/login");
-            return;
-          }
-          setOrders((prevOrders) => {
-            const existingOrder = prevOrders.find(
-              (item) => item.myOrder.id === data.id 
-            );
-  
-            if (existingOrder) {
-              return prevOrders.map((item) =>
-                item.myOrder.id === data.id 
-                  ? { ...item, quantity: item.quantity+1  }
-                  : item
-              );
-            }
-  
-            return [
-              ...prevOrders,
-              {
-                id: prevOrders.length + 1,
-                myOrder: data,
-                quantity: 1,
-              },
-            ];
-          });
-             myOrderr? '' :toast.success("Product added to cart!")
-  
-        };
+  if (!currentUser) {
+    navigate("/login");
+    return;
+  }
+
+  try {
+
+    const existingOrder = orders.find(
+      (item) => item.myOrder.id === data.id
+    );
+
+    const quantity = existingOrder
+      ? existingOrder.quantity + 1
+      : 1;
+
+    // Save inside this user's cart
+    await setDoc(
+      doc(
+        db,
+        "orders",
+        currentUser.uid,
+        "items",
+        String(data.id)
+      ),
+      {
+        userId: currentUser.uid,
+        productId: data.id,
+        productName: data.name,
+        price: data.price,
+        image: data.image,
+        category: data.category,
+        quantity: quantity,
+        createdAt: new Date()
+      },
+      { merge: true }
+    );
+
+    // Update React state
+    setOrders((prevOrders) => {
+
+      const existing = prevOrders.find(
+        (item) => item.myOrder.id === data.id
+      );
+
+      if (existing) {
+        return prevOrders.map((item) =>
+          item.myOrder.id === data.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1
+              }
+            : item
+        );
+      }
+
+      return [
+        ...prevOrders,
+        {
+          id: data.id,
+          myOrder: data,
+          quantity: 1
+        }
+      ];
+    });
+
+    if (!existingOrder) {
+      toast.success("Product added to cart!");
+    }
+
+  } catch (error) {
+    console.error("Error adding product:", error);
+    toast.error("Failed to add product to cart.");
+  }
+};
 
         const myOrderr = orders.find(
         (item) => item.myOrder.id === data.id 
