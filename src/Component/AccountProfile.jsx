@@ -55,9 +55,16 @@ useEffect(() => {
   }
 };
   return (
-    <div className="m-5 bg-slate-50 rounded-2xl min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
+    <>
+    <button
+            onClick={() => navigate(-1)}
+            className="text-cyan-700 hover:text-cyan-900 m-5 mx-10"
+          >
+            ← Back 
+          </button>
+    <div className="mx-10 mb-10 bg-slate-50 rounded-2xl shadow min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
      <div className="flex justify-between">
-         <h2 className="text-2xl font-bold ">Profile Information</h2>
+          <div></div>
       <button
           onClick={handleLogout}
           className="font-semibold text-red-500 px-6 py-3 sm:text-sm text-xs -mr-5 rounded-lg hover:text-red-700 transition"
@@ -94,57 +101,59 @@ useEffect(() => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold">{currentUser?.displayName}</h3>
+            <h3 className="text-2xl font-semibold">{currentUser?.displayName}</h3>
             <p className="text-slate-500 text-sm">
               Click the camera icon to change your profile photo.
             </p>
           </div>
         </div>
 
-  
-          <div>
-                <h1 className="font-semibold inline mr-5">Full Name:</h1> 
-                <span className="text-slate-500">{userData?.fullName || currentUser?.displayName}</span>
-          </div>
-          <div>
-                <h1 className="font-semibold inline mr-5">Email:</h1> 
-                <span className="text-slate-500">{currentUser?.email}</span>
-          </div>
+ <div className="flex w-full gap-5 justify-between">
 
-          <div>
-                <h1 className="font-semibold inline mr-5">Phone:</h1> 
-                <span className="text-slate-500">{userData?.phone || "Not provided"}</span>
-          </div>
+   
+     <div className="w-full  bg-white border border-slate-300 rounded-xl p-4 px-6  shadow-sm">
+      <h2 className="text-2xl my-5 font-bold ">Profile Information</h2>
+      <div className="flex">        
+            <div className="grid h-50">
+                <h1 className="text-slate-500 mr-5">Full Name: </h1>
+                <h1 className="text-slate-500 mr-5">Email: </h1>
+                <h1 className="text-slate-500 mr-5">Phone Number: </h1>
+                <h1 className="text-slate-500 mr-5">Address: </h1>
+               </div> 
+               <div className="grid">
+                <h1 className=" mr-5">{userData?.fullName || currentUser?.displayName}</h1> 
+                <h1 className=" mr-5">{currentUser?.email}</h1> 
+                <h1 className=" mr-5">{userData?.phone || "Not provided"}</h1> 
+                <h1 className=" mr-5">{userData ? `${userData.street}, ${userData.city}, Iraq` : "Not provided"}</h1> 
+           </div>
+     </div>
+     <button className="text-blue-500 underline ">Edit</button>
+   </div>
+    
+         
 
-           <div>
-                <h1 className="font-semibold inline mr-5">Address:</h1> 
-                <span className="text-slate-500">{userData
-                  ? `${userData.street}, ${userData.city}, Iraq`
-                  : "Not provided"}</span>
-          </div>
-
-    <div className="my-5 flex sm:flex-row flex-col gap-2">
-      <Link to='/favorites' className="p-10 hover:bg-red-400 hover:text-white transition bg-red-300 rounded-xl">
+    <div className=" grid w-full grid-cols-2 text-center justify-center  gap-2">
+      <Link to='/favorites' className="w-full  hover:bg-red-400 hover:text-white transition bg-red-300 rounded-xl">
         <h1 className="font-semibold text-sm ">Your Favorites list</h1>
       </Link>
 
-      <Link to='/cart' className="p-10 hover:bg-blue-400 hover:text-white transition bg-blue-300 rounded-xl">
+      <Link to='/cart' className="w-full  hover:bg-blue-400 hover:text-white transition bg-blue-300 rounded-xl">
         <h1 className="font-semibold text-sm ">Your orders list</h1>
       </Link>
 
-      <Link className="p-10 hover:bg-purple-400 hover:text-white transition px-15 bg-purple-300 rounded-xl">
+      <Link className="w-full  hover:bg-purple-400 hover:text-white transition  bg-purple-300 rounded-xl">
         <h1 className="font-semibold text-sm">Your Wallet</h1>
       </Link>
 
-      <Link to='/useraddress' className="p-10 hover:bg-orange-400 hover:text-white transition px-15 bg-orange-300 rounded-xl">
+      <Link to='/useraddress' className="w-full hover:bg-orange-400 hover:text-white transition  bg-orange-300 rounded-xl">
         <h1 className="font-semibold text-sm">Your Address</h1>
       </Link>
     </div>
-
+</div>
       
       </form>
     </div>
-  
+  </>
   )
 }
 

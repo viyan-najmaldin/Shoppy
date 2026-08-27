@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 import {
   collection,
@@ -191,17 +192,20 @@ export default function Checkout({ orders, setOrders }) {
 
   if (success) {
     return (
-      <section className="min-h-screen bg-blue-50 p-5 flex justify-center items-center">
-        <div className="bg-white rounded-2xl border border-slate-300 p-5 text-center max-w-md">
+      <section className="min-h-150 bg-blue-50 p-5 flex justify-center items-center">
+        <div className="bg-white rounded-2xl border border-slate-300 p-5 w-150 text-center max-w-md">
           
 
-          <h1 className="text-2xl font-bold mb-3">
-          {/* <span className="text-green-500 text-5xl i mb-4"> ✓  </span>  */}
-           Order Placed Successfully!
+          <h1 className="sm:text-2xl font-bold mb-3">
+            
+          <span className="bg-green-100  p-2 rounded-full mr-2 ">
+            <IoCheckmarkDoneSharp  className="text-green-500 text-3xl inline mb-2" />
+          </span> 
+           Order Placed Successfully! 
           </h1>
 
           <p className="text-slate-500 mb-6">
-            Thank you for your order. Your order has been saved successfully.
+            Thank you for your order. <br/> Your order has been saved successfully.
           </p>
 
           <button

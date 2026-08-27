@@ -185,10 +185,10 @@ const decreaseQty = async (id) => {
         <div className="mb-8 mx-5">
 
           <button
-            onClick={() => navigate("/cart")}
+            onClick={() => navigate(-1)}
             className="text-cyan-700 hover:text-cyan-900 mb-3"
           >
-            ← Back to Cart
+            ← Back 
           </button>
 
           <h1 className="text-3xl font-bold">
@@ -260,7 +260,7 @@ const decreaseQty = async (id) => {
                                 </button>
                               </div>
                            
-                             <div className="p-5">
+                             <div className="p-5 w-100">
                              <p>do you want to delete this product?</p>
                               <div className="flex justify-center text-black mt-2 gap-2">
                               <button className="bg-white border hover:bg-red-700 hover:text-white px-4 border-slate-400 p-1 rounded-xl"
@@ -278,7 +278,7 @@ const decreaseQty = async (id) => {
           </div>
 
           {/* Summary */}
-          <div className="bg-white border border-slate-300 rounded-xl p-4 px-6 h-fit shadow-sm">
+          <div className=" sm:-mt-25 bg-white border border-slate-300 rounded-xl p-4 px-6 h-fit shadow-sm">
             <h3 className="text-xl font-semibold mb-6">Order Summary</h3>
 
             <div className="flex justify-between mb-3">
@@ -298,13 +298,13 @@ const decreaseQty = async (id) => {
               <span>${total}</span>
             </div>
 
-            <button className="w-full mt-6 bg-[#003049] text-white py-2 rounded-lg hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition transition"
+            <button className="w-full mt-6 font-semibold text-lg text-white py-4 rounded-lg bg-gradient-to-r from-red-400 to-red-800  hover:text-black transition"
              onClick={() => navigate("/checkout")}
             >
               Proceed to Checkout
             </button>
         <div className='items-end flex flex-col justify-center'>  
-                        <img src={orderss} alt="image wishlist" className='mt-2 w-100'/>
+                        <img src={orderss} alt="image wishlist" className='mt-2 mx-auto w-100'/>
                        
                         </div>   </div>
 
