@@ -57,7 +57,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/useraddress" element={<UserAddress />} />
-                <Route path="/checkout" element={<Checkout orders={orders} />}/>
+                <Route path="/checkout" element={<Checkout orders={orders} setOrders={setOrders} />}/>
                 <Route
                   path="/account" element={ <ProtectedRoute> 
                                               <AccountProfile />
