@@ -5,6 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import {
+  FaHeart,
+  FaCartShopping,
+  FaStar,
+  FaLocationDot,
+} from "react-icons/fa6";
 
 
 const AccountProfile = () => {
@@ -75,12 +81,12 @@ useEffect(() => {
      </div>
   
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center gap-6 mb-8">
+        <div className="flex items-center sm:-mt-10 gap-6 mb-8">
           <div className="relative">
             <img
               src={profileImage}
               alt="Profile"
-              className="w-28 h-28 rounded-full object-cover border-2 border-slate-300"
+              className="sm:w-28 sm:h-28  rounded-full object-cover border-2 border-slate-300"
             />
 
             <button
@@ -108,7 +114,7 @@ useEffect(() => {
           </div>
         </div>
 
- <div className="flex w-full gap-5 justify-between">
+ <div className="flex flex-col sm:flex-row w-full gap-5 justify-between">
 
    
      <div className="w-full  bg-white border border-slate-300 rounded-xl p-4 px-6  shadow-sm">
@@ -127,27 +133,46 @@ useEffect(() => {
                 <h1 className=" mr-5">{userData ? `${userData.street}, ${userData.city}, Iraq` : "Not provided"}</h1> 
            </div>
      </div>
-     <button className="text-blue-500 underline ">Edit</button>
+     <Link to='/useraddress' className="text-blue-500 underline">Edit</Link>
    </div>
     
          
 
     <div className=" grid w-full grid-cols-2 text-center justify-center  gap-2">
-      <Link to='/favorites' className="w-full  hover:bg-red-400 hover:text-white transition bg-red-300 rounded-xl">
-        <h1 className="font-semibold text-sm ">Your Favorites list</h1>
-      </Link>
+    <Link to="/favorites"  className="w-full py-10 group flex flex-col items-center justify-center hover:bg-red-400 hover:text-white transition bg-red-200 rounded-xl">
+  <FaHeart className="text-2xl text-red-500 group-hover:text-white transition" />
+  <h1 className="font-semibold text-sm mt-2">  Favorites </h1>
+  <p className="text-sm text-slate-500 group-hover:text-white mt-1">  Your Favorites list</p>
+</Link>
 
-      <Link to='/cart' className="w-full  hover:bg-blue-400 hover:text-white transition bg-blue-300 rounded-xl">
-        <h1 className="font-semibold text-sm ">Your orders list</h1>
-      </Link>
 
-      <Link className="w-full  hover:bg-purple-400 hover:text-white transition  bg-purple-300 rounded-xl">
-        <h1 className="font-semibold text-sm">Your Wallet</h1>
-      </Link>
 
-      <Link to='/useraddress' className="w-full hover:bg-orange-400 hover:text-white transition  bg-orange-300 rounded-xl">
-        <h1 className="font-semibold text-sm">Your Address</h1>
-      </Link>
+<Link
+  to="/cart"
+  className="w-full py-10 group flex flex-col items-center justify-center hover:bg-blue-400 hover:text-white transition bg-blue-200 rounded-xl">
+  <FaCartShopping className="text-2xl text-blue-600 group-hover:text-white transition" />
+  <h1 className="font-semibold text-sm mt-2"> Orders</h1>
+  <p className="text-sm text-slate-500 group-hover:text-white mt-1"> Your orders list </p>
+</Link>
+
+
+<Link
+  // to=""
+  className="w-full py-10 group flex flex-col items-center justify-center hover:bg-purple-400 hover:text-white transition bg-purple-200 rounded-xl">
+  <FaStar className="text-2xl text-purple-600 group-hover:text-white transition" />
+  <h1 className="font-semibold text-sm mt-2">  Points</h1>
+  <p className="text-sm text-slate-500 group-hover:text-white mt-1">Your reward points</p>
+</Link>
+
+
+<Link
+  to="/useraddress"
+  className="w-full py-10 group flex flex-col items-center justify-center hover:bg-orange-400 hover:text-white transition bg-orange-200 rounded-xl">
+  <FaLocationDot className="text-2xl text-orange-600 group-hover:text-white transition" />
+  <h1 className="font-semibold text-sm mt-2">    Address </h1>
+  <p className="text-sm text-slate-500 group-hover:text-white mt-1">  Manage your address</p>
+</Link>
+
     </div>
 </div>
       

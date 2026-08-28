@@ -4,3 +4,25 @@
 @theme {
   --font-playwrite: "Playwrite ID", cursive;
 }
+
+
+@keyframes brandLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes brandRight {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+

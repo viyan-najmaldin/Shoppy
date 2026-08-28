@@ -1,18 +1,39 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { TfiMenuAlt } from "react-icons/tfi";
 
-const MenuLinks = ({categories}) => {
+const MenuLinks = () => {
+
+  const links = [
+    { name: "All Categories", path: "/products/All", icon: true },
+    { name: "Electronics", path: "/products/Electronics" },
+    { name: "Fashion", path: "/products/Fashion" },
+    { name: "Home & Living", path: "/products/Home & Living" },
+    { name: "Sports", path: "/products/Sports" },
+    { name: "About", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ]
+
   return (
-    <div>
-       <div className="flex flex-wrap bg-white sm:bg-transparent text-black sm:text-white flex-col p-3 sm:p-0 sm:flex-row gap-5 mt-2">
-      <Link to='/products/All' className='hover:text-blue-300' href="http://">All Categories</Link>
-      <Link to='/products/Electronics' className='hover:text-blue-300' href="http://">Electronics</Link>
-      <Link to='/products/Fashion' className='hover:text-blue-300' href="http://">Fashion</Link>
-      <Link to='/products/Home & Living' className='hover:text-blue-300' href="http://">Home & Living</Link>
-      <Link to='/products/Sports' className='hover:text-blue-300' href="http://">Sports</Link>
-      <Link to='/' className='hover:text-blue-300' href="http://">About</Link>
-      <Link to='/contact' className='hover:text-blue-300' href="http://">Contact</Link>
-      </div>
+    <div className="flex flex-wrap bg-white sm:bg-transparent text-black sm:text-white flex-col p-3 sm:p-0 sm:flex-row gap-2 mt-2">
+
+      {links.map((link) => (
+        <NavLink
+          key={link.path}
+          to={link.path}
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-full transition-all duration-200 ${
+              isActive
+                ? "bg-slate-200/30"
+                : "hover:text-blue-300"
+            }`
+          }
+        >
+          {link.icon && <TfiMenuAlt className=" hidden sm:inline mr-1" />}
+          {link.name}
+        </NavLink>
+      ))}
+
     </div>
   )
 }
