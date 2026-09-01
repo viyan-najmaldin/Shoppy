@@ -2,7 +2,7 @@ import './App.css'
 import Footer from './Component/Footer';
 import MenuLinks from './Component/Navbar/MenuLinks'
 import Nav from './Component/Navbar/Nav'
-import { useState, lazy, Suspense  } from 'react';
+import { useState, lazy, Suspense, useEffect  } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Category from './Component/Home/Category';
 import { ToastContainer } from "react-toastify";
@@ -15,21 +15,40 @@ const Contact = lazy(() => import("./Component/Contact"));
 const AccountProfile = lazy(() => import("./Component/AccountProfile"));
 const ShoppingCart = lazy(() => import("./Component/ShoppingCart"));
 const PageNotFound404 = lazy(() => import("./Component/PageNotFound404"));
-import productData from "./data/productData";
+// import productData from "./data/productData";
 import Signup from './Component/Signup';
 import Login from './Component/Login';
 import ProtectedRoute from './Component/ProtectedRoute';
 import UserAddress from './Component/UserAddress';
 import Checkout from "./Component/Checkout";
+import { getProducts } from "./api/productApi";
 
 
 function App() {
  
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-   const [Data, setData]=useState(productData)
+   const [Data, setData]=useState([])
    const [orders, setOrders]= useState([])
    const [search, setSearch] = useState("");
 
+
+    useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+
+        console.log(data);
+
+        setData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+   
+  console.log(Data)
 
   return (
     <>

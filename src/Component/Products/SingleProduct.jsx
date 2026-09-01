@@ -14,7 +14,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
      const navigate = useNavigate();
     const [showButton, setShowButton] = useState(false);
     const data = Data.find(
-    (item) => item.id === Number(id) 
+    (item) => String(item.id) === String(id)
   );
 
   
@@ -34,7 +34,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
   return (
     
     <div className='bg-blue-50 pb-10 p-5'>
-       {showButton && <div className='bg-slate-300 -mx-5 p-1  px-5 sm:pt-32 top-0 mb-10 fixed w-full'>  <button
+       {showButton && <div className='bg-slate-300 -mx-5 p-1  px-5 sm:pt-34 top-0 mb-10 fixed w-full'>  <button
             onClick={() => navigate(-1)}
             className="text-cyan-700 hover:text-cyan-900 "
           >

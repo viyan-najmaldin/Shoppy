@@ -68,7 +68,7 @@ useEffect(() => {
           >
             ← Back 
           </button>
-    <div className="mx-10 mb-10 bg-slate-50 rounded-2xl shadow min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
+    <div className="sm:mx-10 mx-5 mb-10 bg-slate-50 rounded-2xl shadow min-h-100 border border-slate-300 p-6 lg:p-8 mb-8">
      <div className="flex justify-between">
           <div></div>
       <button

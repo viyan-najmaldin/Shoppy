@@ -1,0 +1,983 @@
+{"products":[
+    {
+        "id": "a3eu78q17q",
+        "type": "catalog",
+        "title": "ساعة أورايمو الذكية كروم فاتح oraimo Watch 5",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 16 مايو 2026، 10_13_09 ص.png",
+            "/files/c62a4749f40548b65507cc2798affd37f6d09f72_d810f809357aad58008ee0.jpeg",
+            "/files/OSW-805-1.webp",
+            "/files/b728e36d2370259418782dc1ee0285b95416ea8b_7fa57cb3dc449cd6051821.jpeg",
+            "/files/DSC01358.JPG",
+            "/files/DSC01363.JPG",
+            "/files/DSC01368.JPG",
+            "/files/DSC01373.JPG"
+        ],
+        "price": 28000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "a3e4l3mgjl",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 28000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 18:38:25.423001",
+        "updated_at": "2026-08-27 23:53:15.978900"
+    },
+    {
+        "id": "sl01h07j7a",
+        "type": "catalog",
+        "title": "يد تحكم لاسلكية PS4 DualShock 4 ستايل سبايدر مان",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/تصميم بدون عنوان (4)d49990.png",
+            "/files/تصميم بدون عنوان (4).png",
+            "/files/تصميم بدون عنوان (6)858eba.png",
+            "/files/تصميم بدون عنوان (5).png",
+            "/files/تصميم بدون عنوان (3).png",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٧٣١.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٧٢٤.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٧٠٦e582e6.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٦٥٣.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٥١٩.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٥٠٥.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٤٤٣.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٩١٦b0751d.jpg",
+            "/files/٢٠٢٦٠٨٢٥_٢١٤٩٠٥220edd.jpg"
+        ],
+        "price": 20000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنة",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "sl1bhnj25q",
+                "size": "بدون",
+                "color": "سبايدر مان",
+                "color_code": "#ff1212",
+                "price": 20000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-27 14:52:48.062012",
+        "updated_at": "2026-08-27 23:52:26.571152"
+    },
+    {
+        "id": "kg7l7a591f",
+        "type": "catalog",
+        "title": "سماعة بلوتوث رقمية مع منبه ومكبر صوت Z7",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/2D19F5C5-95C4-45F6-AEEF-0BB7A1B21B6B.png",
+            "/files/٢٠٢٦٠٤٠٢_٢٠٠٦٥٧ (2)88c227.jpg",
+            "/files/٢٠٢٦٠٤٠٢_٢٠٠٦٢٢.jpg",
+            "/files/٢٠٢٦٠٤٠٢_١٩٥٩٥٠.jpg",
+            "/files/٢٠٢٦٠٤٠٢_٢٠٠٠٤٧.jpg"
+        ],
+        "price": 10000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": " ✅ ضمان تشغيل",
+                "color": "#1db835",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "f7nplka7of",
+                "size": "بدون ",
+                "color": "وردي",
+                "color_code": "#ff91ba",
+                "price": 10000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-04-15 16:39:12.692305",
+        "updated_at": "2026-08-27 18:35:55.167437"
+    },
+    {
+        "id": "ujvht8ae5f",
+        "type": "catalog",
+        "title": "يد تحكم لاسلكية PS4 DualShock 4",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/IMG_6783.JPG",
+            "/files/IMG_6796 (1)756016.JPG",
+            "/files/IMG_6794.JPG",
+            "/files/IMG_6793.JPG",
+            "/files/IMG_677372e16a.JPG"
+        ],
+        "price": 19000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنة",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "vek9pbq522",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 19000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-06-11 08:48:47.943579",
+        "updated_at": "2026-08-27 15:52:02.745817"
+    },
+    {
+        "id": "jcb37lbujf",
+        "type": "catalog",
+        "title": "سماعة انكر ساوندكور R60i NC ",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/41856bfb-5c7b-4cd6-96f3-cff52d101833.png",
+            "/files/soundcore-r60i-nc___thumb_805_805.jpg",
+            "/files/Untitled-4___thumb_1080_1080.jpg",
+            "/files/Untitled-1___thumb_1080_1080.jpg",
+            "/files/9761___thumb_1080_1080.jpg",
+            "/files/D1202H21___media_library_original_700_700.webp",
+            "/files/1-anker-soundcore-p31i-blue-d1202z31-1768477961___thumb_1229_1229.jpg",
+            "/files/99315222-956A-4FFC-A25A-DB98FA7A1A11.jpg",
+            "/files/557F940B-C1D3-466E-8160-42BE3ADF3B95.jpg",
+            "/files/71BA810C-BE52-4B80-AC1F-66CB20BB0D69.jpg"
+        ],
+        "price": 39000,
+        "old_price": 43000,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "jcbp9taa9d",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 39000,
+                "old_price": 43000
+            },
+            {
+                "variant": "jcb3kv02l9",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 39000,
+                "old_price": 43000
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-05-02 21:51:45.166564",
+        "updated_at": "2026-08-27 08:49:58.854528"
+    },
+    {
+        "id": "gsavgn9luj",
+        "type": "catalog",
+        "title": "شاحن سامسونك اصلي PD T4511 بقوة 45 واط مع كابل USB-c إلى USB-C بقوة 5 أمبير",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 4 مايو 2026، 12_45_50 ص.png",
+            "/files/photo_3_2025-11-23_02-25-26.jpg",
+            "/files/photo_1_2025-11-23_02-25-26.jpg",
+            "/files/photo_2_2025-11-23_02-25-26.jpg",
+            "/files/photo_4_2025-11-23_02-25-26.jpg",
+            "/files/DA1BF058-C3B5-41BC-B04F-8A2E1694D961_1_201_a.jpg",
+            "/files/2AC9E3C0-CDD2-4F13-8AEF-DC43A4717908.jpg",
+            "/files/1FC3E2F4-D52A-47DC-8985-59CBAC82A05B.jpg"
+        ],
+        "price": 32000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "gsai9huro8",
+                "size": "S",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 32000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 02:26:57.054671",
+        "updated_at": "2026-08-27 08:47:55.070409"
+    },
+    {
+        "id": "38dsgk5ia6",
+        "type": "catalog",
+        "title": "Havit MS1044WB – ماوس ألعاب Tri-Mode",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 17 أغسطس 2026، 01_38_59 م.png",
+            "/files/ZEePm4qKvqN6pxwFzQe7sgjH9CE4in0LO4avMUVG.jpg",
+            "/files/nuQF6Cgi5qlUjimp462m7PtjQe2andwo2Cl0U3EQ.jpg",
+            "/files/DYrHQbWWVgpJy3VL2Tk56ykP1E86NqbU4x515frY.jpg",
+            "/files/NBJrmhyq0nHX5aEYnIDOSZy7Vr8ekD2Jdi25WDvb.jpg",
+            "/files/KrL4E7jzuvc6iwGwfjxL1vifg9ZvhWFdg3Xd8nhn.jpg",
+            "/files/4KxXIY4P426F4vBlr9aCunUxt5BuQYx7n318otif.jpg"
+        ],
+        "price": 26000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "38dh3mgn5e",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 26000,
+                "old_price": null
+            },
+            {
+                "variant": "38dfo1mfeb",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 26000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 13:51:32.539057",
+        "updated_at": "2026-08-27 01:23:13.753854"
+    },
+    {
+        "id": "ikjpv6fncc",
+        "type": "catalog",
+        "title": "Havit M19 سماعة سبيكر مكتبية للألعاب والترفيه بتصميم مدمج",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/Gemini_Generated_Image_onf7uonf7uonf7uo.jpeg",
+            "/files/نسخة ‏M19-_Detail-page.jpg",
+            "/files/2نسخة ‏M19-_Detail-page.jpg",
+            "/files/3نسخة ‏M19-_Detail-page.jpg",
+            "/files/4نسخة ‏M19-_Detail-page.jpg",
+            "/files/5نسخة ‏M19-_Detail-page.jpg",
+            "/files/6نسخة ‏M19-_Detail-page.jpg",
+            "/files/7نسخة ‏M19-_Detail-page.jpg",
+            "/files/8نسخة ‏M19-_Detail-page.jpg"
+        ],
+        "price": 17000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "ikjrafhcjp",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 17000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 15:12:24.322882",
+        "updated_at": "2026-08-27 01:22:59.634828"
+    },
+    {
+        "id": "gjq1pehriu",
+        "type": "catalog",
+        "title": "❄️🎮 مبرد الهاتف المغناطيسي XO-SL09",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/423586A9-8A69-4FDC-AA16-282E584FC608.png",
+            "/files/IMG_6707.jpg",
+            "/files/IMG_6737.DNG",
+            "/files/IMG_6705.jpg",
+            "/files/IMG_6704.jpg",
+            "/files/IMG_6736.DNG",
+            "/files/IMG_6732.DNG",
+            "/files/IMG_6730.DNG"
+        ],
+        "price": 20000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان ١٨ شهر",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            },
+            {
+                "title": "❄️ ترند",
+                "color": "#4F9DD9",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "gjqvf2j5mc",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 20000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-06-10 01:28:02.633838",
+        "updated_at": "2026-08-27 01:22:46.923196"
+    },
+    {
+        "id": "adp45to4qu",
+        "type": "catalog",
+        "title": "باور بانك Anker Zolo (10K, 22.5W) ",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/IMG_2242.PNG",
+            "/files/IMG_2236.JPG",
+            "/files/IMG_2235.JPG",
+            "/files/IMG_2234.JPG"
+        ],
+        "price": 25000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "adptgpepiv",
+                "size": "10k",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 25000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-21 12:56:47.348172",
+        "updated_at": "2026-08-27 01:22:30.942147"
+    },
+    {
+        "id": "cbcvekcsdi",
+        "type": "catalog",
+        "title": "Hoco DI62 Warrior – داش كام ثلاثية الكاميرات مع Wi-Fi",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/519018234.webp",
+            "/files/519018285.webp",
+            "/files/Hoco-DI62-Car-Driving-Recorder-150mAh-4-inch-1080-Full-HD-WiFi-Black-Card-Driving-Recorder-HOCO-Star-Light-Kuwait-6-600x600.webp",
+            "/files/Hoco-DI62-Car-Driving-Recorder-150mAh-4-inch-1080-Full-HD-WiFi-Black-Card-Driving-Recorder-HOCO-Star-Light-Kuwait-3.webp",
+            "/files/Hoco-DI62-Car-Driving-Recorder-150mAh-4-inch-1080-Full-HD-WiFi-Black-Card-Driving-Recorder-HOCO-Star-Light-Kuwait-2.webp",
+            "/files/Hoco-DI62-Car-Driving-Recorder-150mAh-4-inch-1080-Full-HD-WiFi-Black-Card-Driving-Recorder-HOCO-Star-Light-Kuwait.webp"
+        ],
+        "price": 35000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنة",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "cbchnq9o9d",
+                "size": "3 in 1",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 35000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-15 12:03:19.616221",
+        "updated_at": "2026-08-23 08:50:03.014233"
+    },
+    {
+        "id": "10tqdc2h4k",
+        "type": "catalog",
+        "title": "سماعة رأس سلكية للألعاب هافيت H2048U باللونين الأسود والأخضر",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/IMG_3056.JPG",
+            "/files/IMG_3063.PNG",
+            "/files/IMG_3066.PNG",
+            "/files/IMG_3062.PNG"
+        ],
+        "price": 25000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "10tk7mtoaa",
+                "size": "XL",
+                "color": "اخضر + اسود",
+                "color_code": "#29CD42",
+                "price": 25000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 20:12:09.297894",
+        "updated_at": "2026-08-23 08:43:17.125154"
+    },
+    {
+        "id": "8g09nkrkh0",
+        "type": "catalog",
+        "title": "لعبة التج ميموجي",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/٢٠٢٦٠٧٢١_٢٠٠٥٢٦ (1).jpg",
+            "/files/٢٠٢٦٠٧٢١_٢٠٠٠٣٣ (1).jpg",
+            "/files/٢٠٢٦٠٧٢١_٢٠٠١٥٣ (1).jpg",
+            "/files/٢٠٢٦٠٧٢١_٢٠٠٢٤٥ (1).jpg"
+        ],
+        "price": 12000,
+        "old_price": 14000,
+        "tags": [
+            {
+                "title": "❄️ ترند",
+                "color": "#4F9DD9",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "8g14ojktpf",
+                "size": "بدون",
+                "color": "موز",
+                "color_code": "#ede54c",
+                "price": 12000,
+                "old_price": 14000
+            },
+            {
+                "variant": "8g1l8a66st",
+                "size": "بدون",
+                "color": "برتقال",
+                "color_code": "#EC864B",
+                "price": 12000,
+                "old_price": 14000
+            },
+            {
+                "variant": "8g1uji9nev",
+                "size": "بدون",
+                "color": "فراولة",
+                "color_code": "#f54988",
+                "price": 12000,
+                "old_price": 14000
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-07-22 20:52:38.341158",
+        "updated_at": "2026-08-22 22:59:44.119211"
+    },
+    {
+        "id": "t9or4ejfp0",
+        "type": "catalog",
+        "title": "سماعة رأس لاسلكية من مارشال ME01",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/٢٠٢٦٠٨١٧_٢١٥٣٤٩ (1).jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٣١٥ (1).jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٥٣٣.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٦٤٨.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٥٠٠.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٥١٣.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥١٥٤.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٩٠٠476d2c.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٥٢٩.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٧٣٨.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٨١٦.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٨٠٥.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٨٣٣.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٩١٩.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٩٤٣.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٥٦٤٤.jpg"
+        ],
+        "price": 16000,
+        "old_price": 17050,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            },
+            {
+                "title": "خصم %7",
+                "color": "#CB2929",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "28umjqhmb5",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 16000,
+                "old_price": 17050
+            },
+            {
+                "variant": "t9o28peq2m",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 16000,
+                "old_price": 17050
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-20 09:57:22.305560",
+        "updated_at": "2026-08-20 13:29:39.565624"
+    },
+    {
+        "id": "liol6v8ffn",
+        "type": "catalog",
+        "title": "سماعة اذن لاسلكية من فيليبس TWS TAT2139BK / TAT2139WT",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/image3.png",
+            "/files/ce2b17a7c88e45d8a17bb0f400a40e58.webp",
+            "/files/a808602208824c0aa7cdb0f40105fe10.webp",
+            "/files/78ffb1ff205e42b282e7b0f400d42012.webp",
+            "/files/2e292a273cdd4eb79fa4b0f40108e9b3.webp"
+        ],
+        "price": 26000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "lio9hafcjv",
+                "size": "S",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 26000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 18:58:00.802424",
+        "updated_at": "2026-08-20 13:19:23.549231"
+    },
+    {
+        "id": "pm2mtiq72k",
+        "type": "catalog",
+        "title": "سماعة اذن لاسلكية انكر R50i.",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 2 مايو 2026، 10_12_02 م.png",
+            "/files/٢٠٢٦٠٢١١_٢١٤٤٤٠.jpg",
+            "/files/٢٠٢٦٠٢١١_٢١٣٨٥٤.jpg",
+            "/files/٢٠٢٦٠٢١١_٢١٣٣٠٨.jpg"
+        ],
+        "price": 20000,
+        "old_price": 22000,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "sok5i1ofj9",
+                "size": "بدون",
+                "color": "نيلي",
+                "color_code": "#013778",
+                "price": 20000,
+                "old_price": 22000
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 19:59:37.850179",
+        "updated_at": "2026-08-20 13:06:38.267811"
+    },
+    {
+        "id": "fgffelst1c",
+        "type": "catalog",
+        "title": "محول الشحن الذكي Auto Power Disconnector",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/518UVP-hEfL._SL1048_.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٠٣٥.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤١٥٦.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٣٥٠091eef.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٣٢٧.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٣٢٣.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٣٢٤.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٢٤٩.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤١٢٩.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٤٣٩.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٦٠٢.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٨٣٢.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٧٤٧.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٤٠٤٤.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٦٢٥.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٧٣٠.jpg",
+            "/files/٢٠٢٦٠٨١٧_٢١٣٨٥٩.jpg"
+        ],
+        "price": 15000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": " ✅ ضمان تشغيل",
+                "color": "#1db835",
+                "color_code_text": "#ffffff"
+            },
+            {
+                "title": "❄️ ترند",
+                "color": "#4F9DD9",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "fgf5c6ok22",
+                "size": "Type - C",
+                "color": "رصاصي",
+                "color_code": "#cfcfcf",
+                "price": 15000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-20 09:33:50.266950",
+        "updated_at": "2026-08-20 10:08:54.320477"
+    },
+    {
+        "id": "gp1jqb74nv",
+        "type": "catalog",
+        "title": "Hoco ZP17 Meihao مسدس ماء مع خرطوم",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/a527eba4-5ef2-4c36-ade0-9b3ec88a5b75.jpg",
+            "/files/da012b23-1bf5-4309-bbb5-cdaee5587077.jpg",
+            "/files/09cd504f-6f5c-4e7d-bca4-12748b209646.jpg",
+            "/files/162cf38e-e629-4694-a52d-1e921b29784a.jpg",
+            "/files/09d43ef9-56ac-45b8-af23-c3e7aefe0d31.jpg",
+            "/files/e0562497-83b3-41af-b6db-aa95795118f0.jpg",
+            "/files/4cbd87d8-4f60-48bb-8fce-2f2f7ccf5cb8.jpg",
+            "/files/e7b5593e-df5a-4624-b6f5-a84018043e79.jpg"
+        ],
+        "price": 26000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنة",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "gp11nn0ftt",
+                "size": "5/15 m",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 26000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-15 11:16:16.116335",
+        "updated_at": "2026-08-19 12:37:34.105177"
+    },
+    {
+        "id": "10msuh52mk",
+        "type": "catalog",
+        "title": "Havit MS1041WB ماوس ألعاب لاسلكي ",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 17 أغسطس 2026، 11_03_37 ص.png",
+            "/files/havit-gaming-mouse-ms1041wbhavit-business-9789093_1024x1024_crop_center.jpg",
+            "/files/havit-gaming-mouse-ms1041wbhavit-business-2986746_1024x1024_crop_center.webp"
+        ],
+        "price": 21750,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "10m5ri999o",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 21750,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 11:03:52.675196",
+        "updated_at": "2026-08-17 15:19:03.097682"
+    },
+    {
+        "id": "rjaavnt4he",
+        "type": "catalog",
+        "title": "Havit MS969WB ماوس ألعاب ثلاثي الاتصال ب الأداء العالي والوزن الخفيف",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/٥نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/٦نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/٧نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/٨نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/١١نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg",
+            "/files/٩نسخة ‏MS969WB_RGB_Detail_page_-_-2024.6.4 (1).jpg"
+        ],
+        "price": 54000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "rja7ugnckg",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 54000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 11:49:14.656823",
+        "updated_at": "2026-08-17 15:18:59.565830"
+    },
+    {
+        "id": "v7e7mt9gho",
+        "type": "catalog",
+        "title": "مايكروفون Havit GK50 Live",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 17 أغسطس 2026، 02_34_20 م.png",
+            "/files/havit-recording-microphone-gk50havit-business-7822689_1024x1024_crop_center.webp",
+            "/files/havit-recording-microphone-gk50havit-business-7827665_1024x1024_crop_center.webp",
+            "/files/havit-recording-microphone-gk50havit-business-3653185_1024x1024_crop_center.webp",
+            "/files/havit-recording-microphone-gk50havit-business-2248585_1024x1024_crop_center.webp",
+            "/files/havit-recording-microphone-gk50havit-business-4416249_1024x1024_crop_center.webp"
+        ],
+        "price": 32000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "v7eira43s1",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 32000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 14:39:16.605770",
+        "updated_at": "2026-08-17 15:17:50.782219"
+    },
+    {
+        "id": "l0lpdif6f9",
+        "type": "catalog",
+        "title": "كيبورد Havit KB903L ميكانيكي للألعاب – 61 مفتاح",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/ChatGPT Image 17 أغسطس 2026، 01_03_54 م.png",
+            "/files/ChatGPT Image 17 أغسطس 2026، 12_30_30 م.png",
+            "/files/نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/2نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/3نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/4نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/5نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/6نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg",
+            "/files/7نسخة ‏KB903L_B_-_-2025.1.15_e0d1ddc9-7ac4-49eb-beb9-22a0ea627734.jpg"
+        ],
+        "price": 40500,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "l0l5181jtq",
+                "size": "61",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 40500,
+                "old_price": null
+            },
+            {
+                "variant": "l0lg8mv31h",
+                "size": "61",
+                "color": "اسود",
+                "color_code": "#050000",
+                "price": 40500,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-08-17 12:32:37.325853",
+        "updated_at": "2026-08-17 15:17:38.813285"
+    },
+    {
+        "id": "f40svsopq6",
+        "type": "catalog",
+        "title": "سماعة الألعاب السلكية Havit H2230U.",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/photo_1_2025-11-23_20-32-52.jpg",
+            "/files/photo_2_2025-11-23_20-32-52.jpg",
+            "/files/photo_3_2025-11-23_20-32-52.jpg"
+        ],
+        "price": 20000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "f40lq66fv3",
+                "size": "بدون",
+                "color": "اسود",
+                "color_code": "#000000",
+                "price": 20000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2025-11-23 20:36:12.804146",
+        "updated_at": "2026-08-17 15:16:25.351039"
+    },
+    {
+        "id": "s8tk210gka",
+        "type": "catalog",
+        "title": "سماعة الألعاب اللاسلكية Acefast H11",
+        "description": null,
+        "bg_color": null,
+        "images": [
+            "/files/F70A60D7-A5EF-4404-A176-04111F5BDE64.png",
+            "/files/DSC01783.JPG",
+            "/files/DSC01781.JPG",
+            "/files/DSC01780.JPG"
+        ],
+        "price": 43000,
+        "old_price": null,
+        "tags": [
+            {
+                "title": "ضمان سنتين",
+                "color": "#ECAD4B",
+                "color_code_text": "#ffffff"
+            }
+        ],
+        "variants": [
+            {
+                "variant": "s8t84v890l",
+                "size": "بدون",
+                "color": "ابيض",
+                "color_code": "#fff",
+                "price": 43000,
+                "old_price": null
+            }
+        ],
+        "sort_order": 0,
+        "created_at": "2026-05-01 02:25:29.322037",
+        "updated_at": "2026-08-17 15:14:46.452779"
+    }
+] }

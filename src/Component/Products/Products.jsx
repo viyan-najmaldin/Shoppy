@@ -8,7 +8,7 @@ import nodata from '../../assets/Search engines-rafiki.png'
 const Products = ({Data,setData, search , orders, setOrders}) => {
 
    const { categories  } = useParams();
-   const [priceValue, setPriceValue] = useState(500)
+   const [priceValue, setPriceValue] = useState(60000)
    const [categoryValue, setCategoryValue] = useState([])
    const [ratingValue, setRatingValue] = useState(0)
    const [sortValue, setSortValue] = useState("featured");
@@ -29,21 +29,56 @@ const Products = ({Data,setData, search , orders, setOrders}) => {
   }, []);
 
 
+  const myData = Data.filter((product) => {
+  const productCategory = (product.category || "").toLowerCase();
+  const selectedCategory = (categories || "All").toLowerCase();
+
+  // CATEGORY
+  const myCategory =
+    (selectedCategory === "all" ||
+      productCategory === selectedCategory) &&
+    (categoryValue.length === 0 ||
+      categoryValue.some(
+        (category) =>
+          category.toLowerCase() === productCategory
+      ));
+
+  // PRICE
+  const myPrice = Number(product.price || 0) <= priceValue;
+
+  // RATING
+  const myRating =
+    ratingValue === 0 ||
+    Number(product.rating || 0) >= ratingValue;
+
+  // SEARCH
+  const searchText = (search || "").toLowerCase().trim();
+
+  const mySearch =
+    searchText === "" ||
+    (product.title || "").toLowerCase().includes(searchText) ||
+    productCategory.includes(searchText) ||
+    (product.description || "").toLowerCase().includes(searchText);
+
+  return myCategory && myPrice && myRating && mySearch;
+});
+
+  
  
-const myData = Data.filter((product) =>{
+// const myData = Data.filter((product) =>{
 
-   const myCategory=  (categories === "All" || product.category === categories) &&
-                      (categoryValue.length === 0 || categoryValue.includes(product.category))
-   const myPrice = product.price <= priceValue
-   const myRating =  ratingValue === 0 || product.rating >= ratingValue;
-   const mySearch =
-                  product.name.toLowerCase().includes(search.toLowerCase()) ||
-                  product.category.toLowerCase().includes(search.toLowerCase()) ||
-                  product.color.toLowerCase().includes(search.toLowerCase());
+  //  const myCategory=  (categories === "All" || product.category === categories) 
+                      // (categoryValue.length === 0 || categoryValue.includes(product.category))
+  //  const myPrice = product.price <= priceValue
+  //  const myRating =  ratingValue === 0 || product.rating >= ratingValue;
+  //  const mySearch =
+  //                 product.name.toLowerCase().includes(search.toLowerCase()) ||
+  //                 product.category.toLowerCase().includes(search.toLowerCase()) ||
+  //                 product.color.toLowerCase().includes(search.toLowerCase());
 
 
-   return myCategory && myPrice && myRating && mySearch
-    }  );
+  //  return myCategory  
+  //   }  );
    
     const scrollToTop = () => {
   window.scrollTo({

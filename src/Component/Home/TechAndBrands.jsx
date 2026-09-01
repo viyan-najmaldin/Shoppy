@@ -45,19 +45,16 @@ const UpgradeTechSlider = () => {
     },
   ];
 
-  // Next slide
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
-  // Previous slide
   const previousSlide = () => {
     setCurrentSlide(
       (prev) => (prev - 1 + slides.length) % slides.length
     );
   };
 
-  // Automatic slideshow
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();

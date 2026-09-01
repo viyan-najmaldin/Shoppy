@@ -128,8 +128,8 @@ const Carts = ({data,setData, orders, setOrders}) => {
         </Link>
         <div className="flex items-center gap-2 p-4">
           <div className="flex-1">
-            <div className="font-bold text-lg text-dark">${data.price}</div>
-            {data.oldPrice? <div className="text-xs text-slate-400 line-through">${data.oldPrice}</div>: <div className='p-2'></div>}
+            <div className="font-bold text-lg text-dark">IQD{data.price}</div>
+            {data.oldPrice? <div className="text-xs text-slate-400 line-through">IQD{data.oldPrice}</div>: <div className='p-2'></div>}
           </div>
           <button className="p-2.5 rounded-xl text-slate-400"
           onClick={()=>{ 

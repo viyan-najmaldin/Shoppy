@@ -9,7 +9,7 @@ const Filter = ({Data, priceValue , setPriceValue, categoryValue, setCategoryVal
     const { categories  } = useParams();
    
     const handleReset = () => {
-        setPriceValue(500); 
+        setPriceValue(60000); 
         setCategoryValue([]);
         setRatingValue(0);
     };
@@ -51,12 +51,12 @@ const Filter = ({Data, priceValue , setPriceValue, categoryValue, setCategoryVal
 
             <div className='pb-5 border-b border-slate-200'>
                 <h1 className='font-semibold'>Price Range</h1>
-                <input className='w-full' type="range" name="price" id="price" list='prices' value={priceValue} onChange={(e)=>setPriceValue(e.target.value)} />
+                <input className='w-full' type="range" min="0" max="60000" step="1000" name="price" id="price" list='prices' value={priceValue} onChange={(e)=>setPriceValue(e.target.value)} />
 
                 <div className="flex items-center justify-between text-sm text-slate-600 ">
-                      <span>$0</span>
-                      <span id="priceValue" className="font-medium text-dark">{priceValue}$</span>
-                      <span>$500</span> 
+                      <span>0IQD</span>
+                      <span id="priceValue" className="font-medium text-dark">{priceValue}IDQ</span>
+                      <span>60000</span> 
                 </div> 
             </div>
 
