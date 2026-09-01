@@ -80,7 +80,7 @@ const SingleProduct = ({Data, setData, orders, setOrders}) => {
                                 <span className='text-slate-500'>{data.rating} (108 reviews)</span>
                 </div>
                     <div className='flex gap-3 my-4 items-center'>
-                        <h1 className='sm:text-3xl text-xl font-bold'>${data.price}</h1>  
+                        <h1 className='sm:text-3xl text-xl font-bold'>{data.price} IQD</h1>  
                        {data.oldPrice && <h1 className='sm:text-xl text-slate-400 line-through font-bold'>${data.oldPrice}</h1> }
                       {data.off ? <span className="px-2 h-fit bg-red-500/20 text-red-500 rounded-lg">{data.off}% OFF</span> : '' }
                      {/* {console.log(data.off)} */}

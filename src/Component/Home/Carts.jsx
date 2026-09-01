@@ -105,10 +105,10 @@ const Carts = ({data,setData, orders, setOrders}) => {
                  {/* {data.quantity<15 && <span className="absolute bottom-3 left-3 px-2.5 py-1 bg-amber-500 text-white text-xs font-bold rounded-lg">Only {data.quantity} left</span> } */}
           </div>
 
-      <div className="p-4">
+      <div className="p-4 pb-2">
             <div className="text-xs text-slate-500 mb-1 capitalize">{data.category}</div>
             <h3 className="font-semibold text-sm mb-2 line-clamp-2 cursor-pointer hover:text-cyan-700 transition" >{data.name}</h3>
-            <div className="flex items-center gap-1 mb-3">
+            <div className="flex items-center gap-1 ">
             <div className="flex items-center gap-1 text-yellow-400">
 
             
@@ -126,9 +126,9 @@ const Carts = ({data,setData, orders, setOrders}) => {
         </div>
         </div>
         </Link>
-        <div className="flex items-center gap-2 p-4">
-          <div className="flex-1">
-            <div className="font-bold text-lg text-dark">IQD{data.price}</div>
+        <div className="flex w-fit sm:w-full items-center gap-1 p-4 pt-2">
+          <div className="flex-1 ">
+            <div className="flex gap-1 items-center"> <span className="font-bold sm:text-lg text-dark">{data.price}</span> <span className="text-slate-500 sm:text-sm text-xs ">IQD</span></div>
             {data.oldPrice? <div className="text-xs text-slate-400 line-through">IQD{data.oldPrice}</div>: <div className='p-2'></div>}
           </div>
           <button className="p-2.5 rounded-xl text-slate-400"
