@@ -28,25 +28,30 @@ function App() {
  
     const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [Data, setData]=useState([])
+   const [isLoading, setIsLoading] = useState(true);
    const [orders, setOrders]= useState([])
    const [search, setSearch] = useState("");
 
 
     useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
 
-        console.log(data);
+      const data = await getProducts();
 
-        setData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+      console.log(data);
 
-    fetchProducts();
-  }, []);
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, []);
    
   console.log(Data)
 
@@ -66,8 +71,8 @@ function App() {
             </div> }
             <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
             <Routes>
-                <Route path="/" element={<Home Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
-                <Route path="/products/:categories" element={<Products search={search} Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
+                <Route path="/" element={<Home Data={Data} setData={setData} orders={orders} setOrders={setOrders}   isLoading={isLoading} />} />
+                <Route path="/products/:categories" element={<Products search={search} Data={Data} setData={setData} orders={orders} setOrders={setOrders}  isLoading={isLoading} />} />
                 <Route path="/products/:categories/:id" element={<SingleProduct Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/favorites" element={<FavProducts Data={Data} setData={setData} orders={orders} setOrders={setOrders} />} />
                 <Route path="/contact" element={<Contact />} />     
