@@ -1,12 +1,15 @@
-// src/api/productAdapter.js
+
+// ========================================
+// LAHTHA IMAGE BASE URL
+// ========================================
 
 const LAHTHA_IMAGE_BASE_URL =
   "https://apbackendi.lahtha.store";
 
 
-// ------------------------------------
-// LAHTHA
-// ------------------------------------
+// ========================================
+// LAHTHA PRODUCT ADAPTER
+// ========================================
 
 export const adaptLahthaProduct = (product) => {
   const title =
@@ -19,7 +22,6 @@ export const adaptLahthaProduct = (product) => {
         .map((image) => {
           if (!image) return "";
 
-          // Already a complete URL
           if (
             image.startsWith("http://") ||
             image.startsWith("https://")
@@ -27,7 +29,6 @@ export const adaptLahthaProduct = (product) => {
             return image;
           }
 
-          // Lahtha image path
           if (image.startsWith("/")) {
             return `${LAHTHA_IMAGE_BASE_URL}${image}`;
           }
@@ -48,8 +49,7 @@ export const adaptLahthaProduct = (product) => {
 
     title,
 
-    price:
-      Number(product.price) || 0,
+    price: Number(product.price) || 0,
 
     oldPrice:
       product.old_price !== null &&
@@ -57,6 +57,7 @@ export const adaptLahthaProduct = (product) => {
         ? Number(product.old_price)
         : null,
 
+    // Lahtha products
     category: "Electronics",
 
     image: images[0] || "",
@@ -66,15 +67,13 @@ export const adaptLahthaProduct = (product) => {
     description:
       product.description || "",
 
-    tags:
-      Array.isArray(product.tags)
-        ? product.tags
-        : [],
+    tags: Array.isArray(product.tags)
+      ? product.tags
+      : [],
 
-    variants:
-      Array.isArray(product.variants)
-        ? product.variants
-        : [],
+    variants: Array.isArray(product.variants)
+      ? product.variants
+      : [],
 
     createdAt:
       product.created_at || "",
@@ -91,315 +90,110 @@ export const adaptLahthaProduct = (product) => {
 };
 
 
-// ------------------------------------
-// MAUJOD
-// ------------------------------------
+// ========================================
+// MAUJOD CATEGORY MAPPING
+// ========================================
+
+const getMaujodCategory = (categoryId) => {
+  const categoryMap = {
+    // الكترونيات
+    1: "Electronics",
+
+    // العاب
+    19: "Electronics",
+
+    // ادوات السيارات
+    20: "Electronics",
+
+    // اجهزة العناية
+    12: "Home & Living",
+
+    // منتجات العناية
+    18: "Home & Living",
+
+    // اجهزة المنزل
+    5: "Home & Living",
+
+    // اجهزة المطبخ
+    6: "Home & Living",
+
+    // عدد وادوات
+    21: "Home & Living",
+
+    // اثاث
+    23: "Home & Living",
+
+    // انارة واضاءة
+    24: "Home & Living",
+
+    // ادوات منزلية
+    25: "Home & Living",
+
+    // ادوات مطبخ
+    26: "Home & Living",
+
+    // ادوات رياضية
+    22: "Sports",
+  };
+
+  return categoryMap[Number(categoryId)] || "Home & Living";
+};
+
+
+// ========================================
+// MAUJOD PRODUCT ADAPTER
+// ========================================
 
 export const adaptMaujodProduct = (product) => {
+  const images =
+    Array.isArray(product.img)
+      ? product.img.filter(Boolean)
+      : [];
+
   const title =
-    product.title ||
-    product.name ||
-    product.product_name ||
+    product.name || "";
+
+  const category =
+    getMaujodCategory(product.category);
+
+  const description =
+    product.body ||
+    product.post_body ||
     "";
 
-  let images = [];
-
-  if (Array.isArray(product.images)) {
-    images = product.images
-      .map((image) => {
-        if (!image) return "";
-
-        if (typeof image === "object") {
-          return (
-            image.url ||
-            image.image ||
-            ""
-          );
-        }
-
-        return image;
-      })
-      .filter(Boolean);
-  }
-
-  if (
-    images.length === 0 &&
-    product.image
-  ) {
-    images = [product.image];
-  }
-
   return {
-    id: `maujod-${product.id}`,
+    id: `maujod-${product._id}`,
 
     supplier: "maujod",
 
-    supplierProductId: product.id,
+    supplierProductId: product._id,
 
     name: title,
 
     title,
 
-    price: Number(
-      product.price ??
-      product.sale_price ??
-      product.selling_price ??
-      0
-    ),
+    price: Number(product.price) || 0,
 
-    oldPrice:
-      product.old_price !== null &&
-      product.old_price !== undefined
-        ? Number(product.old_price)
-        : null,
+    oldPrice: null,
 
-    category:
-      product.category?.name ||
-      product.category_name ||
-      product.category ||
-      "All",
+    category,
 
-    image:
-      images[0] || "",
+    image: images[0] || "",
 
     images,
 
-    description:
-      product.description || "",
+    description,
 
-    tags:
-      Array.isArray(product.tags)
-        ? product.tags
-        : [],
+    tags: [],
 
-    variants:
-      Array.isArray(product.variants)
-        ? product.variants
-        : [],
+    variants: [],
 
-    createdAt:
-      product.created_at || "",
+    createdAt: "",
 
-    updatedAt:
-      product.updated_at || "",
+    updatedAt: "",
 
-    color:
-      product.color || "",
+    color: "",
 
-    rating:
-      Number(product.rating) || 0,
+    rating: 0,
   };
 };
-
-
-
-
-// const API_BASE_URL = "";
-
-// const getCategory = (title = "") => {
-  
-//   const text = title.toLowerCase();
-
-//   const fashionKeywords = [
-//     "تيشيرت",
-//     "تي شيرت",
-//     "قميص",
-//     "بنطلون",
-//     "جينز",
-//     "جاكيت",
-//     "فستان",
-//     "ملابس",
-//     "هودي",
-//     "بلوزة",
-//     "تنورة",
-//     "حذاء",
-//     "t-shirt",
-//     "tshirt",
-//     "shirt",
-//     "pants",
-//     "jeans",
-//     "jacket",
-//     "dress",
-//     "clothes",
-//     "clothing",
-//     "hoodie",
-//     "blouse",
-//     "skirt",
-//     "shoes",
-//   ];
-
-//   const sportsKeywords = [
-//     "كرة",
-//     "رياضة",
-//     "رياضي",
-//     "جيم",
-//     "تمارين",
-//     "يوغا",
-//     "دمبل",
-//     "كرة قدم",
-//     "كرة سلة",
-//     "كرة طائرة",
-//     "معدات رياضية",
-//     "sport",
-//     "sports",
-//     "football",
-//     "soccer",
-//     "basketball",
-//     "volleyball",
-//     "gym",
-//     "yoga",
-//     "dumbbell",
-//     "fitness",
-//     "exercise",
-//     "workout",
-//   ];
-
-//   const electronicsKeywords = [
-//     "لعبة",
-//     "ألعاب",
-//     "العاب",
-//     "بلايستيشن",
-//     "بلاي ستيشن",
-//     "يد تحكم",
-//     "سماعة",
-//     "سماعات",
-//     "سماعة اذن",
-//     "سماعة رأس",
-//     "هاتف",
-//     "جوال",
-//     "موبايل",
-//     "شاحن",
-//     "باور بانك",
-//     "ماوس",
-//     "كيبورد",
-//     "مايكروفون",
-//     "كاميرا",
-//     "بلوتوث",
-//     "سبيكر",
-//     "مكبر صوت",
-//     "ساعة",
-//     "ساعة ذكية",
-//     "مبرد الهاتف",
-//     "محول الشحن",
-//     "داش كام",
-//     "كابل",
-//     "كيبل",
-//     "شاشة",
-//     "راوتر",
-//     "game",
-//     "games",
-//     "gaming",
-//     "playstation",
-//     "play station",
-//     "ps4",
-//     "ps5",
-//     "xbox",
-//     "controller",
-//     "headphone",
-//     "headphones",
-//     "earphone",
-//     "earphones",
-//     "earbuds",
-//     "smartphone",
-//     "phone",
-//     "mobile",
-//     "charger",
-//     "power bank",
-//     "mouse",
-//     "keyboard",
-//     "microphone",
-//     "camera",
-//     "bluetooth",
-//     "speaker",
-//     "smart watch",
-//     "smartwatch",
-//     "watch",
-//     "phone cooler",
-//     "adapter",
-//     "dash cam",
-//     "cable",
-//     "screen",
-//     "monitor",
-//     "router",
-//   ];
-
-//   if (
-//     electronicsKeywords.some((keyword) =>
-//       text.includes(keyword)
-//     )
-//   ) {
-//     return "Electronics";
-//   }
-
-//   if (
-//     sportsKeywords.some((keyword) =>
-//       text.includes(keyword)
-//     )
-//   ) {
-//     return "Sports";
-//   }
-
-//   if (
-//     fashionKeywords.some((keyword) =>
-//       text.includes(keyword)
-//     )
-//   ) {
-//     return "Fashion";
-//   }
-
-//   return "All";
-// };
-
-
-
-// export const productAdapter = (data) => {
-
-//   const products = Array.isArray(data)
-//     ? data
-//     : data?.products || [];
-
-//   // console.log("PRODUCTS BEFORE ADAPTER:", products);
-
-//   if (!Array.isArray(products)) {
-//     console.error("Products is not an array:", products);
-//     return [];
-//   }
-
-//   const adaptedProducts = products.map((product) => {
-
-//     const title = product.title || "";
-
-//     return {
-//       id: product.id,
-//       title: title,
-//       price: Number(product.price) || 0,
-//       oldPrice: product.old_price
-//         ? Number(product.old_price)
-//         : null,
-//       category: getCategory(title),
-//       image: product.images?.[0]
-//         ? `https://apbackendi.lahtha.store${product.images[0]}`
-//         : "",
-//       images: Array.isArray(product.images)
-//         ? product.images.map(
-//             (image) => `https://apbackendi.lahtha.store${image}`
-//           )
-//         : [],
-//       description: product.description || "",
-//       tags: Array.isArray(product.tags)
-//         ? product.tags
-//         : [],
-//       variants: Array.isArray(product.variants)
-//         ? product.variants
-//         : [],
-//       createdAt: product.created_at || "",
-//       updatedAt: product.updated_at || "",
-//       name: title,
-//       color: product.color || "",
-//       rating: Number(product.rating) || 0,
-//     };
-//   });
-
-//   // console.log("ADAPTED PRODUCTS:", adaptedProducts);
-//   return adaptedProducts;
-// };

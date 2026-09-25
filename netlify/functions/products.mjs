@@ -1,35 +1,80 @@
-import { adaptLahthaProduct } from "../../src/api/productAdapter.js";
+import {
+  adaptLahthaProduct,
+  adaptMaujodProduct,
+} from "../../src/api/productAdapter.js";
+
+
+// ========================================
+// API URLS
+// ========================================
 
 const LAHTHA_API_URL =
   "https://apbackendi.lahtha.store/api/method/lahtha.api.store_public.get_storefront";
 
+const MAUJOD_API_URL =
+  "https://rolemall.com/api/products";
+
+
+// ========================================
+// MAUJOD TOKEN
+// ========================================
+
+const MAUJOD_TOKEN =
+  "j6c2a0g";
+
+
+// ========================================
+// MAIN FUNCTION
+// ========================================
+
 export default async () => {
   try {
-    const allProducts = [];
 
-    let page = 1;
-    const pageSize = 24;
-    let hasMore = true;
+    // ========================================
+    // LAHTHA
+    // ========================================
 
-    while (hasMore) {
+    console.log("=================================");
+    console.log("FETCHING LAHTHA PRODUCTS");
+    console.log("=================================");
+
+    const lahthaProducts = [];
+
+    let lahthaPage = 1;
+
+    const lahthaPageSize = 24;
+
+    let lahthaHasMore = true;
+
+
+    while (lahthaHasMore) {
+
       const params = new URLSearchParams({
         slug: "shoppy",
-        page: String(page),
-        page_size: String(pageSize),
+        page: String(lahthaPage),
+        page_size: String(lahthaPageSize),
       });
 
-      const url = `${LAHTHA_API_URL}?${params.toString()}`;
+      const url =
+        `${LAHTHA_API_URL}?${params.toString()}`;
 
-      console.log(`Fetching Lahtha page ${page}...`);
+      console.log(
+        `Fetching Lahtha page ${lahthaPage}...`
+      );
+
 
       const response = await fetch(url, {
         method: "GET",
+
         headers: {
           Accept: "*/*",
         },
       });
 
-      const text = await response.text();
+
+      const text =
+        await response.text();
+
 
       if (!response.ok) {
         throw new Error(
@@ -37,48 +82,245 @@ export default async () => {
         );
       }
 
-      const data = JSON.parse(text);
 
-      const products = Array.isArray(data?.message?.products)
-        ? data.message.products
-        : [];
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          `Lahtha returned invalid JSON: ${text.substring(
+            0,
+            500
+          )}`
+        );
+      }
+
+
+      const products =
+        Array.isArray(
+          data?.message?.products
+        )
+          ? data.message.products
+          : [];
+
 
       console.log(
-        `Page ${page}: ${products.length} products`
+        `Lahtha page ${lahthaPage}: ${products.length} products`
       );
 
-      // Add this page's products to the complete list
-      allProducts.push(...products);
 
-      // Lahtha tells us if another page exists
-      hasMore = data?.message?.has_more === true;
+      lahthaProducts.push(
+        ...products
+      );
 
-      page++;
+
+      lahthaHasMore =
+        data?.message?.has_more === true;
+
+
+      lahthaPage++;
+
 
       // Safety limit
-      if (page > 100) {
-        console.warn("Stopped after 100 pages.");
+      if (lahthaPage > 100) {
+        console.log(
+          "Lahtha safety limit reached."
+        );
+
         break;
       }
     }
 
+
     console.log(
-      `Total Lahtha products: ${allProducts.length}`
+      `Lahtha total products: ${lahthaProducts.length}`
     );
 
-    // Convert Lahtha products to Shoppy's format
-    const adaptedProducts =
-      allProducts.map(adaptLahthaProduct);
 
-    return Response.json(adaptedProducts);
+    // ========================================
+    // MAUJOD
+    // ========================================
+
+    console.log("=================================");
+    console.log("FETCHING MAUJOD PRODUCTS");
+    console.log("=================================");
+
+
+    const maujodProducts = [];
+
+    let maujodPage = 1;
+
+    const maujodPageSize = 100;
+
+    let maujodTotalPages = 1;
+
+
+    while (
+      maujodPage <= maujodTotalPages
+    ) {
+
+      const params = new URLSearchParams({
+        page: String(maujodPage),
+
+        limit: String(maujodPageSize),
+
+        token: MAUJOD_TOKEN,
+      });
+
+
+      const url =
+        `${MAUJOD_API_URL}?${params.toString()}`;
+
+
+      console.log(
+        `Fetching Maujod page ${maujodPage}...`
+      );
+
+
+      const response = await fetch(url, {
+        method: "GET",
+
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+
+      const text =
+        await response.text();
+
+
+      if (!response.ok) {
+        throw new Error(
+          `Maujod returned HTTP ${response.status}: ${text}`
+        );
+      }
+
+
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          `Maujod returned invalid JSON: ${text.substring(
+            0,
+            500
+          )}`
+        );
+      }
+
+
+      const products =
+        Array.isArray(
+          data?.data?.products
+        )
+          ? data.data.products
+          : [];
+
+
+      console.log(
+        `Maujod page ${maujodPage}: ${products.length} products`
+      );
+
+
+      maujodProducts.push(
+        ...products
+      );
+
+
+      maujodTotalPages =
+        Number(data?.data?.pages) || 1;
+
+
+      maujodPage++;
+    }
+
+
+    console.log(
+      `Maujod total products: ${maujodProducts.length}`
+    );
+
+
+    // ========================================
+    // ADAPT PRODUCTS
+    // ========================================
+
+    console.log("=================================");
+    console.log("ADAPTING PRODUCTS");
+    console.log("=================================");
+
+
+    const adaptedLahthaProducts =
+      lahthaProducts.map(
+        adaptLahthaProduct
+      );
+
+
+    const adaptedMaujodProducts =
+      maujodProducts.map(
+        adaptMaujodProduct
+      );
+
+
+    // ========================================
+    // COMBINE
+    // ========================================
+
+    const allProducts = [
+      ...adaptedLahthaProducts,
+      ...adaptedMaujodProducts,
+    ];
+
+
+    console.log("=================================");
+    console.log(
+      "Lahtha total:",
+      adaptedLahthaProducts.length
+    );
+
+    console.log(
+      "Maujod total:",
+      adaptedMaujodProducts.length
+    );
+
+    console.log(
+      "TOTAL PRODUCTS:",
+      allProducts.length
+    );
+
+    console.log("=================================");
+
+
+    // ========================================
+    // RETURN JSON
+    // ========================================
+
+    return Response.json(
+      allProducts
+    );
 
   } catch (error) {
-    console.error("LAHTHA ERROR:", error);
+
+    console.error(
+      "========== PRODUCTS ERROR =========="
+    );
+
+    console.error(error);
+
+    console.error(
+      "===================================="
+    );
+
 
     return Response.json(
       {
-        error: "Failed to fetch Lahtha products",
-        message: error.message,
+        error: "Failed to fetch products",
+
+        message:
+          error?.message ||
+          "Unknown error",
       },
       {
         status: 500,
@@ -86,6 +328,11 @@ export default async () => {
     );
   }
 };
+
+
+// ========================================
+// NETLIFY FUNCTION ROUTE
+// ========================================
 
 export const config = {
   path: "/api/products",
