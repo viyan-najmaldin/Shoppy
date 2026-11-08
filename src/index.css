@@ -1,28 +1,67 @@
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+ID:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Playwrite+ID:wght@100..400&display=swap");
 @import "tailwindcss";
 
 @theme {
   --font-playwrite: "Playwrite ID", cursive;
+  /* Cairo covers both the Latin UI and the Arabic product content */
+  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
+
+  /* Tigris: the brand navy and its lighter steps */
+  --color-tigris-50: #eef5f9;
+  --color-tigris-100: #d6e7f0;
+  --color-tigris-200: #adcfe0;
+  --color-tigris-300: #7ab1cc;
+  --color-tigris-400: #4a8fb2;
+  --color-tigris-500: #2a7298;
+  --color-tigris-600: #155e85;
+  --color-tigris-700: #0b4566;
+  --color-tigris-800: #003049;
+  --color-tigris-900: #002236;
+
+  --color-mist: #eef3f6;
+  --color-ink: #16232c;
+  --color-line: #d8e0e6;
+  /* Brand red (logo, main buttons, sales) and the sky blue of the hero photos */
+  --color-cherry: #e03a45;
+  --color-pomegranate: #c8323f;
+  --color-lagoon: #4fb3d9;
+  --color-lagoon-soft: #e3f3fa;
 }
 
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-@keyframes brandLeft {
+  body {
+    @apply bg-mist text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lagoon);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hero text swaps in with each slide */
+@keyframes heroIn {
   from {
-    transform: translateX(0);
+    opacity: 0;
+    transform: translateY(8px);
   }
 
   to {
-    transform: translateX(-50%);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-
-@keyframes brandRight {
-  from {
-    transform: translateX(-50%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-

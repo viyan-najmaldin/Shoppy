@@ -1,118 +1,101 @@
-import React from 'react'
-import { FaStar, FaRegStar } from "react-icons/fa";
-import {  FaTruck, FaRotateLeft,FaLock, FaAngleRight } from "react-icons/fa6";
-import MoreExplore from './MoreExplore';
+import { FaTruck, FaRotateLeft, FaLock, FaAngleRight } from "react-icons/fa6";
+import ProductGallery from './ProductGallery';
 import SelectProduct from './SelectProduct';
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
-// import shopping from "../../assets/Shopping bag-amico.png";
+import { useParams, Link } from "react-router-dom";
+import { getProduct, useApi } from '../../api/productApi';
+import { formatPrice, discountPercent } from '../../utils/format';
 
 
+const SingleProduct = ({ orders, setOrders }) => {
+  const { id } = useParams();
+  const { data, isLoading } = useApi(() => getProduct(id), [id]);
 
-const SingleProduct = ({Data, setData, orders, setOrders}) => {
-     const { id  } = useParams();
-     const navigate = useNavigate();
-    const [showButton, setShowButton] = useState(false);
-    const data = Data.find(
-    (item) => String(item.id) === String(id)
-  );
+  if (isLoading) {
+    return (
+      <div className='p-4 sm:p-5'>
+        <div className='bg-white rounded-2xl border border-slate-200 p-4 sm:p-8 grid md:grid-cols-2 gap-6 md:gap-10 animate-pulse'>
+          <div className='aspect-square bg-slate-200 rounded-2xl' />
+          <div className='space-y-4'>
+            <div className='h-7 bg-slate-200 rounded w-3/4' />
+            <div className='h-7 bg-slate-200 rounded w-1/3' />
+            <div className='h-24 bg-slate-200 rounded' />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  
-    useEffect(() => {
-      const handleScroll = () => {
-        setShowButton(window.scrollY > 300);
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-  
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
+  if (!data) {
+    return (
+      <div className='text-center py-20 px-5'>
+        <h1 className='text-2xl font-bold mb-2'>Product not found</h1>
+        <p className='text-slate-500 mb-6'>This product may no longer be available.</p>
+        <Link to='/products/All' className='bg-tigris-800 text-white rounded-lg px-6 py-3'>Browse products</Link>
+      </div>
+    );
+  }
 
+  const off = discountPercent(data);
 
   return (
-    
-    <div className='bg-blue-50 pb-10 p-5'>
-       {showButton && <div className='bg-slate-300 -mx-5 p-1  px-5 sm:pt-34 top-0 mb-10 fixed w-full'>  <button
-            onClick={() => navigate(-1)}
-            className="text-cyan-700 hover:text-cyan-900 "
-          >
-            ← Back to previous
-          </button>
-        </div> }
 
-      <div className='text-sm  font-semibold flex items-center gap-2'>
-        <Link to='/'> <span className='text-slate-500'>Home</span> </Link> 
-        <FaAngleRight  className='text-slate-500'/>
-         <Link to={`/products/${data.category}`} className='text-slate-500'><span> {data.category}</span></Link>
-          <FaAngleRight  className='text-slate-500'/>
-         <span> Product Detail</span>
-         
-         </div> 
-   
-   
-        <div className='bg-white sm:my-5 my-2  rounded-2xl border border-slate-200 sm:p-10 p-4 grid sm:grid-cols-2  gap-10  '>
-    
-            
-           <section id='productImage'>        
-                <img src={data.image} alt="img" loading="lazy" 
-                className="border border-slate-200 object-cover w-full h-110 mb-4 rounded-2xl"/>
-         
-               <MoreExplore Data={Data} />
+    <div className='p-4 sm:p-5 pb-12'>
 
-               {/* {console.log(id)} */}
-           </section>
-            
-        <section id='PruductDetails'>
-            <div>
-                 <h1 className='sm:text-3xl text-xl font-bold'>{data.name}</h1>  
-                <div className='flex my-2 gap-2'>
-                    <div className="flex text-2xl text-amber-400">
-                                         {[...Array(5)].map((_, index) =>
-                                                          index < data.rating ? (
-                                                            <FaStar key={index} />
-                                                          ) : (
-                                                            <FaRegStar key={index} />
-                                                          )
-                                                        )}
-                                        </div>
-                                <span className='text-slate-500'>{data.rating} (108 reviews)</span>
-                </div>
-                    <div className='flex gap-3 my-4 items-center'>
-                        <h1 className='sm:text-3xl text-xl font-bold'>{data.price} IQD</h1>  
-                       {data.oldPrice && <h1 className='sm:text-xl text-slate-400 line-through font-bold'>${data.oldPrice}</h1> }
-                      {data.off ? <span className="px-2 h-fit bg-red-500/20 text-red-500 rounded-lg">{data.off}% OFF</span> : '' }
-                     {/* {console.log(data.off)} */}
-                    </div>
-            </div>
+      <div className='text-sm font-semibold flex items-center gap-2 text-slate-500 min-w-0'>
+        <Link to='/' className='hover:text-tigris-700 shrink-0'>Home</Link>
+        <FaAngleRight className='shrink-0' />
+        <Link to={`/products/${data.categoryId || 'All'}`} className='hover:text-tigris-700 truncate' dir="auto">
+          {data.category || 'All Products'}
+        </Link>
+      </div>
 
-            <SelectProduct 
-                          Data={Data}
-                          data={data} 
-                          setData={setData}
-                          orders={orders} 
-                          setOrders={setOrders}/>    
-               
-            <div className='flex'>
-               <ul className='mt-5'>
-              <li><FaTruck className="text-cyan-800 inline mr-2" />
-               Free shipping on orders over $50</li>
-              <li><FaRotateLeft className="text-cyan-800 inline mr-2" />
-                30-day easy returns</li>
-              <li> <FaLock className="text-cyan-800 inline mr-2" /> 2-year warranty included</li>
-            </ul>
-            
-            {/* <img src={shopping} alt="img shopping" className='w-50'/> */}
+      <div className='bg-white mt-3 sm:mt-5 rounded-2xl border border-slate-200 p-4 sm:p-8 grid md:grid-cols-2 gap-6 md:gap-10'>
 
-            </div>
-           
+        <section className='min-w-0'>
+          <ProductGallery key={data.id} images={data.images.length ? data.images : [data.image].filter(Boolean)} name={data.name} />
         </section>
 
-        </div>
+        <section className='min-w-0'>
+          <h1 className='text-xl sm:text-3xl font-bold leading-snug' dir="auto">{data.name}</h1>
 
-         
-         
+          <div className='flex flex-wrap gap-3 my-4 items-center'>
+            <span className='text-2xl sm:text-3xl font-bold text-tigris-900'>{formatPrice(data.price)}</span>
+            {off > 0 && <>
+              <span className='sm:text-xl text-slate-400 line-through'>{formatPrice(data.oldPrice)}</span>
+              <span className="px-2 py-0.5 bg-red-500/15 text-red-600 rounded-lg text-sm font-semibold">-{off}%</span>
+            </>}
+          </div>
+
+          {data.tags?.length > 0 &&
+            <div className='flex flex-wrap gap-2 mb-2'>
+              {data.tags.map((tag) => (
+                <span key={tag.title} className='px-2 py-0.5 rounded-md text-xs font-semibold'
+                  style={{ backgroundColor: tag.color || '#e2e8f0', color: tag.color_code_text || '#0f172a' }}>
+                  {tag.title}
+                </span>
+              ))}
+            </div>}
+
+          <SelectProduct
+            data={data}
+            orders={orders}
+            setOrders={setOrders} />
+
+          <ul className='mt-5 space-y-1 text-sm text-slate-700'>
+            <li><FaTruck className="text-tigris-800 inline mr-2" />Delivery across Iraq</li>
+            <li><FaRotateLeft className="text-tigris-800 inline mr-2" />30-day easy returns</li>
+            <li><FaLock className="text-tigris-800 inline mr-2" />2-year warranty included</li>
+          </ul>
+        </section>
+
+      </div>
+
+      {data.description &&
+        <section className='bg-white mt-4 sm:mt-5 rounded-2xl border border-slate-200 p-4 sm:p-8'>
+          <h2 className='text-lg font-bold mb-3'>Description</h2>
+          <p className='whitespace-pre-line leading-relaxed text-slate-700' dir="auto">{data.description}</p>
+        </section>}
+
     </div>
   )
 }

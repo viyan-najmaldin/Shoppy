@@ -35,15 +35,15 @@ export default function Signup() {
       <form className='bg-white mb-4 p-10 rounded-2xl shadow-sm flex justify-center flex-col gap-4 border border-slate-300 sm:w-full sm:max-w-md sm:mx-auto mx-5' onSubmit={handleSubmit}>
                <div className='flex flex-col w-full gap-4'>
        <label >Username <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name"
-          className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+          className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
           required /></label>
         
         <label > Your Email<input
-         className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+         className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
          type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
       </label> 
       <label> Password <input
-        className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+        className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
         type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
        </label> 
        <label>
@@ -52,7 +52,7 @@ export default function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Re-enter Password"
-              className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+              className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
               required
             />
           </label>
@@ -61,7 +61,7 @@ export default function Signup() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <button 
-        className='bg-red-500 text-white  rounded-xl p-3 px-10 hover:bg-gradient-to-r from-cyan-600 to-red-400 hover:font-semibold transition'
+        className='bg-red-500 text-white  rounded-xl p-3 px-10 hover:font-semibold transition'
        type="submit">Sign Up</button>
       </form>
     </div>

@@ -1,339 +1,106 @@
 import {
-  adaptLahthaProduct,
-  adaptMaujodProduct,
-} from "../../src/api/productAdapter.js";
+  getCatalog,
+  normalizeText,
+  toListItem,
+  cacheHeaders,
+} from "../lib/catalog.mjs";
 
+const DEFAULT_LIMIT = 24;
+const MAX_LIMIT = 60;
 
-// ========================================
-// API URLS
-// ========================================
-
-const LAHTHA_API_URL =
-  "https://apbackendi.lahtha.store/api/method/lahtha.api.store_public.get_storefront";
-
-const MAUJOD_API_URL =
-  "https://rolemall.com/api/products";
-
+const errorResponse = (status, message) =>
+  Response.json({ error: message }, { status });
 
 // ========================================
-// MAUJOD TOKEN
+// GET /api/products/:id
 // ========================================
 
-const MAUJOD_TOKEN =
-  "j6c2a0g";
+const getSingleProduct = (catalog, id) => {
+  const product = catalog.byId.get(id);
 
+  if (!product) {
+    return errorResponse(404, "Product not found");
+  }
+
+  return Response.json(product, { headers: cacheHeaders });
+};
 
 // ========================================
-// MAIN FUNCTION
+// GET /api/products?page=&limit=&category=&q=&sort=&maxPrice=
 // ========================================
 
-export default async () => {
+const listProducts = (catalog, searchParams) => {
+  const page = Math.max(1, parseInt(searchParams.get("page"), 10) || 1);
+  const limit = Math.min(
+    MAX_LIMIT,
+    Math.max(1, parseInt(searchParams.get("limit"), 10) || DEFAULT_LIMIT)
+  );
+  const categoryId = searchParams.get("category") || "All";
+  const search = normalizeText(searchParams.get("q"));
+  const sort = searchParams.get("sort") || "featured";
+  const maxPrice = Number(searchParams.get("maxPrice")) || 0;
+
+  let products = catalog.products;
+
+  if (categoryId !== "All") {
+    products = products.filter((product) =>
+      product.categoryIds.includes(categoryId)
+    );
+  }
+
+  if (search) {
+    const words = search.split(/\s+/);
+    products = products.filter((product) => {
+      const text = normalizeText(`${product.name} ${product.category} ${product.description}`);
+      return words.every((word) => text.includes(word));
+    });
+  }
+
+  // The price slider's upper bound, before the price filter itself applies
+  const priceMax = products.reduce((max, product) => Math.max(max, product.price), 0);
+
+  if (maxPrice > 0) {
+    products = products.filter((product) => product.price <= maxPrice);
+  }
+
+  if (sort === "price-low") {
+    products = [...products].sort((a, b) => a.price - b.price);
+  } else if (sort === "price-high") {
+    products = [...products].sort((a, b) => b.price - a.price);
+  }
+
+  const total = products.length;
+  const pages = Math.max(1, Math.ceil(total / limit));
+  const start = (page - 1) * limit;
+
+  return Response.json(
+    {
+      products: products.slice(start, start + limit).map(toListItem),
+      total,
+      page,
+      pages,
+      limit,
+      priceMax,
+    },
+    { headers: cacheHeaders }
+  );
+};
+
+export default async (request, context) => {
   try {
+    const catalog = await getCatalog();
 
-    // ========================================
-    // LAHTHA
-    // ========================================
-
-    console.log("=================================");
-    console.log("FETCHING LAHTHA PRODUCTS");
-    console.log("=================================");
-
-    const lahthaProducts = [];
-
-    let lahthaPage = 1;
-
-    const lahthaPageSize = 24;
-
-    let lahthaHasMore = true;
-
-
-    while (lahthaHasMore) {
-
-      const params = new URLSearchParams({
-        slug: "shoppy",
-        page: String(lahthaPage),
-        page_size: String(lahthaPageSize),
-      });
-
-      const url =
-        `${LAHTHA_API_URL}?${params.toString()}`;
-
-      console.log(
-        `Fetching Lahtha page ${lahthaPage}...`
-      );
-
-
-      const response = await fetch(url, {
-        method: "GET",
-
-        headers: {
-          Accept: "*/*",
-        },
-      });
-
-
-      const text =
-        await response.text();
-
-
-      if (!response.ok) {
-        throw new Error(
-          `Lahtha returned HTTP ${response.status}: ${text}`
-        );
-      }
-
-
-      let data;
-
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error(
-          `Lahtha returned invalid JSON: ${text.substring(
-            0,
-            500
-          )}`
-        );
-      }
-
-
-      const products =
-        Array.isArray(
-          data?.message?.products
-        )
-          ? data.message.products
-          : [];
-
-
-      console.log(
-        `Lahtha page ${lahthaPage}: ${products.length} products`
-      );
-
-
-      lahthaProducts.push(
-        ...products
-      );
-
-
-      lahthaHasMore =
-        data?.message?.has_more === true;
-
-
-      lahthaPage++;
-
-
-      // Safety limit
-      if (lahthaPage > 100) {
-        console.log(
-          "Lahtha safety limit reached."
-        );
-
-        break;
-      }
+    if (context.params?.id) {
+      return getSingleProduct(catalog, decodeURIComponent(context.params.id));
     }
 
-
-    console.log(
-      `Lahtha total products: ${lahthaProducts.length}`
-    );
-
-
-    // ========================================
-    // MAUJOD
-    // ========================================
-
-    console.log("=================================");
-    console.log("FETCHING MAUJOD PRODUCTS");
-    console.log("=================================");
-
-
-    const maujodProducts = [];
-
-    let maujodPage = 1;
-
-    const maujodPageSize = 100;
-
-    let maujodTotalPages = 1;
-
-
-    while (
-      maujodPage <= maujodTotalPages
-    ) {
-
-      const params = new URLSearchParams({
-        page: String(maujodPage),
-
-        limit: String(maujodPageSize),
-
-        token: MAUJOD_TOKEN,
-      });
-
-
-      const url =
-        `${MAUJOD_API_URL}?${params.toString()}`;
-
-
-      console.log(
-        `Fetching Maujod page ${maujodPage}...`
-      );
-
-
-      const response = await fetch(url, {
-        method: "GET",
-
-        headers: {
-          Accept: "application/json",
-        },
-      });
-
-
-      const text =
-        await response.text();
-
-
-      if (!response.ok) {
-        throw new Error(
-          `Maujod returned HTTP ${response.status}: ${text}`
-        );
-      }
-
-
-      let data;
-
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error(
-          `Maujod returned invalid JSON: ${text.substring(
-            0,
-            500
-          )}`
-        );
-      }
-
-
-      const products =
-        Array.isArray(
-          data?.data?.products
-        )
-          ? data.data.products
-          : [];
-
-
-      console.log(
-        `Maujod page ${maujodPage}: ${products.length} products`
-      );
-
-
-      maujodProducts.push(
-        ...products
-      );
-
-
-      maujodTotalPages =
-        Number(data?.data?.pages) || 1;
-
-
-      maujodPage++;
-    }
-
-
-    console.log(
-      `Maujod total products: ${maujodProducts.length}`
-    );
-
-
-    // ========================================
-    // ADAPT PRODUCTS
-    // ========================================
-
-    console.log("=================================");
-    console.log("ADAPTING PRODUCTS");
-    console.log("=================================");
-
-
-    const adaptedLahthaProducts =
-      lahthaProducts.map(
-        adaptLahthaProduct
-      );
-
-
-    const adaptedMaujodProducts =
-      maujodProducts.map(
-        adaptMaujodProduct
-      );
-
-
-    // ========================================
-    // COMBINE
-    // ========================================
-
-    const allProducts = [
-      ...adaptedLahthaProducts,
-      ...adaptedMaujodProducts,
-    ];
-
-
-    console.log("=================================");
-    console.log(
-      "Lahtha total:",
-      adaptedLahthaProducts.length
-    );
-
-    console.log(
-      "Maujod total:",
-      adaptedMaujodProducts.length
-    );
-
-    console.log(
-      "TOTAL PRODUCTS:",
-      allProducts.length
-    );
-
-    console.log("=================================");
-
-
-    // ========================================
-    // RETURN JSON
-    // ========================================
-
-    return Response.json(
-      allProducts
-    );
-
+    return listProducts(catalog, new URL(request.url).searchParams);
   } catch (error) {
-
-    console.error(
-      "========== PRODUCTS ERROR =========="
-    );
-
-    console.error(error);
-
-    console.error(
-      "===================================="
-    );
-
-
-    return Response.json(
-      {
-        error: "Failed to fetch products",
-
-        message:
-          error?.message ||
-          "Unknown error",
-      },
-      {
-        status: 500,
-      }
-    );
+    console.error("PRODUCTS ERROR:", error);
+    return errorResponse(500, error?.message || "Failed to fetch products");
   }
 };
 
-
-// ========================================
-// NETLIFY FUNCTION ROUTE
-// ========================================
-
 export const config = {
-  path: "/api/products",
+  path: ["/api/products", "/api/products/:id"],
 };

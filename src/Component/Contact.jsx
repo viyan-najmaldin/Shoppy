@@ -67,7 +67,7 @@ export default function Contact() {
             <div className="space-y-6">
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-cyan-700/10 rounded-full flex items-center justify-center text-cyan-700">
+                <div className="w-12 h-12 bg-tigris-700/10 rounded-full flex items-center justify-center text-tigris-700">
                   <FaEnvelope />
                 </div>
 
@@ -80,7 +80,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-cyan-700/10 rounded-full flex items-center justify-center text-cyan-700">
+                <div className="w-12 h-12 bg-tigris-700/10 rounded-full flex items-center justify-center text-tigris-700">
                   <FaPhoneAlt />
                 </div>
 
@@ -93,7 +93,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-cyan-700/10 rounded-full flex items-center justify-center text-cyan-700">
+                <div className="w-12 h-12 bg-tigris-700/10 rounded-full flex items-center justify-center text-tigris-700">
                   <FaMapMarkerAlt />
                 </div>
 
@@ -106,7 +106,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-cyan-700/10 rounded-full flex items-center justify-center text-cyan-700">
+                <div className="w-12 h-12 bg-tigris-700/10 rounded-full flex items-center justify-center text-tigris-700">
                   <FaClock />
                 </div>
 
@@ -128,14 +128,14 @@ export default function Contact() {
               <div className="flex gap-4">
                 <a
                   href="#"
-                  className="w-11 h-11 rounded-full bg-slate-100 text-cyan-800 hover:bg-cyan-700 hover:text-white transition flex items-center justify-center"
+                  className="w-11 h-11 rounded-full bg-slate-100 text-tigris-800 hover:bg-tigris-700 hover:text-white transition flex items-center justify-center"
                 >
                   <FaGithub />
                 </a>
 
                 <a
                   href="#"
-                  className="w-11 h-11 rounded-full text-cyan-800 bg-slate-100 hover:bg-cyan-700 hover:text-white transition flex items-center justify-center"
+                  className="w-11 h-11 rounded-full text-tigris-800 bg-slate-100 hover:bg-tigris-700 hover:text-white transition flex items-center justify-center"
                 >
                   <FaLinkedin />
                 </a>
@@ -165,7 +165,7 @@ export default function Contact() {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
                 />
               </div>
 
@@ -181,7 +181,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
                 />
               </div>
 </div>
@@ -197,7 +197,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
                 />
               </div>
                    
@@ -213,13 +213,13 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full border border-slate-300 rounded-lg px-4 py-2 resize-none outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-2 resize-none outline-none focus:ring-1 focus:ring-tigris-500"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#003049] text-white rounded-lg font-semibold hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition"
+                className="w-full py-3 bg-tigris-800 text-white rounded-lg font-semibold transition"
               >
                 Send Message
               </button>

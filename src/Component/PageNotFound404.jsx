@@ -8,8 +8,8 @@ const PageNotFound404 = () => {
 
   return (
     <div className='min-h-100 my-10 text-center'>
-        <img src={notfound} alt="404 page not found image" className='w-100 mx-auto' />
-        <button className='underline hover:text-cyan-500 text-slate-700' onClick={() => navigate('/')}>Go back to home</button>
+        <img src={notfound} alt="404 page not found image" className='w-full max-w-100 mx-auto' />
+        <button className='underline hover:text-tigris-500 text-slate-700' onClick={() => navigate('/')}>Go back to home</button>
     </div>
   )
 }

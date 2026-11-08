@@ -64,7 +64,7 @@ useEffect(() => {
     <>
     <button
             onClick={() => navigate(-1)}
-            className="text-cyan-700 hover:text-cyan-900 m-5 mx-10"
+            className="text-tigris-700 hover:text-tigris-900 m-5 mx-10"
           >
             ← Back 
           </button>
@@ -133,7 +133,7 @@ useEffect(() => {
                 <h1 className=" mr-5">{userData ? `${userData.street}, ${userData.city}, Iraq` : "Not provided"}</h1> 
            </div>
      </div>
-     <Link to='/useraddress' className="text-blue-500 underline">Edit</Link>
+     <Link to='/useraddress' className="text-tigris-500 underline">Edit</Link>
    </div>
     
          

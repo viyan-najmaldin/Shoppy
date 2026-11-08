@@ -30,21 +30,21 @@ export default function Login() {
         
         <input type="email" value={email} 
         onChange={(e) => setEmail(e.target.value)}
-         className=" border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+         className=" border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
          placeholder="Email" 
          required />
         <input type="password" value={password}
          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className=" border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-cyan-500"
+          className=" border border-slate-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-tigris-500"
           required />
           
         <button 
-        className='bg-red-500 text-white rounded-xl p-3 px-10 hover:bg-gradient-to-r from-cyan-600 to-red-400 hover:font-semibold transition'
+        className='bg-red-500 text-white rounded-xl p-3 px-10 hover:font-semibold transition'
         type="submit">Log In</button>
       </form>
       <span>You don't have account? </span>
-      <button className='text-cyan-700' 
+      <button className='text-tigris-700' 
       onClick={()=>navigate('/signup')}
       >SignUp</button>
     </div>

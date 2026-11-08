@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { useAuth } from "../../AuthContext";
+import { useFavorites } from "../../FavoritesContext";
 import { doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
-const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
+const SelectProduct = ({ data, orders, setOrders }) => {
   const myOrderr = orders.find(
         (item) => item.myOrder.id === data.id 
       );
@@ -17,33 +18,11 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
 
       const [selectedSize, setSelectedSize] = useState("M");
       const [selectedColor, setSelectedColor] = useState("")
-      const [newProduct, setNewProduct] = useState("")
       const { currentUser } = useAuth();
+      const { isFavorite, toggleFavorite } = useFavorites();
       const navigate = useNavigate();
 
       
-      const onFavToggle=(id)=>{
-        setData((prev) =>
-        prev.map((product) =>
-          product.id === id
-            ? { ...product, favorite: !product.favorite }
-            : product
-        ))
-      }
-
- const changeColor = (selectedColor) => {
-  const product = Data.find(
-    (item) =>
-      item.code === data.code &&
-      item.color === selectedColor
-  );
-
-  if (product) {
-    setNewProduct(product);
-    navigate(`/products/${product.category}/${product.id}`);
-  }
-};
-
 
       const onOrders = async () => {
   if (!currentUser) {
@@ -92,7 +71,8 @@ const SelectProduct = ({Data, data, setData , orders, setOrders}) => {
         productName: data.name,
         price: data.price,
         image: data.image,
-        category: data.category,
+        category: data.category || "",
+        categoryId: data.categoryId || null,
         quantity: 1,
         size: data.sizes ? selectedSize : null,
         color: data.colors ? selectedColor : null,
@@ -211,7 +191,7 @@ const IncreaseQty = async () => {
 
 
   return (
-      <div className='my-6 py-4 border-slate-300 border-t w-full'>
+      <div className='my-4 py-4 border-slate-300 border-t w-full'>
 
         
             { data.sizes && <div>
@@ -255,8 +235,8 @@ const IncreaseQty = async () => {
                   className={`w-15 h-8 border border-slate-200 rounded-full transition
                     ${
                       selectedSize === size
-                        ? "bg-cyan-800 text-white"
-                        : "bg-white text-black  hover:border-cyan-600"
+                        ? "bg-tigris-800 text-white"
+                        : "bg-white text-black  hover:border-tigris-600"
                     }`}
                 >
                   {size}
@@ -305,13 +285,12 @@ const IncreaseQty = async () => {
                       }
                     }
 
-                    changeColor(color);
                   }}
                     style={{ backgroundColor: color }}
                   className={`size-5 border rounded-full transition
                     ${
                       selectedColor === color? "border-5 border-slate-300 "
-                        : " hover:border-cyan-600 border-slate-300"
+                        : " hover:border-tigris-600 border-slate-300"
                     }`}
                 >
                   
@@ -343,11 +322,11 @@ const IncreaseQty = async () => {
             Only {data.quantity} left in stock</p> } */}
           </div>
 
-    <div className=' py-10 border-b border-slate-300 '>
+    <div className='py-6 border-b border-slate-300'>
         <div className='flex gap-4'>
 
       
-        <button className='bg-cyan-800 flex rounded-lg gap-2 text-white p-4 px-10 w-full justify-center items-center hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition font-semibold'
+        <button className='bg-tigris-800 flex rounded-lg gap-2 text-white p-3 sm:p-4 px-6 w-full justify-center items-center transition font-semibold'
         onClick={()=>{
           onOrders()                       
         }}
@@ -355,12 +334,11 @@ const IncreaseQty = async () => {
             <FaCartShopping className="text-lg"/>
             Add to Cart
         </button>
-  { console.log(orders) }
         <button className='p-4 border rounded-lg border-slate-300 text-lg text-slate-500 hover:bg-red-500/20 hover:text-red-400 transition'
-          onClick={()=>onFavToggle(data.id)}
+          onClick={()=>toggleFavorite(data)}
           title='Add to favorite'
         >
-        {data.favorite? <FaHeart className='text-red-500' />: <FaRegHeart /> } </button>
+        {isFavorite(data.id)? <FaHeart className='text-red-500' />: <FaRegHeart /> } </button>
     </div>
       
     {myOrderr && (

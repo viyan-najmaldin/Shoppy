@@ -1,52 +1,33 @@
-import React from 'react'
 import {
   FaTruck,
   FaRotateLeft,
-  FaLock,
+  FaMoneyBillWave,
   FaHeadset,
 } from "react-icons/fa6";
+import { formatPrice, SHIPPING_FEE } from "../../utils/format";
+
+const promises = [
+  { icon: FaTruck, title: "Delivery across Iraq", text: `${formatPrice(SHIPPING_FEE)} to any city` },
+  { icon: FaMoneyBillWave, title: "Pay when it arrives", text: "Cash to the courier at your door" },
+  { icon: FaRotateLeft, title: "Easy returns", text: "30-day return policy" },
+  { icon: FaHeadset, title: "24/7 support", text: "Message us any time" },
+];
 
 const Aboutwebsite = () => {
   return (
-    <div className="bg-white border-y sm:my-5 border-slate-300">
-  <div className="max-w-7xl mx-auto px-4 py-15">
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-     
-      <div className="text-center border border-slate-300  rounded-xl p-4 flex shadow">
-        <div className="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center m-4 mb-4">
-          <FaTruck className="text-purple-500 text-2xl" />
-        </div>
-       <div className='my-4'> <h3 className="font-bold text-lg mb-2">Free Shipping</h3>
-        <p className="text-slate-600 text-sm">On all orders over $50</p>
-      </div></div>
-
-      
-      <div className="text-center border border-slate-300  rounded-xl p-4 flex shadow">
-        <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center m-4 mb-4">
-          <FaRotateLeft className="text-red-500 text-2xl" />
-        </div>
-       <div className='my-4'> <h3 className="font-bold text-lg mb-2">Easy Returns</h3>
-        <p className="text-slate-600 text-sm">30-day return policy</p>
-      </div></div>
-
-      <div className="text-center border border-slate-300  rounded-xl p-4 flex shadow">
-        <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center m-4 mb-4">
-          <FaLock className="text-emerald-600 text-2xl" />
-        </div>
-       <div className='my-4'> <h3 className="font-bold text-lg mb-2">Secure Payment</h3>
-        <p className="text-slate-600 text-sm">100% secure transactions</p>
-      </div></div>
-
-      <div className="text-center border border-slate-300  rounded-xl p-4 flex shadow">
-        <div className="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center m-4 mb-4">
-          <FaHeadset className="text-amber-600 text-2xl" />
-        </div>
-       <div className='my-4'> <h3 className="font-bold text-lg mb-2">24/7 Support</h3>
-        <p className="text-slate-600 text-sm">Dedicated customer service</p>
-      </div></div>
-    </div>
-  </div>
-    </div>
+    <section className="mx-4 sm:mx-6 lg:mx-8 my-6 rounded-[1.75rem] bg-tigris-800 text-white px-5 py-7 sm:px-8 sm:py-9">
+      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
+        {promises.map(({ icon: Icon, title, text }) => (
+          <li key={title} className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <Icon className="text-lagoon text-xl sm:text-2xl shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-bold leading-tight">{title}</h3>
+              <p className="text-white/65 text-xs sm:text-sm">{text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 

@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../firebase";
+import { formatPrice, SHIPPING_FEE } from "../utils/format";
 
 export default function Checkout({ orders, setOrders }) {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function Checkout({ orders, setOrders }) {
     0
   );
 
-  const shipping = subtotal > 0 ? 15 : 0;
+  const shipping = subtotal > 0 ? SHIPPING_FEE : 0;
 
   const total = subtotal + shipping;
 
@@ -170,7 +171,7 @@ export default function Checkout({ orders, setOrders }) {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-blue-50 p-6 flex justify-center items-center">
+      <div className="min-h-screen bg-mist p-6 flex justify-center items-center">
         <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
           <h2 className="text-2xl font-bold mb-3">
             Please log in
@@ -180,7 +181,7 @@ export default function Checkout({ orders, setOrders }) {
           </p>
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#003049] text-white px-6 py-3 rounded-lg"
+            className="bg-tigris-800 text-white px-6 py-3 rounded-lg"
           >
             Login
           </button>
@@ -192,8 +193,8 @@ export default function Checkout({ orders, setOrders }) {
 
   if (success) {
     return (
-      <section className="min-h-150 bg-blue-50 p-5 flex justify-center items-center">
-        <div className="bg-white rounded-2xl border border-slate-300 p-5 w-150 text-center max-w-md">
+      <section className="min-h-[60vh] bg-mist p-5 flex justify-center items-center">
+        <div className="bg-white rounded-2xl border border-slate-300 p-5 w-full text-center max-w-md">
           
 
           <h1 className="sm:text-2xl font-bold mb-3">
@@ -210,7 +211,7 @@ export default function Checkout({ orders, setOrders }) {
 
           <button
             onClick={() => navigate("/")}
-            className="bg-[#003049] text-white px-6 py-3 rounded-lg hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition"
+            className="bg-tigris-800 text-white px-6 py-3 rounded-lg transition"
           >
             Continue Shopping
           </button>
@@ -227,7 +228,7 @@ export default function Checkout({ orders, setOrders }) {
   // =========================
 
   return (
-    <section className="min-h-screen bg-blue-50 p-5">
+    <section className="min-h-screen bg-mist p-5">
 
       <div className="max-w-5xl mx-auto">
 
@@ -237,12 +238,12 @@ export default function Checkout({ orders, setOrders }) {
 
           <button
             onClick={() => navigate("/cart")}
-            className="text-cyan-700 hover:text-cyan-900 mb-3"
+            className="text-tigris-700 hover:text-tigris-900 mb-3"
           >
             ← Back to Cart
           </button>
 
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-2xl sm:text-3xl font-bold">
             Checkout
           </h1>
 
@@ -253,7 +254,7 @@ export default function Checkout({ orders, setOrders }) {
         </div>
 
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
 
 
           {/* =========================
@@ -265,7 +266,7 @@ export default function Checkout({ orders, setOrders }) {
 
             {/* CUSTOMER */}
 
-            <div className="bg-white rounded-2xl border border-slate-300 p-6">
+            <div className="bg-white rounded-2xl border border-slate-300 p-5 sm:p-6">
 
               <h2 className="text-xl font-semibold mb-5">
                 Customer Information
@@ -284,7 +285,7 @@ export default function Checkout({ orders, setOrders }) {
 
             {/* ADDRESS */}
 
-            <div className="bg-white rounded-2xl border border-slate-300 p-6">
+            <div className="bg-white rounded-2xl border border-slate-300 p-5 sm:p-6">
 
               <div className="flex justify-between items-center mb-5">
 
@@ -294,7 +295,7 @@ export default function Checkout({ orders, setOrders }) {
 
                 <button
                   onClick={() => navigate("/useraddress")}
-                  className="text-cyan-700 font-semibold text-sm"
+                  className="text-tigris-700 font-semibold text-sm"
                 >
                   Change
                 </button>
@@ -325,15 +326,7 @@ export default function Checkout({ orders, setOrders }) {
                   </p>
 
                   <p>
-                    {address.city}, {address.region}
-                  </p>
-
-                  <p>
-                    {address.country}
-                  </p>
-
-                  <p>
-                    {address.zipCode}
+                    {address.city}, Iraq
                   </p>
 
                 </div>
@@ -348,7 +341,7 @@ export default function Checkout({ orders, setOrders }) {
 
                   <button
                     onClick={() => navigate("/useraddress")}
-                    className="bg-cyan-700 text-white px-5 py-2 rounded-lg"
+                    className="bg-tigris-700 text-white px-5 py-2 rounded-lg"
                   >
                     Add Address
                   </button>
@@ -362,7 +355,7 @@ export default function Checkout({ orders, setOrders }) {
 
             {/* PRODUCTS */}
 
-            <div className="bg-white rounded-2xl border border-slate-300 p-6">
+            <div className="bg-white rounded-2xl border border-slate-300 p-5 sm:p-6">
 
               <h2 className="text-xl font-semibold mb-5">
                 Your Order
@@ -380,12 +373,12 @@ export default function Checkout({ orders, setOrders }) {
                     <img
                       src={item.myOrder.image}
                       alt={item.myOrder.name}
-                      className="w-20 h-20 object-cover rounded-lg"
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg shrink-0"
                     />
 
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
 
-                      <h3 className="font-semibold">
+                      <h3 className="font-semibold line-clamp-2" dir="auto">
                         {item.myOrder.name}
                       </h3>
 
@@ -407,12 +400,11 @@ export default function Checkout({ orders, setOrders }) {
 
                     </div>
 
-                    <p className="font-semibold">
-                      $
-                      {(
+                    <p className="font-semibold whitespace-nowrap">
+                      {formatPrice(
                         Number(item.myOrder.price) *
                         item.quantity
-                      ).toFixed(2)}
+                      )}
                     </p>
 
                   </div>
@@ -432,7 +424,7 @@ export default function Checkout({ orders, setOrders }) {
 
           <div>
 
-            <div className="bg-white rounded-2xl border border-slate-300 p-6 sticky top-5">
+            <div className="bg-white rounded-2xl border border-slate-300 p-5 sm:p-6 lg:sticky lg:top-32">
 
               <h2 className="text-xl font-semibold mb-6">
                 Order Summary
@@ -446,7 +438,7 @@ export default function Checkout({ orders, setOrders }) {
                 </span>
 
                 <span>
-                  ${subtotal.toFixed(2)}
+                  {formatPrice(subtotal)}
                 </span>
 
               </div>
@@ -459,7 +451,7 @@ export default function Checkout({ orders, setOrders }) {
                 </span>
 
                 <span>
-                  ${shipping.toFixed(2)}
+                  {formatPrice(shipping)}
                 </span>
 
               </div>
@@ -475,7 +467,7 @@ export default function Checkout({ orders, setOrders }) {
                 </span>
 
                 <span>
-                  ${total.toFixed(2)}
+                  {formatPrice(total)}
                 </span>
 
               </div>
@@ -488,7 +480,7 @@ export default function Checkout({ orders, setOrders }) {
                   !address
                 }
                 onClick={handlePlaceOrder}
-                className="w-full mt-6 bg-[#003049] text-white py-3 rounded-lg hover:bg-cyan-700 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
+                className="w-full mt-6 bg-tigris-800 text-white py-3 rounded-lg hover:bg-tigris-700 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
               >
 
                 {placingOrder

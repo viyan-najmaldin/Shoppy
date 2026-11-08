@@ -1,74 +1,56 @@
-import React from 'react'
-import { IoMdHeadset,IoIosFitness } from "react-icons/io";
-import { FaShirt } from "react-icons/fa6";
-import { RiSofaFill } from "react-icons/ri";
-import { GiLipstick } from "react-icons/gi";
-import { MdViewModule } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { MdViewModule } from "react-icons/md";
+import { useCategories } from '../../api/productApi';
 
+// How many categories the home page shows; the rest are on the products page
+const HOME_CATEGORY_COUNT = 7;
 
+const circleClass = 'aspect-square w-full rounded-full overflow-hidden ring-1 ring-line group-hover:ring-2 group-hover:ring-lagoon transition';
 
-
+// The biggest categories, each pictured with one of its own products
 const Category = () => {
+  const { categories, isLoading } = useCategories();
+  const shown = categories
+    .filter((category) => !category.isCollection)
+    .slice(0, HOME_CATEGORY_COUNT);
+
   return (
-    <div className='bg-white mt-15 p-5 py-10 pb-20'>
-     <div className='my-5'>
-        <p className="text-sm font-medium text-gray-500 uppercase tracking-widest">
-          Explore our curated collections
-        </p>
-        <h1 className='text-2xl font-bold'>Shop by Category</h1>
-     </div>
-      
-
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
-        <Link to='/products/Electronics' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:-rotate-5 transition shadow'>
-           <div className='bg-gradient-to-t from-red-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-            <IoMdHeadset className='size-15  mx-auto' />
-           </div>
-            <h1 className="font-bold">Electronics</h1>
-            <span className='opacity-70'>240+ items</span>
-        </Link>
-        
-        <Link to='/products/Fashion' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:-rotate-5 transition shadow'>
-           <div className='bg-gradient-to-t from-blue-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-            <FaShirt className='size-15 mx-auto'/>
-           </div>
-            
-            <h1 className="font-bold">Fashion</h1>
-            <span className='opacity-70'>1.2k+ items</span>
-            </Link>
-
-        <Link to='/products/Home' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:rotate-5 transition shadow'>
-           <div className='bg-gradient-to-t from-orange-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-            <RiSofaFill className='size-15 mx-auto'/> </div>
-            <h1 className="font-bold">Home</h1>
-            <span className='opacity-70'>540+ items</span>
-        </Link>
-
-        <Link to='/products/Sports' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:-rotate-5 transition shadow'>
-          <div className='bg-gradient-to-t from-purple-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-          <IoIosFitness className='size-15 mx-auto'/> </div>
-            <h1 className="font-bold">Sports</h1>
-            <span className='opacity-70'>320+ items</span>
-            </Link>
-
-        <Link to='/products/Beauty' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:rotate-5 transition shadow'>
-           <div className='bg-gradient-to-t from-green-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-            <GiLipstick className='size-15 mx-auto'/> </div>
-            <h1 className="font-bold">Beauty</h1>
-            <span className='opacity-70'>480+ items</span>
-            </Link>
-
-        <Link to='/products/All' className='p-10 sm:p-12 text-center text-white bg-gradient-to-tr from-gray-500 to-cyan-800 rounded-3xl  hover:-rotate-5 transition shadow'>
-           <div className='bg-gradient-to-t from-red-300/70 to-cyan-800/1 p-1 py-6 mb-2  rounded-full'>
-            <MdViewModule className='size-15 mx-auto'/></div>
-            <h1 className="font-bold">View All</h1>
-            <span className='opacity-70'>3k+ items</span>
-            </Link>
-       
+    <section className='px-4 sm:px-6 lg:px-8 py-8 sm:py-10'>
+      <div className='flex items-baseline justify-between gap-4 mb-5'>
+        <h2 className='text-2xl sm:text-3xl font-black tracking-tight text-tigris-800'>Shop by category</h2>
+        <Link to='/products/All' className='shrink-0 font-bold text-sm text-tigris-700 underline underline-offset-4 decoration-cherry decoration-2 hover:text-tigris-900'>All categories</Link>
       </div>
-      
-    </div>
+
+      <div className='flex gap-4 overflow-x-auto snap-x scroll-px-4 -mx-4 px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+                      sm:mx-0 sm:px-0 sm:grid sm:grid-cols-4 lg:grid-cols-8 sm:gap-5 sm:overflow-visible'>
+        {isLoading && Array.from({ length: HOME_CATEGORY_COUNT + 1 }, (_, index) => (
+          <div key={index} className='shrink-0 w-24 sm:w-auto animate-pulse'>
+            <div className='aspect-square rounded-full bg-white' />
+            <div className='h-3 mt-3 mx-auto w-2/3 rounded bg-white' />
+          </div>
+        ))}
+
+        {shown.map((category) => (
+          <Link key={category.id} to={`/products/${category.id}`} className='group shrink-0 w-24 sm:w-auto snap-start text-center'>
+            <div className={`${circleClass} bg-white`}>
+              {category.previews?.[0] &&
+                <img src={category.previews[0]} alt="" loading="lazy" className='w-full h-full object-cover' />}
+            </div>
+            <h3 className='mt-2.5 text-sm font-bold leading-tight line-clamp-2' dir="auto">{category.name}</h3>
+            <p className='text-xs text-ink/55'>{category.count} items</p>
+          </Link>
+        ))}
+
+        {!isLoading &&
+          <Link to='/products/All' className='group shrink-0 w-24 sm:w-auto snap-start text-center'>
+            <div className={`${circleClass} flex items-center justify-center bg-tigris-800 text-white`}>
+              <MdViewModule className='size-9 sm:size-11' />
+            </div>
+            <h3 className='mt-2.5 text-sm font-bold'>View all</h3>
+            <p className='text-xs text-ink/55'>{categories.filter((category) => !category.isCollection).length} categories</p>
+          </Link>}
+      </div>
+    </section>
   )
 }
 

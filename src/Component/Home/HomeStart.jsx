@@ -1,228 +1,127 @@
-import React, { useEffect, useState } from 'react';
-import { FaFireFlameCurved, FaArrowRight, FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-import Shopping from "../../assets/Shopping.png";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import Shopping1 from "../../assets/11.jpg";
 import Shopping2 from "../../assets/22.jpg";
 import Shopping3 from "../../assets/33.jpg";
-import { useNavigate } from "react-router-dom";
+import { useCategories } from "../../api/productApi";
+
+// Each slide links to the vendor category whose name matches one of its words,
+// so the links keep working when the vendors rename or renumber categories
+const SLIDES = [
+  {
+    image: Shopping1,
+    position: "object-[30%_center]",
+    title: "Shop smarter, live better",
+    text: "Gadgets, home and kitchen essentials, delivered anywhere in Iraq. Pay when your order arrives.",
+    cta: "Shop now",
+  },
+  {
+    image: Shopping2,
+    position: "object-center",
+    title: "Hear every detail",
+    text: "Wireless headphones, earbuds and speakers, ready to ship.",
+    cta: "Shop audio",
+    match: ["صوتيات", "سماعات"],
+  },
+  {
+    image: Shopping3,
+    position: "object-[70%_center]",
+    title: "Level up your setup",
+    text: "Gaming mice, keyboards, headsets and accessories.",
+    cta: "Shop gaming",
+    match: ["گيمنگ", "كيمنك", "العاب"],
+  },
+];
+
+const AUTOPLAY_MS = 6000;
 
 const HomeStart = () => {
+  const { categories } = useCategories();
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const navigate = useNavigate();
-
-  // Images for the carousel
-  const slides = [
-    Shopping1,
-    Shopping2,
-    Shopping3
-  ];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Automatically change image
   useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (paused || reducedMotion) return;
 
-    const interval = setInterval(() => {
+    const timer = setInterval(() => setCurrent((index) => (index + 1) % SLIDES.length), AUTOPLAY_MS);
+    return () => clearInterval(timer);
+  }, [paused]);
 
-      setCurrentSlide((prev) =>
-        prev === slides.length - 1 ? 0 : prev + 1
-      );
-
-    }, 4000);
-
-    return () => clearInterval(interval);
-
-  }, [slides.length]);
-
-
-  // Previous button
-  const previousSlide = () => {
-
-    setCurrentSlide((prev) =>
-      prev === 0 ? slides.length - 1 : prev - 1
-    );
-
+  const linkFor = (slide) => {
+    const category = slide.match && categories.find((item) =>
+      slide.match.some((word) => item.name.includes(word)));
+    return category ? `/products/${category.id}` : "/products/All";
   };
 
-
-  // Next button
-  const nextSlide = () => {
-
-    setCurrentSlide((prev) =>
-      prev === slides.length - 1 ? 0 : prev + 1
-    );
-
-  };
-
+  const show = (index) => setCurrent((index + SLIDES.length) % SLIDES.length);
+  const slide = SLIDES[current];
+  const arrowClass = "w-10 h-10 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white hover:text-tigris-800 transition-colors";
 
   return (
-
-    <div className='flex pt-10 px-5 sm:pr-0 gap-5 flex-col sm:flex-row'>
-
-      {/* LEFT SIDE */}
-
-      <div className='flex items-center sm:items-start flex-col h-full'>
-
-        <span className="w-fit inline-block px-4 py-1.5 bg-blue-100 text-blue-500 rounded-full text-sm font-semibold mb-4">
-
-          <FaFireFlameCurved className="text-orange-400 inline mr-1" />
-
-          Summer Sale 2026
-
-        </span>
-
-
-        <div className='text-center sm:text-left'>
-
-          <h1 className='text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4'>
-
-            Shop Smarter, <br/>
-
-            <span className="p-0 bg-gradient-to-r from-blue-500 to-red-300 bg-clip-text text-transparent">
-
-              Live Better
-
-            </span>
-
-          </h1>
-
-
-          <p className='text-lg text-gray-600'>
-
-            Discover curated collections from top brands.
-            Up to 70% off on premium products with free shipping.
-
-          </p>
-
+    <section className="px-4 sm:px-6 lg:px-8 pt-5 sm:pt-8">
+      <div
+        className="grid lg:grid-cols-[5fr_7fr] rounded-3xl overflow-hidden bg-tigris-800 shadow-[0_20px_50px_-30px_rgba(0,48,73,0.8)]"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        aria-roledescription="carousel"
+        aria-label="Highlights"
+      >
+        {/* Photo: on top on phones, on the right on wide screens */}
+        <div className="relative aspect-[16/10] lg:aspect-auto lg:h-[460px] lg:order-2">
+          {SLIDES.map((item, index) => (
+            <img
+              key={item.title}
+              src={item.image}
+              alt=""
+              className={`absolute inset-0 w-full h-full object-cover ${item.position} transition-opacity duration-700 ${index === current ? "opacity-100" : "opacity-0"}`}
+            />
+          ))}
         </div>
 
-
-        <div className='flex font-bold gap-5 mt-8'>
-
-          <button
-            className='bg-red-500 text-white shadow-lg rounded-full p-3 px-10 hover:bg-gradient-to-r from-red-600 to-orange-400 transition'
-            onClick={() => navigate("/products/All")}
-          >
-
-            Shop Now
-
-            <FaArrowRight className="inline ml-1" />
-
-          </button>
-
-
-          <button
-            className='bg-white rounded-full shadow-lg p-3 px-10 hover:bg-gray-500 transition hover:text-white'
-          >
-
-            Learn More
-
-          </button>
-
-        </div>
-
-
-        <div className='flex my-8 gap-5'>
-
-          <div className="flex -space-x-3">
-
-            <img
-              src="https://i.pravatar.cc/100?img=1"
-              className="w-10 h-10 rounded-full border-2 border-white"
-              alt="customer"
-            />
-
-            <img
-              src="https://i.pravatar.cc/100?img=2"
-              className="w-10 h-10 rounded-full border-2 border-white"
-              alt="customer"
-            />
-
-            <img
-              src="https://i.pravatar.cc/100?img=3"
-              className="w-10 h-10 rounded-full border-2 border-white"
-              alt="customer"
-            />
-
+        <div className="flex flex-col justify-between gap-6 p-6 sm:p-8 lg:p-12 text-white">
+          <div key={current} className="animate-[heroIn_500ms_ease-out]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-[1.05] tracking-tight">
+              {slide.title}
+            </h1>
+            <p className="mt-4 text-base sm:text-lg text-white/75 max-w-md">{slide.text}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                to={linkFor(slide)}
+                className="bg-cherry hover:bg-pomegranate text-white font-bold rounded-full px-7 py-3 transition-colors"
+              >
+                {slide.cta}
+              </Link>
+              <Link
+                to="/products/All"
+                className="border border-white/40 hover:bg-white hover:text-tigris-800 text-white font-bold rounded-full px-7 py-3 transition-colors"
+              >
+                Browse everything
+              </Link>
+            </div>
           </div>
 
-
-          <div>
-
-            <h2 className='font-bold text-lg'>
-              2 M+
-            </h2>
-
-            <span className='text-gray-600'>
-              Happy Customers
-            </span>
-
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2">
+              {SLIDES.map((item, index) => (
+                <button
+                  key={item.title}
+                  onClick={() => setCurrent(index)}
+                  aria-label={`Show slide ${index + 1}`}
+                  aria-current={index === current}
+                  className={`h-2 rounded-full transition-all duration-300 ${index === current ? "w-8 bg-lagoon" : "w-2 bg-white/35 hover:bg-white/60"}`}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <button className={arrowClass} onClick={() => show(current - 1)} aria-label="Previous slide"><FaAngleLeft /></button>
+              <button className={arrowClass} onClick={() => show(current + 1)} aria-label="Next slide"><FaAngleRight /></button>
+            </div>
           </div>
-
         </div>
-
       </div>
-
-
-      <div className='sm:relative z-0 sm:w-2/4'>
-
-        <div className='hidden sm:block relative sm:w-70 lg:w-full h-full overflow-hidden rounded-full lg:rounded-r-[2vw]'>
-
-          <img
-            src={slides[currentSlide]}
-            alt="Shopping"
-            className="w-full h-full object-cover transition-opacity duration-700"
-          />
-
-          <button
-            onClick={previousSlide}
-            className="absolute top-1/2 left-4 -translate-y-1/2 
-                       w-10 h-10 rounded-full 
-                       bg-white/40 backdrop-blur-sm
-                       hover:bg-white/70
-                       flex items-center justify-center
-                       transition"
-          >
-
-            <FaAngleLeft />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute top-1/2 right-4 -translate-y-1/2 
-                       w-10 h-10 rounded-full 
-                       bg-white/40 backdrop-blur-sm
-                       hover:bg-white/70
-                       flex items-center justify-center
-                       transition">
-            <FaAngleRight />
-          </button>
-
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentSlide === index
-                    ? "w-7 bg-white"
-                    : "w-2 bg-white/50"
-                }`}   />
-            ))}
-
-          </div>
-        </div>
-
-
-            <img
-          src={Shopping}
-          className='sm:absolute w-100 hover:rotate-5 transition -bottom-36 -left-46'
-          alt="Shopping"
-        />
-      </div>
-
-       
-    </div>
+    </section>
   );
 };
 

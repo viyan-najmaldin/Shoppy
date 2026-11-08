@@ -19,7 +19,7 @@ const Subscribe = () => {
     <section className="px-4 sm:px-8 lg:px-16 py-16">
       <div
         className="relative overflow-hidden rounded-3xl
-                   bg-cyan-800 px-6 py-12
+                   bg-tigris-800 px-6 py-12
                    sm:px-10 lg:px-16
                    text-white"
       >

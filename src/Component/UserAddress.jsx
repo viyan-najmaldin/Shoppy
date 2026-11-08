@@ -116,7 +116,7 @@ export default function UserAddress() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-blue-50 flex items-center justify-center p-5">
+      <div className="min-h-screen bg-mist flex items-center justify-center p-5">
         <div className="bg-white p-8 rounded-2xl border border-slate-300 text-center">
           <h2 className="text-2xl font-bold mb-3">
             Please Log In
@@ -128,7 +128,7 @@ export default function UserAddress() {
 
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#003049] text-white px-6 py-3 rounded-lg hover:bg-cyan-700 transition"
+            className="bg-tigris-800 text-white px-6 py-3 rounded-lg hover:bg-tigris-700 transition"
           >
             Go to Login
           </button>
@@ -139,7 +139,7 @@ export default function UserAddress() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-blue-50 flex items-center justify-center">
+      <div className="min-h-screen bg-mist flex items-center justify-center">
         <p className="text-slate-600">
           Loading your address...
         </p>
@@ -149,14 +149,14 @@ export default function UserAddress() {
 
   
   return (
-    <div className="min-h-screen bg-blue-50 p-5 font-josefin">
+    <div className="min-h-screen bg-mist p-5 font-josefin">
 
       <div className="max-w-3xl mx-auto">
 
         <div className="mb-6">
           <button
             onClick={() => navigate("/account")}
-            className="text-cyan-700 hover:text-cyan-900 mb-3"
+            className="text-tigris-700 hover:text-tigris-900 mb-3"
           >
             ← Back to Profile
           </button>
@@ -178,7 +178,7 @@ export default function UserAddress() {
 
           <div className="flex items-center gap-3 mb-6">
 
-            <div className="bg-cyan-100 text-cyan-700 p-3 rounded-full">
+            <div className="bg-tigris-100 text-tigris-700 p-3 rounded-full">
               <FaMapMarkerAlt />
             </div>
 
@@ -219,7 +219,7 @@ export default function UserAddress() {
                   onChange={handleChange}
                   placeholder="Enter your full name"
                   required
-                  className="w-full border border-slate-300 rounded-lg pl-10 pr-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg pl-10 pr-4 py-3 outline-none focus:ring-1 focus:ring-tigris-500"
                 />
 
               </div>
@@ -247,7 +247,7 @@ export default function UserAddress() {
                   onChange={handleChange}
                   placeholder="+964 750 123 4567"
                   required
-                  className="w-full border border-slate-300 rounded-lg pl-10 pr-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full border border-slate-300 rounded-lg pl-10 pr-4 py-3 outline-none focus:ring-1 focus:ring-tigris-500"
                 />
 
               </div>
@@ -271,7 +271,7 @@ export default function UserAddress() {
                 onChange={handleChange}
                 placeholder="e.g. Erbil"
                 required
-                className="w-full mb-5 border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
+                className="w-full mb-5 border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-tigris-500"
               />
             </div>
 
@@ -289,7 +289,7 @@ export default function UserAddress() {
                 onChange={handleChange}
                 placeholder="Street name, building number, apartment..."
                 required
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-cyan-500"
+                className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-tigris-500"
               />
             </div>
 
@@ -308,7 +308,7 @@ export default function UserAddress() {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="px-6 py-3 bg-[#003049] text-white rounded-lg hover:bg-gradient-to-r from-cyan-700 to-cyan-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-3 bg-tigris-800 text-white rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {saving ? "Saving..." : "Save Address"}
                   </button>
